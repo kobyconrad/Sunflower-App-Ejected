@@ -1,28 +1,97 @@
-// In App.js in a new project
-
 import * as React from "react";
-import { View, Text } from "react-native";
+import { useState } from "react";
+import { View, Text, Button } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-function HomeScreen() {
-  return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>Home Screen</Text>
-    </View>
-  );
-}
+// This project uses YARN YARN YARN YARN YARN YARN YARN YARN YARN YARN YARN
 
 const Stack = createStackNavigator();
 
-function App() {
+const storeData = async (value) => {
+  try {
+    const jsonValue = JSON.stringify(value);
+    await AsyncStorage.setItem("quit-date", jsonValue);
+  } catch (e) {
+    // saving error
+  }
+};
+
+const getData = async () => {
+  try {
+    const jsonValue = await AsyncStorage.getItem("quit-date");
+    return jsonValue != null ? JSON.parse(jsonValue) : null;
+  } catch (e) {
+    // error reading value
+  }
+};
+
+export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{ title: "Overview" }}
+        />
+        <Stack.Screen name="Details" component={DetailsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
 
-export default App;
+function HomeScreen({ navigation }) {
+  const [date, setDate] = useState();
+  return (
+    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <Text>Home Screen</Text>
+      <Button
+        title="Set Quit Date"
+        onPress={() => {
+          let currentDate = new Date();
+          console.log(currentDate);
+
+          storeData(currentDate);
+        }}
+      />
+
+      <Button
+        title="Time Difference"
+        onPress={() => {
+          timeDifference();
+        }}
+      />
+      <Button
+        title="Go to Details"
+        onPress={() => navigation.navigate("Details")}
+      />
+    </View>
+  );
+}
+
+async function timeDifference() {
+  let currentDate = new Date();
+  let savedData = await getData();
+  let quitDate = new Date(savedData);
+
+  let currentTotalTime = currentDate.getTime();
+  let quitTotalTime = quitDate.getTime();
+  let difference = currentTotalTime - quitTotalTime;
+  let differenceInSeconds = difference / 1000;
+
+  console.log("---");
+  console.log("currentTime ", currentTotalTime);
+  console.log("quitTime: ", quitTotalTime);
+  console.log("difference: ", difference);
+  console.log("difference in seconds: ", differenceInSeconds);
+}
+
+function DetailsScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <Text>Details Screen</Text>
+    </View>
+  );
+}
