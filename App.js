@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { View, Text, Button } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -44,8 +44,30 @@ export default function App() {
 
 function HomeScreen({ navigation }) {
   const [date, setDate] = useState();
+  const [time, setTime] = useState(0);
+
+  useEffect(() => {
+    setTimeout(() => {
+      async function timeDifference() {
+        let currentDate = new Date();
+        let savedData = await getData();
+        let quitDate = new Date(savedData);
+
+        let currentTotalTime = currentDate.getTime();
+        let quitTotalTime = quitDate.getTime();
+        let difference = currentTotalTime - quitTotalTime;
+        let differenceInSeconds = difference / 1000;
+
+        setTime(Math.floor(differenceInSeconds));
+      }
+      timeDifference();
+    }, 1000);
+  });
+
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <Text>{time} seconds</Text>
+
       <Text>Home Screen</Text>
       <Button
         title="Set Quit Date"
@@ -81,11 +103,7 @@ async function timeDifference() {
   let difference = currentTotalTime - quitTotalTime;
   let differenceInSeconds = difference / 1000;
 
-  console.log("---");
-  console.log("currentTime ", currentTotalTime);
-  console.log("quitTime: ", quitTotalTime);
-  console.log("difference: ", difference);
-  console.log("difference in seconds: ", differenceInSeconds);
+  return differenceInSeconds;
 }
 
 function DetailsScreen() {
@@ -95,3 +113,9 @@ function DetailsScreen() {
     </View>
   );
 }
+
+// console.log("---");
+// console.log("currentTime ", currentTotalTime);
+// console.log("quitTime: ", quitTotalTime);
+// console.log("difference: ", difference);
+// console.log("difference in seconds: ", differenceInSeconds);
