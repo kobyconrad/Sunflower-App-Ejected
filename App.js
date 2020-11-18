@@ -68,7 +68,7 @@ function HomeScreen({ navigation }) {
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <Text>{time} seconds</Text>
 
-      <Text>Home Screen</Text>
+      <Text>Home Screen (Im a bad programmer)</Text>
       <Button
         title="Set Quit Date"
         onPress={() => {
