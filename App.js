@@ -58,17 +58,39 @@ function HomeScreen({ navigation }) {
         let difference = currentTotalTime - quitTotalTime;
         let differenceInSeconds = difference / 1000;
 
-        setTime(Math.floor(differenceInSeconds));
+        setTime(timeObject(differenceInSeconds));
       }
       timeDifference();
     }, 1000);
   });
 
+  function timeObject(timeInSeconds) {
+    let days = Math.floor(timeInSeconds / 86400);
+    let dayRemainder = timeInSeconds % 86400;
+    let hours = Math.floor(dayRemainder / 3600);
+    let hourRemainder = dayRemainder % 360;
+    let minutes = Math.floor(hourRemainder / 60);
+    let seconds = Math.floor(hourRemainder % 60);
+
+    let returnObj = {
+      days: days,
+      hours: hours,
+      minutes: minutes,
+      hours: hours,
+      seconds: seconds,
+    };
+
+    return returnObj;
+  }
+
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>{time} seconds</Text>
+      <Text>{time.days} days</Text>
+      <Text>{time.hours} hours</Text>
+      <Text>{time.minutes} minutes</Text>
+      <Text>{time.seconds} seconds</Text>
 
-      <Text>Home Screen (Im a bad programmer)</Text>
+      <Text>Home Screen</Text>
       <Button
         title="Set Quit Date"
         onPress={() => {
@@ -88,6 +110,12 @@ function HomeScreen({ navigation }) {
       <Button
         title="Go to Details"
         onPress={() => navigation.navigate("Details")}
+      />
+      <Button
+        title="testing button"
+        onPress={() => {
+          timeObject();
+        }}
       />
     </View>
   );
