@@ -44,7 +44,6 @@ export default function App() {
 }
 
 function HomeScreen({ navigation }) {
-  const [date, setDate] = useState();
   const [time, setTime] = useState(0);
 
   useEffect(() => {
@@ -111,38 +110,16 @@ function HomeScreen({ navigation }) {
   );
 }
 
-function DetailsScreen() {
+function DetailsScreen({ navigation }) {
   const [date, setDate] = useState(new Date(1598051730000));
-  const [mode, setMode] = useState("date");
-  const [show, setShow] = useState(true);
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
-    setShow(Platform.OS === "ios");
     setDate(currentDate);
-  };
-
-  const showMode = (currentMode) => {
-    setShow(true);
-    setMode(currentMode);
-  };
-
-  const showDatepicker = () => {
-    showMode("date");
-  };
-
-  const showTimepicker = () => {
-    showMode("time");
   };
 
   return (
     <View>
-      {/* <View>
-        <Button onPress={showDatepicker} title="Show date picker!" />
-      </View>
-      <View>
-        <Button onPress={showTimepicker} title="Show time picker!" />
-      </View> */}
       <View>
         <Text>Select your date</Text>
       </View>
@@ -169,17 +146,8 @@ function DetailsScreen() {
       <View>
         <Button
           onPress={() => {
-            console.log(date);
-            let newDate = new Date();
-            console.log(newDate);
-          }}
-          title="Console Log Date"
-        />
-      </View>
-      <View>
-        <Button
-          onPress={() => {
             storeData(date);
+            navigation.navigate("Home");
           }}
           title="Save New Date"
         />
