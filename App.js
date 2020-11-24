@@ -1,9 +1,10 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-import { View, Text, Button } from "react-native";
+import { View, Text, Button, Platform } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import DateTimePicker from "@react-native-community/datetimepicker";
 
 // This project uses YARN YARN YARN YARN YARN YARN YARN YARN YARN YARN YARN
 
@@ -111,9 +112,78 @@ function HomeScreen({ navigation }) {
 }
 
 function DetailsScreen() {
+  const [date, setDate] = useState(new Date(1598051730000));
+  const [mode, setMode] = useState("date");
+  const [show, setShow] = useState(true);
+
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    setShow(Platform.OS === "ios");
+    setDate(currentDate);
+  };
+
+  const showMode = (currentMode) => {
+    setShow(true);
+    setMode(currentMode);
+  };
+
+  const showDatepicker = () => {
+    showMode("date");
+  };
+
+  const showTimepicker = () => {
+    showMode("time");
+  };
+
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>Details Screen</Text>
+    <View>
+      {/* <View>
+        <Button onPress={showDatepicker} title="Show date picker!" />
+      </View>
+      <View>
+        <Button onPress={showTimepicker} title="Show time picker!" />
+      </View> */}
+      <View>
+        <Text>Select your date</Text>
+      </View>
+      <DateTimePicker
+        testID="dateTimePicker"
+        value={date}
+        mode={"date"}
+        is24Hour={true}
+        display="default"
+        onChange={onChange}
+      />
+      <View>
+        <Text>Select your time</Text>
+      </View>
+      <DateTimePicker
+        testID="dateTimePicker"
+        value={date}
+        mode={"time"}
+        is24Hour={true}
+        display="default"
+        onChange={onChange}
+      />
+
+      <View>
+        <Button
+          onPress={() => {
+            console.log(date);
+            let newDate = new Date();
+            console.log(newDate);
+          }}
+          title="Console Log Date"
+        />
+      </View>
+      <View>
+        <Button
+          onPress={() => {
+            storeData(date);
+          }}
+          title="Save New Date"
+        />
+      </View>
     </View>
   );
 }
