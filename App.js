@@ -67,8 +67,10 @@ function HomeScreen({ navigation }) {
   function timeObject(timeInSeconds) {
     let days = Math.floor(timeInSeconds / 86400);
     let dayRemainder = timeInSeconds % 86400;
+
     let hours = Math.floor(dayRemainder / 3600);
     let hourRemainder = dayRemainder % 360;
+
     let minutes = Math.floor(hourRemainder / 60);
     let seconds = Math.floor(hourRemainder % 60);
 
@@ -90,9 +92,8 @@ function HomeScreen({ navigation }) {
       <Text>{time.minutes} minutes</Text>
       <Text>{time.seconds} seconds</Text>
 
-      <Text>Home Screen</Text>
       <Button
-        title="Set Quit Date"
+        title="Reset"
         onPress={() => {
           let currentDate = new Date();
           console.log(currentDate);
@@ -102,36 +103,11 @@ function HomeScreen({ navigation }) {
       />
 
       <Button
-        title="Time Difference"
-        onPress={() => {
-          timeDifference();
-        }}
-      />
-      <Button
-        title="Go to Details"
+        title="Edit Date"
         onPress={() => navigation.navigate("Details")}
-      />
-      <Button
-        title="testing button"
-        onPress={() => {
-          timeObject();
-        }}
       />
     </View>
   );
-}
-
-async function timeDifference() {
-  let currentDate = new Date();
-  let savedData = await getData();
-  let quitDate = new Date(savedData);
-
-  let currentTotalTime = currentDate.getTime();
-  let quitTotalTime = quitDate.getTime();
-  let difference = currentTotalTime - quitTotalTime;
-  let differenceInSeconds = difference / 1000;
-
-  return differenceInSeconds;
 }
 
 function DetailsScreen() {
@@ -141,9 +117,3 @@ function DetailsScreen() {
     </View>
   );
 }
-
-// console.log("---");
-// console.log("currentTime ", currentTotalTime);
-// console.log("quitTime: ", quitTotalTime);
-// console.log("difference: ", difference);
-// console.log("difference in seconds: ", differenceInSeconds);
