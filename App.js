@@ -65,6 +65,7 @@ function HomeScreen({ navigation }) {
         let difference = currentTotalTime - quitTotalTime;
         let differenceInSeconds = difference / 1000;
 
+        console.log(differenceInSeconds);
         setTime(timeObject(differenceInSeconds));
       }
       timeDifference();
@@ -76,7 +77,7 @@ function HomeScreen({ navigation }) {
     let dayRemainder = timeInSeconds % 86400;
 
     let hours = Math.floor(dayRemainder / 3600);
-    let hourRemainder = dayRemainder % 360;
+    let hourRemainder = dayRemainder % 3600;
 
     let minutes = Math.floor(hourRemainder / 60);
     let seconds = Math.floor(hourRemainder % 60);
@@ -85,9 +86,10 @@ function HomeScreen({ navigation }) {
       days: days,
       hours: hours,
       minutes: minutes,
-      hours: hours,
       seconds: seconds,
     };
+
+    console.log(returnObj);
 
     return returnObj;
   }
