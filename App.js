@@ -92,12 +92,70 @@ function HomeScreen({ navigation }) {
     return returnObj;
   }
 
+  function ReturnDays() {
+    if (time.days > 0) {
+      return (
+        <Text style={{ marginRight: 10, fontSize: 18, fontWeight: "bold" }}>
+          {time.days}d
+        </Text>
+      );
+    } else {
+      return;
+    }
+  }
+
+  function ReturnHours() {
+    if (time.hours > 0) {
+      return (
+        <Text style={{ marginRight: 10, fontSize: 18, fontWeight: "bold" }}>
+          {time.hours}h
+        </Text>
+      );
+    } else {
+      return;
+    }
+  }
+
+  function ReturnMinutes() {
+    if (time.minutes > 0) {
+      return (
+        <Text style={{ marginRight: 10, fontSize: 18, fontWeight: "bold" }}>
+          {time.minutes}m
+        </Text>
+      );
+    } else {
+      return;
+    }
+  }
+
+  function ReturnSeconds() {
+    if (time.seconds > 0) {
+      return (
+        <Text style={{ marginRight: 10, fontSize: 18, fontWeight: "bold" }}>
+          {time.seconds}s
+        </Text>
+      );
+    } else {
+      return;
+    }
+  }
+
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>{time.days} days</Text>
-      <Text>{time.hours} hours</Text>
-      <Text>{time.minutes} minutes</Text>
-      <Text>{time.seconds} seconds</Text>
+      <Text>You've Stayed Sober For</Text>
+      <View
+        style={{
+          flexDirection: "row",
+          width: 100,
+          margin: 10,
+          justifyContent: "center",
+        }}
+      >
+        {ReturnDays()}
+        {ReturnHours()}
+        {ReturnMinutes()}
+        {ReturnSeconds()}
+      </View>
 
       <Button
         title="Reset"
@@ -128,7 +186,7 @@ function EditDateScreen({ navigation }) {
   return (
     <View style={styles.displayContainer}>
       <View style={styles.titleContainer}>
-        <Text style={styles.titleText}>Select your date</Text>
+        <Text style={styles.titleText}>Select your quit date</Text>
       </View>
       <DateTimePicker
         testID="dateTimePicker"
@@ -139,7 +197,7 @@ function EditDateScreen({ navigation }) {
         onChange={onChange}
       />
       <View style={styles.titleContainer}>
-        <Text style={styles.titleText}>Select your time</Text>
+        <Text style={styles.titleText}>Select your quit time</Text>
       </View>
       <DateTimePicker
         testID="dateTimePicker"
