@@ -65,7 +65,6 @@ function HomeScreen({ navigation }) {
         let difference = currentTotalTime - quitTotalTime;
         let differenceInSeconds = difference / 1000;
 
-        console.log(differenceInSeconds);
         setTime(timeObject(differenceInSeconds));
       }
       timeDifference();
@@ -88,8 +87,6 @@ function HomeScreen({ navigation }) {
       minutes: minutes,
       seconds: seconds,
     };
-
-    console.log(returnObj);
 
     return returnObj;
   }
