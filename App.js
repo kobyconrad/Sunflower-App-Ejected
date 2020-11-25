@@ -94,11 +94,7 @@ function HomeScreen({ navigation }) {
 
   function ReturnDays() {
     if (time.days > 0) {
-      return (
-        <Text style={{ marginRight: 10, fontSize: 18, fontWeight: "bold" }}>
-          {time.days}d
-        </Text>
-      );
+      return <Text style={styles.counterText}>{time.days}d</Text>;
     } else {
       return;
     }
@@ -106,11 +102,7 @@ function HomeScreen({ navigation }) {
 
   function ReturnHours() {
     if (time.hours > 0) {
-      return (
-        <Text style={{ marginRight: 10, fontSize: 18, fontWeight: "bold" }}>
-          {time.hours}h
-        </Text>
-      );
+      return <Text style={styles.counterText}>{time.hours}h</Text>;
     } else {
       return;
     }
@@ -118,11 +110,7 @@ function HomeScreen({ navigation }) {
 
   function ReturnMinutes() {
     if (time.minutes > 0) {
-      return (
-        <Text style={{ marginRight: 10, fontSize: 18, fontWeight: "bold" }}>
-          {time.minutes}m
-        </Text>
-      );
+      return <Text style={styles.counterText}>{time.minutes}m</Text>;
     } else {
       return;
     }
@@ -130,47 +118,42 @@ function HomeScreen({ navigation }) {
 
   function ReturnSeconds() {
     if (time.seconds > 0) {
-      return (
-        <Text style={{ marginRight: 10, fontSize: 18, fontWeight: "bold" }}>
-          {time.seconds}s
-        </Text>
-      );
+      return <Text style={styles.counterText}>{time.seconds}s</Text>;
     } else {
       return;
     }
   }
 
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>You've Stayed Sober For</Text>
-      <View
-        style={{
-          flexDirection: "row",
-          width: 100,
-          margin: 10,
-          justifyContent: "center",
-        }}
-      >
-        {ReturnDays()}
-        {ReturnHours()}
-        {ReturnMinutes()}
-        {ReturnSeconds()}
+    <View
+      style={{ flex: 1, alignItems: "center", justifyContent: "space-between" }}
+    >
+      <View>
+        <Text style={styles.counterTitleText}>You've Stayed Sober For</Text>
+        <View style={styles.counterContainer}>
+          {ReturnDays()}
+          {ReturnHours()}
+          {ReturnMinutes()}
+          {ReturnSeconds()}
+        </View>
       </View>
 
-      <Button
-        title="Reset"
-        onPress={() => {
-          let currentDate = new Date();
-          console.log(currentDate);
+      <View style={styles.navContainer}>
+        <Button
+          title="Reset"
+          onPress={() => {
+            let currentDate = new Date();
+            console.log(currentDate);
 
-          storeData(currentDate);
-        }}
-      />
+            storeData(currentDate);
+          }}
+        />
 
-      <Button
-        title="Edit Date"
-        onPress={() => navigation.navigate("Edit Date")}
-      />
+        <Button
+          title="Edit Date"
+          onPress={() => navigation.navigate("Edit Date")}
+        />
+      </View>
     </View>
   );
 }
@@ -207,16 +190,6 @@ function EditDateScreen({ navigation }) {
         display="default"
         onChange={onChange}
       />
-
-      {/* <View>
-        <Button
-          onPress={() => {
-            storeData(date);
-            navigation.navigate("Home");
-          }}
-          title="Save New Date"
-        />
-      </View> */}
 
       <View style={styles.buttonContainer}>
         <TouchableHighlight
@@ -271,5 +244,23 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: "white",
     fontWeight: "bold",
+  },
+  counterText: {
+    margin: 5,
+    fontSize: 28,
+  },
+  counterContainer: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+  },
+  counterTitleText: {
+    fontSize: 20,
+    marginBottom: 20,
+    marginTop: 40,
+  },
+  navContainer: {
+    display: "flex",
+    marginBottom: 100,
   },
 });
