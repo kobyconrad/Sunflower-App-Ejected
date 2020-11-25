@@ -111,7 +111,7 @@ function HomeScreen({ navigation }) {
 }
 
 function DetailsScreen({ navigation }) {
-  const [date, setDate] = useState(new Date(1598051730000));
+  const [date, setDate] = useState(new Date());
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
