@@ -1,6 +1,13 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-import { View, Text, Button, Platform } from "react-native";
+import {
+  View,
+  Text,
+  Button,
+  Platform,
+  StyleSheet,
+  TouchableHighlight,
+} from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -37,7 +44,7 @@ export default function App() {
           component={HomeScreen}
           options={{ title: "Overview" }}
         />
-        <Stack.Screen name="Details" component={DetailsScreen} />
+        <Stack.Screen name="Edit Date" component={EditDateScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -104,13 +111,13 @@ function HomeScreen({ navigation }) {
 
       <Button
         title="Edit Date"
-        onPress={() => navigation.navigate("Details")}
+        onPress={() => navigation.navigate("Edit Date")}
       />
     </View>
   );
 }
 
-function DetailsScreen({ navigation }) {
+function EditDateScreen({ navigation }) {
   const [date, setDate] = useState(new Date());
 
   const onChange = (event, selectedDate) => {
@@ -119,9 +126,9 @@ function DetailsScreen({ navigation }) {
   };
 
   return (
-    <View>
-      <View>
-        <Text>Select your date</Text>
+    <View style={styles.displayContainer}>
+      <View style={styles.titleContainer}>
+        <Text style={styles.titleText}>Select your date</Text>
       </View>
       <DateTimePicker
         testID="dateTimePicker"
@@ -131,8 +138,8 @@ function DetailsScreen({ navigation }) {
         display="default"
         onChange={onChange}
       />
-      <View>
-        <Text>Select your time</Text>
+      <View style={styles.titleContainer}>
+        <Text style={styles.titleText}>Select your time</Text>
       </View>
       <DateTimePicker
         testID="dateTimePicker"
@@ -143,7 +150,7 @@ function DetailsScreen({ navigation }) {
         onChange={onChange}
       />
 
-      <View>
+      {/* <View>
         <Button
           onPress={() => {
             storeData(date);
@@ -151,7 +158,60 @@ function DetailsScreen({ navigation }) {
           }}
           title="Save New Date"
         />
+      </View> */}
+
+      <View style={styles.buttonContainer}>
+        <TouchableHighlight
+          onPress={() => {
+            storeData(date);
+            navigation.navigate("Home");
+          }}
+        >
+          <View style={styles.button}>
+            <Text style={styles.buttonText}>Save Date</Text>
+          </View>
+        </TouchableHighlight>
       </View>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  displayContainer: {
+    width: "100%",
+    height: "100%",
+    display: "flex",
+    justifyContent: "center",
+  },
+  titleContainer: {
+    width: "100%",
+    display: "flex",
+    alignItems: "center",
+    marginTop: 20,
+  },
+  titleText: {
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+  buttonContainer: {
+    width: "100%",
+    height: 60,
+    marginTop: 30,
+    marginBottom: 60,
+    display: "flex",
+    alignItems: "center",
+  },
+  button: {
+    width: 160,
+    height: 60,
+    backgroundColor: "#1FB7F2",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  buttonText: {
+    fontSize: 18,
+    color: "white",
+    fontWeight: "bold",
+  },
+});
