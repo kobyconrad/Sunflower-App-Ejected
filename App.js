@@ -7,11 +7,13 @@ import {
   Platform,
   StyleSheet,
   TouchableHighlight,
+  Image,
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import Clock from "./assets/clock.png";
 
 // This project uses YARN YARN YARN YARN YARN YARN YARN YARN YARN YARN YARN
 
@@ -127,6 +129,20 @@ function HomeScreen({ navigation }) {
     <View
       style={{ flex: 1, alignItems: "center", justifyContent: "space-between" }}
     >
+      <Image
+        source={require("./assets/beach.png")}
+        style={{ position: "absolute", zIndex: 0, height: "100%" }}
+      />
+      <View
+        style={{
+          backgroundColor: "white",
+          position: "absolute",
+          height: "100%",
+          width: "100%",
+          opacity: 0.8,
+        }}
+      ></View>
+
       <View>
         <Text style={styles.counterTitleText}>You've Stayed Sober For</Text>
         <View style={styles.counterContainer}>
@@ -136,6 +152,12 @@ function HomeScreen({ navigation }) {
           {ReturnSeconds()}
         </View>
       </View>
+
+      <Image
+        source={require("./assets/clock.png")}
+        resizeMode={"contain"}
+        style={{ width: "80%" }}
+      />
 
       <View style={styles.navContainer}>
         <Button
@@ -261,5 +283,15 @@ const styles = StyleSheet.create({
   navContainer: {
     display: "flex",
     marginBottom: 100,
+  },
+  imageContainer: {
+    backgroundColor: "red",
+    width: "80%",
+  },
+  midContainer: {
+    width: "100%",
+    display: "flex",
+    alignItems: "center",
+    backgroundColor: "blue",
   },
 });
