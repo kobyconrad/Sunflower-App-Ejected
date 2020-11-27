@@ -160,7 +160,7 @@ function HomeScreen({ navigation }) {
       />
 
       <View style={styles.navContainer}>
-        <Button
+        {/* <Button
           title="Reset"
           onPress={() => {
             let currentDate = new Date();
@@ -173,7 +173,18 @@ function HomeScreen({ navigation }) {
         <Button
           title="Edit Date"
           onPress={() => navigation.navigate("Edit Date")}
-        />
+        /> */}
+
+        <View style={styles.buttonContainer}>
+          <TouchableHighlight
+            onPress={() => navigation.navigate("Edit Date")}
+            underlayColor=""
+          >
+            <View style={styles.button}>
+              <Text style={styles.buttonText}>Edit Date</Text>
+            </View>
+          </TouchableHighlight>
+        </View>
       </View>
     </View>
   );
@@ -218,6 +229,7 @@ function EditDateScreen({ navigation }) {
             storeData(date);
             navigation.navigate("Home");
           }}
+          underlayColor=""
         >
           <View style={styles.button}>
             <Text style={styles.buttonText}>Save Date</Text>
@@ -254,12 +266,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   button: {
-    width: 160,
-    height: 60,
+    width: 140,
+    height: 50,
     backgroundColor: "#1FB7F2",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    borderRadius: 30,
   },
   buttonText: {
     fontSize: 18,
