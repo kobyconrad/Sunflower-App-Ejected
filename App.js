@@ -44,7 +44,7 @@ export default function App() {
         <Stack.Screen
           name="Home"
           component={HomeScreen}
-          options={{ title: "Overview" }}
+          options={{ title: "🌻 Sunflower" }}
         />
         <Stack.Screen name="Edit Date" component={EditDateScreen} />
       </Stack.Navigator>
@@ -130,16 +130,18 @@ function HomeScreen({ navigation }) {
       style={{ flex: 1, alignItems: "center", justifyContent: "space-between" }}
     >
       <Image
-        source={require("./assets/beach.png")}
+        source={require("./assets/sunflowers.jpg")}
         style={{ position: "absolute", zIndex: 0, height: "100%" }}
+        resizeMode="contain"
       />
+
       <View
         style={{
           backgroundColor: "white",
           position: "absolute",
           height: "100%",
           width: "100%",
-          opacity: 0.8,
+          opacity: 0.25,
         }}
       ></View>
 
@@ -281,7 +283,7 @@ const styles = StyleSheet.create({
   },
   counterText: {
     margin: 5,
-    fontSize: 28,
+    fontSize: 32,
   },
   counterContainer: {
     display: "flex",
@@ -289,7 +291,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   counterTitleText: {
-    fontSize: 20,
+    fontSize: 24,
+    fontWeight: "bold",
     marginBottom: 20,
     marginTop: 40,
   },
