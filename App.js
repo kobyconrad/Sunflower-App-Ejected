@@ -44,7 +44,7 @@ export default function App() {
         <Stack.Screen
           name="Home"
           component={HomeScreen}
-          options={{ title: "🌻 Sunflower" }}
+          options={{ title: "🌻 Sunflower", headerShown: false }}
         />
         <Stack.Screen name="Edit Date" component={EditDateScreen} />
       </Stack.Navigator>
@@ -144,6 +144,15 @@ function HomeScreen({ navigation }) {
           opacity: 0.25,
         }}
       ></View>
+
+      <View style={styles.headerContainer}>
+        <Image
+          source={require("./assets/sunflower-logo.png")}
+          style={{ height: "100%", width: "50%", marginTop: 34 }}
+          resizeMode="contain"
+        />
+        {/* <Text style={styles.headerText}>Sunflower</Text> */}
+      </View>
 
       <View>
         <Text style={styles.counterTitleText}>You've Stayed Sober For</Text>
@@ -294,7 +303,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 20,
-    marginTop: 40,
+    marginTop: 50,
   },
   navContainer: {
     display: "flex",
@@ -309,5 +318,19 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     backgroundColor: "blue",
+  },
+  headerContainer: {
+    height: 100,
+    width: "100%",
+    backgroundColor: "#000100",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  headerText: {
+    marginTop: 30,
+    fontSize: 20,
+    color: "white",
+    fontWeight: "bold",
   },
 });
