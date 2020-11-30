@@ -131,7 +131,7 @@ function HomeScreen({ navigation }) {
     >
       <Image
         source={require("./assets/sunflowers.jpg")}
-        style={{ position: "absolute", zIndex: 0, height: "100%" }}
+        style={{ position: "absolute", height: "100%", top: 50 }}
         resizeMode="contain"
       />
 
@@ -301,7 +301,7 @@ const styles = StyleSheet.create({
   },
   counterTitleText: {
     fontSize: 24,
-    fontWeight: "bold",
+    fontWeight: "800",
     marginBottom: 20,
     marginTop: 50,
   },
