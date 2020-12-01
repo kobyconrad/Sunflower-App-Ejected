@@ -125,12 +125,23 @@ function HomeScreen({ navigation }) {
     }
   }
 
+  let imageOne = require(`./assets/sunflowers.jpg`);
+  let imageTwo = require(`./assets/beach.png`);
+
+  let mySource;
+
+  if (time.days > 1) {
+    mySource = imageOne;
+  } else {
+    mySource = imageTwo;
+  }
+
   return (
     <View
       style={{ flex: 1, alignItems: "center", justifyContent: "space-between" }}
     >
       <Image
-        source={require("./assets/sunflowers.jpg")}
+        source={mySource}
         style={{ position: "absolute", height: "100%", top: 50 }}
         resizeMode="contain"
       />
@@ -147,7 +158,7 @@ function HomeScreen({ navigation }) {
 
       <View style={styles.headerContainer}>
         <Image
-          source={require("./assets/sunflower-logo.png")}
+          source={require(`./assets/sunflower-logo.png`)}
           style={{ height: "100%", width: "50%", marginTop: 34 }}
           resizeMode="contain"
         />
@@ -165,9 +176,9 @@ function HomeScreen({ navigation }) {
       </View>
 
       <Image
-        source={require("./assets/clock.png")}
+        source={require("./assets/clock-square.png")}
         resizeMode={"contain"}
-        style={{ width: "80%" }}
+        style={{ width: "60%", marginTop: 40 }}
       />
 
       <View style={styles.navContainer}>
@@ -279,7 +290,7 @@ const styles = StyleSheet.create({
   button: {
     width: 140,
     height: 50,
-    backgroundColor: "#1FB7F2",
+    backgroundColor: "#000100",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -293,6 +304,7 @@ const styles = StyleSheet.create({
   counterText: {
     margin: 5,
     fontSize: 32,
+    fontWeight: "700",
   },
   counterContainer: {
     display: "flex",
@@ -301,7 +313,7 @@ const styles = StyleSheet.create({
   },
   counterTitleText: {
     fontSize: 24,
-    fontWeight: "800",
+    fontWeight: "600",
     marginBottom: 20,
     marginTop: 50,
   },
