@@ -17,6 +17,7 @@ import Clock from "./assets/clock.png";
 import { back } from "react-native/Libraries/Animated/src/Easing";
 
 // This project uses YARN YARN YARN YARN YARN YARN YARN YARN YARN YARN YARN
+// don't fuck up haptic feedback koby
 
 const Stack = createStackNavigator();
 
