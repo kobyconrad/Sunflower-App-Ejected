@@ -463,6 +463,7 @@ function LearnScreen({ navigation }) {
           <TouchableHighlight
             onPress={() => {
               Haptics.selectionAsync();
+              navigation.navigate("Lesson One");
             }}
             underlayColor=""
           >
@@ -480,6 +481,7 @@ function LearnScreen({ navigation }) {
           <TouchableHighlight
             onPress={() => {
               Haptics.selectionAsync();
+              navigation.navigate("Lesson One");
             }}
             underlayColor=""
           >
@@ -498,6 +500,7 @@ function LearnScreen({ navigation }) {
           <TouchableHighlight
             onPress={() => {
               Haptics.selectionAsync();
+              navigation.navigate("Lesson One");
             }}
             underlayColor=""
           >
@@ -516,6 +519,7 @@ function LearnScreen({ navigation }) {
           <TouchableHighlight
             onPress={() => {
               Haptics.selectionAsync();
+              navigation.navigate("Lesson One");
             }}
             underlayColor=""
           >
@@ -533,6 +537,7 @@ function LearnScreen({ navigation }) {
           <TouchableHighlight
             onPress={() => {
               Haptics.selectionAsync();
+              navigation.navigate("Lesson One");
             }}
             underlayColor=""
           >
@@ -551,6 +556,7 @@ function LearnScreen({ navigation }) {
           <TouchableHighlight
             onPress={() => {
               Haptics.selectionAsync();
+              navigation.navigate("Lesson One");
             }}
             underlayColor=""
           >
