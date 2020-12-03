@@ -435,7 +435,12 @@ function LearnScreen({ navigation }) {
 
       <SafeAreaView style={styles.learnSafeContainer}>
         <ScrollView style={styles.learnScrollContainer}>
-          <TouchableHighlight onPress={() => {}} underlayColor="">
+          <TouchableHighlight
+            onPress={() => {
+              Haptics.selectionAsync();
+            }}
+            underlayColor=""
+          >
             <View style={styles.learnItemContainer} onPress={() => {}}>
               <Text style={styles.learnItemTitleText}>
                 Lesson 1: Marijuana Is Addictive 🙁
@@ -448,7 +453,12 @@ function LearnScreen({ navigation }) {
             </View>
           </TouchableHighlight>
 
-          <TouchableHighlight onPress={() => {}} underlayColor="">
+          <TouchableHighlight
+            onPress={() => {
+              Haptics.selectionAsync();
+            }}
+            underlayColor=""
+          >
             <View style={styles.learnItemContainer} onPress={() => {}}>
               <Text style={styles.learnItemTitleText}>
                 Lesson 2: There Are Significant Withdrawal Symptoms 🛌
@@ -460,7 +470,12 @@ function LearnScreen({ navigation }) {
             </View>
           </TouchableHighlight>
 
-          <TouchableHighlight onPress={() => {}} underlayColor="">
+          <TouchableHighlight
+            onPress={() => {
+              Haptics.selectionAsync();
+            }}
+            underlayColor=""
+          >
             <View style={styles.learnItemContainer} onPress={() => {}}>
               <Text style={styles.learnItemTitleText}>
                 Lesson 3: "Moderation" Often Leads To Daily Use 🪨
@@ -473,7 +488,12 @@ function LearnScreen({ navigation }) {
             </View>
           </TouchableHighlight>
 
-          <TouchableHighlight onPress={() => {}} underlayColor="">
+          <TouchableHighlight
+            onPress={() => {
+              Haptics.selectionAsync();
+            }}
+            underlayColor=""
+          >
             <View style={styles.learnItemContainer} onPress={() => {}}>
               <Text style={styles.learnItemTitleText}>
                 Lesson 4: Reprogram Your Mind 🧠
@@ -486,7 +506,12 @@ function LearnScreen({ navigation }) {
             </View>
           </TouchableHighlight>
 
-          <TouchableHighlight onPress={() => {}} underlayColor="">
+          <TouchableHighlight
+            onPress={() => {
+              Haptics.selectionAsync();
+            }}
+            underlayColor=""
+          >
             <View style={styles.learnItemContainer} onPress={() => {}}>
               <Text style={styles.learnItemTitleText}>
                 Lesson 5: Addiction Hides Your Real Problems 👩‍⚕️
@@ -498,7 +523,12 @@ function LearnScreen({ navigation }) {
             </View>
           </TouchableHighlight>
 
-          <TouchableHighlight onPress={() => {}} underlayColor="">
+          <TouchableHighlight
+            onPress={() => {
+              Haptics.selectionAsync();
+            }}
+            underlayColor=""
+          >
             <View style={styles.learnItemContainer} onPress={() => {}}>
               <Text style={styles.learnItemTitleText}>
                 Lesson 6: It's Okay To Fail ❤️
@@ -511,7 +541,12 @@ function LearnScreen({ navigation }) {
             </View>
           </TouchableHighlight>
 
-          <TouchableHighlight onPress={() => {}} underlayColor="">
+          <TouchableHighlight
+            onPress={() => {
+              Haptics.selectionAsync();
+            }}
+            underlayColor=""
+          >
             <View style={styles.learnItemContainer} onPress={() => {}}>
               <Text style={styles.learnItemTitleText}>
                 Lesson 7: You're A Better Version Of Yourself, Sober 🦾
@@ -695,10 +730,12 @@ const styles = StyleSheet.create({
   learnItemContainer: {
     width: "100%",
     height: 160,
-    backgroundColor: "#2E2E2E",
+    backgroundColor: "#6A49E8",
     marginBottom: 20,
     display: "flex",
     justifyContent: "center",
+    borderBottomWidth: 2,
+    borderBottomColor: "#5072FF",
   },
   learnItemTitleText: {
     marginLeft: 20,
