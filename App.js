@@ -8,6 +8,8 @@ import {
   StyleSheet,
   TouchableHighlight,
   Image,
+  SafeAreaView,
+  ScrollView,
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -420,11 +422,111 @@ function LearnScreen({ navigation }) {
       style={{
         flex: 1,
         alignItems: "center",
-        justifyContent: "center",
+        justifyContent: "space-between",
         height: "100%",
+        backgroundColor: "#f2f2f2",
       }}
     >
-      <Text>Learn Screen</Text>
+      <View style={styles.learnScreenTitleContainer}>
+        <Text style={styles.learnScreenTitleText}>
+          Learn About Marijuana Addiction
+        </Text>
+      </View>
+
+      <SafeAreaView style={styles.learnSafeContainer}>
+        <ScrollView style={styles.learnScrollContainer}>
+          <TouchableHighlight onPress={() => {}} underlayColor="">
+            <View style={styles.learnItemContainer} onPress={() => {}}>
+              <Text style={styles.learnItemTitleText}>
+                Lesson 1: Marijuana Is Addictive 🙁
+              </Text>
+              <Text style={styles.learnItemSubtitleText}>
+                Do you want to learn the truth? Not 1960's scare tactics, not
+                stoner culture myths, but the actual truth about marijuana
+                addiction.
+              </Text>
+            </View>
+          </TouchableHighlight>
+
+          <TouchableHighlight onPress={() => {}} underlayColor="">
+            <View style={styles.learnItemContainer} onPress={() => {}}>
+              <Text style={styles.learnItemTitleText}>
+                Lesson 2: There Are Significant Withdrawal Symptoms 🛌
+              </Text>
+              <Text style={styles.learnItemSubtitleText}>
+                These effect people differently, but can include a severe
+                inability to sleep or eat, as well as depression and anger.
+              </Text>
+            </View>
+          </TouchableHighlight>
+
+          <TouchableHighlight onPress={() => {}} underlayColor="">
+            <View style={styles.learnItemContainer} onPress={() => {}}>
+              <Text style={styles.learnItemTitleText}>
+                Lesson 3: "Moderation" Often Leads To Daily Use 🪨
+              </Text>
+              <Text style={styles.learnItemSubtitleText}>
+                "One joint won't hurt..." is the most common lie we tell
+                ourselves before relapse. Addiction creates habits that are
+                easily reactivated.
+              </Text>
+            </View>
+          </TouchableHighlight>
+
+          <TouchableHighlight onPress={() => {}} underlayColor="">
+            <View style={styles.learnItemContainer} onPress={() => {}}>
+              <Text style={styles.learnItemTitleText}>
+                Lesson 4: Reprogram Your Mind 🧠
+              </Text>
+              <Text style={styles.learnItemSubtitleText}>
+                You've spent months or years training your brain to associate
+                marijuana with pleasure. Now it's time to learn new
+                associations.
+              </Text>
+            </View>
+          </TouchableHighlight>
+
+          <TouchableHighlight onPress={() => {}} underlayColor="">
+            <View style={styles.learnItemContainer} onPress={() => {}}>
+              <Text style={styles.learnItemTitleText}>
+                Lesson 5: Addiction Hides Your Real Problems 👩‍⚕️
+              </Text>
+              <Text style={styles.learnItemSubtitleText}>
+                People frequently use marijuana as a crutch to avoid their real
+                problems. Becoming sober means facing your real issues.
+              </Text>
+            </View>
+          </TouchableHighlight>
+
+          <TouchableHighlight onPress={() => {}} underlayColor="">
+            <View style={styles.learnItemContainer} onPress={() => {}}>
+              <Text style={styles.learnItemTitleText}>
+                Lesson 6: It's Okay To Fail ❤️
+              </Text>
+              <Text style={styles.learnItemSubtitleText}>
+                While moderation rarely works, it's also okay to fail. You
+                should fight for your sobriety, but don't quit fighting if you
+                relapse.
+              </Text>
+            </View>
+          </TouchableHighlight>
+
+          <TouchableHighlight onPress={() => {}} underlayColor="">
+            <View style={styles.learnItemContainer} onPress={() => {}}>
+              <Text style={styles.learnItemTitleText}>
+                Lesson 7: You're A Better Version Of Yourself, Sober 🦾
+              </Text>
+              <Text style={styles.learnItemSubtitleText}>
+                The ultimate secret to becoming sober? Internalizing the fact
+                you are your best self when sober.
+              </Text>
+            </View>
+          </TouchableHighlight>
+
+          <View style={{ width: "100%", height: 240 }}></View>
+        </ScrollView>
+      </SafeAreaView>
+
       <View style={styles.menuContainer}>
         <TouchableHighlight
           onPress={() => {
@@ -575,5 +677,41 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     color: "#fff",
+  },
+  learnScreenTitleContainer: {
+    marginTop: 80,
+    marginBottom: 40,
+    width: "80%",
+  },
+  learnScreenTitleText: {
+    fontSize: 28,
+    fontWeight: "900",
+  },
+  learnSafeContainer: {
+    width: "100%",
+    height: "100%",
+  },
+  learnScrollContainer: {},
+  learnItemContainer: {
+    width: "100%",
+    height: 160,
+    backgroundColor: "#2E2E2E",
+    marginBottom: 20,
+    display: "flex",
+    justifyContent: "center",
+  },
+  learnItemTitleText: {
+    marginLeft: 20,
+    marginRight: 20,
+    fontSize: 18,
+    color: "white",
+    fontWeight: "900",
+  },
+  learnItemSubtitleText: {
+    marginTop: 10,
+    marginLeft: 20,
+    marginRight: 20,
+    fontSize: 16,
+    color: "white",
   },
 });
