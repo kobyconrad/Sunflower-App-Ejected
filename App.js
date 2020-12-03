@@ -18,6 +18,7 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import Clock from "./assets/clock.png";
 import { back } from "react-native/Libraries/Animated/src/Easing";
 import * as Haptics from "expo-haptics";
+import LessonOneScreen from "./components/lessons/lessonOneScreen";
 
 // This project uses YARN YARN YARN YARN YARN YARN YARN YARN YARN YARN YARN
 // don't fuck up haptic feedback koby
@@ -56,6 +57,11 @@ export default function App() {
           name="Learn Screen"
           component={LearnScreen}
           options={{ animationEnabled: false, headerShown: false }}
+        />
+        <Stack.Screen
+          name="Lesson One"
+          component={LessonOne}
+          options={{ headerShown: false }}
         />
       </Stack.Navigator>
     </NavigationContainer>
@@ -310,7 +316,7 @@ function HomeScreen({ navigation }) {
       </View>
 
       <Image
-        source={require("./assets/clock.gif")}
+        source={require("./assets/clock-fixed.gif")}
         resizeMode={"contain"}
         style={{ width: "60%", marginTop: 40 }}
       />
@@ -438,6 +444,7 @@ function LearnScreen({ navigation }) {
           <TouchableHighlight
             onPress={() => {
               Haptics.selectionAsync();
+              navigation.navigate("Lesson One");
             }}
             underlayColor=""
           >
@@ -583,6 +590,18 @@ function LearnScreen({ navigation }) {
           <Text style={styles.menuText}>sponsor</Text>
         </View>
       </View>
+    </View>
+  );
+}
+
+function LessonOne({ navigation }) {
+  return (
+    <View>
+      <LessonOneScreen
+        back={() => {
+          navigation.navigate("Learn Screen");
+        }}
+      />
     </View>
   );
 }
