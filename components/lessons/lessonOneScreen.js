@@ -1,10 +1,28 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-import { View, Text, Button, StyleSheet } from "react-native";
-import { ArrowUpCircle } from "react-native-feather";
+import {
+  View,
+  Text,
+  Button,
+  StyleSheet,
+  TouchableHighlight,
+} from "react-native";
+import * as Haptics from "expo-haptics";
+import { XCircle, ArrowLeftCircle } from "react-native-feather";
 
 function LessonOneScreen(props) {
   const [screen, setScreen] = useState(0);
+
+  function backFunction() {
+    Haptics.selectionAsync();
+    let currentScreen = screen;
+    setScreen(currentScreen - 1);
+  }
+  function nextFunction() {
+    Haptics.selectionAsync();
+    let currentScreen = screen;
+    setScreen(currentScreen + 1);
+  }
 
   return (
     <View style={styles.lessonContainer}>
@@ -16,27 +34,68 @@ function LessonOneScreen(props) {
         <ProgressBarFive screen={screen} />
       </View>
       <View style={styles.navMenuContainer}>
-        <Text>Left</Text>
-        <ArrowUpCircle stroke="red" fill="#fff" width={32} height={32} />
-      </View>
-      <Button title="back" onPress={props.back}></Button>
+        <BackArrow screen={screen} backFunction={backFunction} />
 
-      <Button
-        title="increase screen"
-        onPress={() => {
-          let currentScreen = screen;
-          setScreen(currentScreen + 1);
-        }}
-      ></Button>
-      <Button
-        title="decrease screen"
-        onPress={() => {
-          let currentScreen = screen;
-          setScreen(currentScreen - 1);
-        }}
-      ></Button>
+        <XCircle
+          stroke="#f2f2f2"
+          width={32}
+          height={32}
+          opacity={0.3}
+          onPress={props.back}
+        />
+      </View>
+
+      <NextArrow
+        screen={screen}
+        nextFunction={nextFunction}
+        finishFunction={props.back}
+      />
     </View>
   );
+}
+
+function BackArrow({ screen, backFunction }) {
+  if (screen === 0) {
+    return <View></View>;
+  } else {
+    return (
+      <ArrowLeftCircle
+        stroke="#f2f2f2"
+        width={32}
+        height={32}
+        opacity={0.3}
+        onPress={backFunction}
+      />
+    );
+  }
+}
+
+function NextArrow({ screen, nextFunction, finishFunction }) {
+  if (screen < 4) {
+    return (
+      <TouchableHighlight
+        onPress={nextFunction}
+        underlayColor=""
+        style={styles.buttonPositioning}
+      >
+        <View style={styles.nextButtonContainer}>
+          <Text style={styles.nextButtonText}>next</Text>
+        </View>
+      </TouchableHighlight>
+    );
+  } else {
+    return (
+      <TouchableHighlight
+        onPress={finishFunction}
+        underlayColor=""
+        style={styles.buttonPositioning}
+      >
+        <View style={styles.nextButtonContainer}>
+          <Text style={styles.nextButtonText}>finish</Text>
+        </View>
+      </TouchableHighlight>
+    );
+  }
 }
 
 function ProgressBarOne({ screen }) {
@@ -110,16 +169,34 @@ const styles = StyleSheet.create({
     backgroundColor: "#f2f2f2",
     borderRadius: 4,
     margin: 5,
-    opacity: 0.15,
+    opacity: 0.3,
   },
   navMenuContainer: {
     width: "100%",
-    // backgroundColor: "red",
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
     flexDirection: "row",
-    marginTop: 5,
+    marginTop: 10,
+  },
+  nextButtonContainer: {
+    width: 90,
+    height: 45,
+    borderRadius: 8,
+    backgroundColor: "white",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  nextButtonText: {
+    color: "#6A49E8",
+    fontWeight: "bold",
+    fontSize: 18,
+  },
+  buttonPositioning: {
+    position: "absolute",
+    bottom: 50,
+    right: 20,
   },
 });
 

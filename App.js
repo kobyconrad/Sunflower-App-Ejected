@@ -599,6 +599,7 @@ function LessonOne({ navigation }) {
     <View>
       <LessonOneScreen
         back={() => {
+          Haptics.selectionAsync();
           navigation.navigate("Learn Screen");
         }}
       />
