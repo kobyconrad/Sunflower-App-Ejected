@@ -15,6 +15,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import Clock from "./assets/clock.png";
 import { back } from "react-native/Libraries/Animated/src/Easing";
+import * as Haptics from "expo-haptics";
 
 // This project uses YARN YARN YARN YARN YARN YARN YARN YARN YARN YARN YARN
 // don't fuck up haptic feedback koby
@@ -345,7 +346,10 @@ function HomeScreen({ navigation }) {
           <Text style={styles.menuTextSelect}>time</Text>
         </View>
         <TouchableHighlight
-          onPress={() => navigation.navigate("Learn Screen")}
+          onPress={() => {
+            Haptics.selectionAsync();
+            navigation.navigate("Learn Screen");
+          }}
           underlayColor=""
         >
           <View style={styles.menuItemContainer}>
@@ -423,7 +427,10 @@ function LearnScreen({ navigation }) {
       <Text>Learn Screen</Text>
       <View style={styles.menuContainer}>
         <TouchableHighlight
-          onPress={() => navigation.navigate("Home")}
+          onPress={() => {
+            Haptics.selectionAsync();
+            navigation.navigate("Home");
+          }}
           underlayColor=""
         >
           <View style={styles.menuItemContainer}>
