@@ -14,6 +14,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import Clock from "./assets/clock.png";
+import { back } from "react-native/Libraries/Animated/src/Easing";
 
 // This project uses YARN YARN YARN YARN YARN YARN YARN YARN YARN YARN YARN
 
@@ -47,6 +48,11 @@ export default function App() {
           options={{ title: "🌻 Sunflower", headerShown: false }}
         />
         <Stack.Screen name="Edit Date" component={EditDateScreen} />
+        <Stack.Screen
+          name="Learn Screen"
+          component={LearnScreen}
+          options={{ animationEnabled: false, headerShown: false }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -259,11 +265,15 @@ function HomeScreen({ navigation }) {
 
   return (
     <View
-      style={{ flex: 1, alignItems: "center", justifyContent: "space-between" }}
+      style={{
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "space-between",
+      }}
     >
       <Image
         source={mySource}
-        style={{ position: "absolute", height: "100%", top: 50 }}
+        style={{ position: "absolute", height: "100%", top: -30 }}
         resizeMode="contain"
       />
 
@@ -277,14 +287,13 @@ function HomeScreen({ navigation }) {
         }}
       ></View>
 
-      <View style={styles.headerContainer}>
+      {/* <View style={styles.headerContainer}>
         <Image
           source={require(`./assets/sunflower-logo-v2.png`)}
           style={{ height: "100%", width: "50%", marginTop: 34 }}
           resizeMode="contain"
         />
-        {/* <Text style={styles.headerText}>Sunflower</Text> */}
-      </View>
+      </View> */}
 
       <View>
         <Text style={styles.counterTitleText}>You've Stayed Sober For</Text>
@@ -327,6 +336,23 @@ function HomeScreen({ navigation }) {
               <Text style={styles.buttonText}>Edit Date</Text>
             </View>
           </TouchableHighlight>
+        </View>
+      </View>
+
+      <View style={styles.menuContainer}>
+        <View style={styles.menuItemSelectContainer}>
+          <Text style={styles.menuTextSelect}>time</Text>
+        </View>
+        <TouchableHighlight
+          onPress={() => navigation.navigate("Learn Screen")}
+          underlayColor=""
+        >
+          <View style={styles.menuItemContainer}>
+            <Text style={styles.menuText}>learn</Text>
+          </View>
+        </TouchableHighlight>
+        <View style={styles.menuItemContainer}>
+          <Text style={styles.menuText}>sponsor</Text>
         </View>
       </View>
     </View>
@@ -378,6 +404,39 @@ function EditDateScreen({ navigation }) {
             <Text style={styles.buttonText}>Save Date</Text>
           </View>
         </TouchableHighlight>
+      </View>
+    </View>
+  );
+}
+
+function LearnScreen({ navigation }) {
+  return (
+    <View
+      style={{
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+        height: "100%",
+      }}
+    >
+      <Text>Learn Screen</Text>
+      <View style={styles.menuContainer}>
+        <TouchableHighlight
+          onPress={() => navigation.navigate("Home")}
+          underlayColor=""
+        >
+          <View style={styles.menuItemContainer}>
+            <Text style={styles.menuText}>time</Text>
+          </View>
+        </TouchableHighlight>
+
+        <View style={styles.menuItemSelectContainer}>
+          <Text style={styles.menuTextSelect}>learn</Text>
+        </View>
+
+        <View style={styles.menuItemContainer}>
+          <Text style={styles.menuText}>sponsor</Text>
+        </View>
       </View>
     </View>
   );
@@ -436,7 +495,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "600",
     marginBottom: 20,
-    marginTop: 50,
+    marginTop: 120,
   },
   navContainer: {
     display: "flex",
@@ -465,5 +524,48 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: "white",
     fontWeight: "bold",
+  },
+  menuContainer: {
+    backgroundColor: "#000100",
+    width: "100%",
+    height: 80,
+    position: "absolute",
+    bottom: 0,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    flexDirection: "row",
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingBottom: 10,
+    borderTopColor: "#2E2E2E",
+    borderTopWidth: 2,
+  },
+  menuItemContainer: {
+    height: 40,
+    width: 100,
+    borderRadius: 8,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  menuItemSelectContainer: {
+    backgroundColor: "#2E2E2E",
+    height: 40,
+    width: 100,
+    borderRadius: 8,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  menuText: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "white",
+  },
+  menuTextSelect: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#fff",
   },
 });
