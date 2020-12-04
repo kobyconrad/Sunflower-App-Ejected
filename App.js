@@ -19,6 +19,8 @@ import Clock from "./assets/clock.png";
 import { back } from "react-native/Libraries/Animated/src/Easing";
 import * as Haptics from "expo-haptics";
 import LessonOneScreen from "./components/lessons/lessonOneScreen";
+import LessonTwoScreen from "./components/lessons/lessonTwoScreen";
+import LessonThreeScreen from "./components/lessons/lessonThreeScreen";
 
 // This project uses YARN YARN YARN YARN YARN YARN YARN YARN YARN YARN YARN
 // don't fuck up haptic feedback koby
@@ -61,6 +63,16 @@ export default function App() {
         <Stack.Screen
           name="Lesson One"
           component={LessonOne}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Lesson Two"
+          component={LessonTwo}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Lesson Three"
+          component={LessonThree}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
@@ -463,7 +475,7 @@ function LearnScreen({ navigation }) {
           <TouchableHighlight
             onPress={() => {
               Haptics.selectionAsync();
-              navigation.navigate("Lesson One");
+              navigation.navigate("Lesson Two");
             }}
             underlayColor=""
           >
@@ -481,7 +493,7 @@ function LearnScreen({ navigation }) {
           <TouchableHighlight
             onPress={() => {
               Haptics.selectionAsync();
-              navigation.navigate("Lesson One");
+              navigation.navigate("Lesson Three");
             }}
             underlayColor=""
           >
@@ -604,6 +616,32 @@ function LessonOne({ navigation }) {
   return (
     <View>
       <LessonOneScreen
+        back={() => {
+          Haptics.selectionAsync();
+          navigation.navigate("Learn Screen");
+        }}
+      />
+    </View>
+  );
+}
+
+function LessonTwo({ navigation }) {
+  return (
+    <View>
+      <LessonTwoScreen
+        back={() => {
+          Haptics.selectionAsync();
+          navigation.navigate("Learn Screen");
+        }}
+      />
+    </View>
+  );
+}
+
+function LessonThree({ navigation }) {
+  return (
+    <View>
+      <LessonThreeScreen
         back={() => {
           Haptics.selectionAsync();
           navigation.navigate("Learn Screen");
