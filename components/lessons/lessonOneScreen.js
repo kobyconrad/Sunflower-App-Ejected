@@ -60,93 +60,113 @@ function Pages({ screen }) {
   if (screen === 0) {
     return (
       <View style={styles.pageContainer}>
-        <Text style={styles.titleText}>Page One Title</Text>
-        <Text style={styles.bodyText}>
-          One of the best ways to have a successful T-break is to remove all
-          temptations to smoke. One way you could do this is by getting rid of
-          all your weed, and utensils. However, if you want to continue smoking
-          after your break that is definitely not ideal. A much better
-          alternative to this is using a timed lockbox.{" "}
+        <Text style={styles.titleText}>
+          The Truth Behind Marijuana Addiction
         </Text>
         <Text style={styles.bodyText}>
-          A great routine to start while on a T-break is to exercise. Exercise
-          obviously has many health benefits, including reducing stress which
-          could be a potential trigger for breaking your tolerance break early.
-          In addition to this it can be used to fill the void and reduce the
-          urge to smoke once you are no longer smoking.
+          There are so many lies and falsehoods when it comes to marijuana
+          addiction that it's hard to figure out what is actually true. You have
+          most likely heard everything ranging from "marijuana is a gateway
+          drug" to "it's only mentally addicting, like video games" to "it's not
+          addictive at all".
+        </Text>
+        <Text style={styles.bodyText}>
+          <Text style={{ fontWeight: "bold" }}>Here's the truth.</Text>
+        </Text>
+        <Text style={styles.bodyText}>
+          Marijuana isn't a gateway drug. It isn't as bad as meth or heroin or
+          even alcohol. However, it IS mentally and physically addictive, much
+          more than video games.
         </Text>
       </View>
     );
   } else if (screen === 1) {
     return (
       <View style={styles.pageContainer}>
-        <Text style={styles.titleText}>Page Two Title</Text>
-        <Text style={styles.bodyText}>
-          CBD is a new market and unregulated so theres a lot of research to be
-          done to find great brands. Do your due diligence to find the right
-          brand for you. However, to make your search easier, we’ve done our
-          research and suggest trying a Brand called “Joy Organics”.
+        <Text style={styles.titleText}>
+          How Does Society View Marijuana Addiction?
         </Text>
         <Text style={styles.bodyText}>
-          Joy Organics is a Colorado-based family owned CBD company that was
-          founded in 2018. We’ve tried other CBD brands and none so far have
-          come close to the effectiveness of Joy Organics. Here are some reasons
-          we like them:
+          The fact that withdrawal symptoms from marijuana actually aren't "that
+          bad" (at least compared to other drugs) is one of the hardest parts
+          about the addiction.
+        </Text>
+        <Text style={styles.bodyText}>
+          Many people report that their family wont take their decision to quit
+          seriously. Often society looks at marijuana addiction as a joke, that
+          it's not actually addictive. Friends who are daily smokers may be in
+          active denial about the harm it causes them.
+        </Text>
+        <Text style={styles.bodyText}>
+          This can cause people to feel a bit lonely when they decide to quit.
+          My hope is that this app will help you feel a little less lonely.
         </Text>
       </View>
     );
   } else if (screen === 2) {
     return (
       <View style={styles.pageContainer}>
-        <Text style={styles.titleText}>Page Three Title</Text>
+        <Text style={styles.titleText}>A Community Of Support</Text>
         <Text style={styles.bodyText}>
-          Water is a great way to flush things out of your system, and keep you
-          hydrated and healthy. It will even lessen the need to take frequent
-          tolerance breaks, so drink plenty of water!
+          A strong supportive community is an invaluable asset when trying to
+          become sober. If there are people in your current life who are
+          encouraging of your decision to quit, talk to them about what you are
+          going through.
         </Text>
         <Text style={styles.bodyText}>
-          Taking a tolerance break can be hard, but you don’t have to go it
-          alone. It’s very likely that if you’re taking a tolerance break, there
-          are many other people who are also taking tolerance breaks. You could
-          get your friends together and do a tolerance break at the same time.
+          One of the largest online communities of people who have decided to
+          quit marijuana lives at www.reddit.com/r/leaves. Reading through the
+          stories of others and posting your own story is extremely helpful when
+          trying to become sober.
+        </Text>
+        <Text style={styles.bodyText}>
+          Just know, you are not alone. There are{" "}
+          <Text style={{ fontWeight: "bold" }}>hundreds of thousands</Text> of
+          people struggling to quit smoking marijuana.
         </Text>
       </View>
     );
   } else if (screen === 3) {
     return (
       <View style={styles.pageContainer}>
-        <Text style={styles.titleText}>Page Four Title</Text>
+        <Text style={styles.titleText}>Making The Decision To Quit</Text>
         <Text style={styles.bodyText}>
-          If you’ve been smoking for a while you may find that smoking weed is
-          your main hobby. To keep you on track, find a new hobby or activity to
-          keep you busy and fill the void. If you would like suggestions on
-          something you can do, check out our article on “Activities to do
-          Instead of Smoking”.
+          This app is pro-marijuana and pro-legalization. However, if you have
+          identified a problem with your usage, it is here to help you become
+          sober.
         </Text>
         <Text style={styles.bodyText}>
-          Meditation is good practice to pickup because the more you do it, the
-          better you will be able to manage your moods. This could be an amazing
-          aid to keep you from breaking your T-break.
+          Do you smoke instead of visiting friends or family? Do you smoke
+          instead of studying or learning new things? Do you smoke instead of
+          going to the gym? Is smoking preventing you from doing the things you
+          truly want to do?
+        </Text>
+        <Text style={styles.bodyText}>
+          If marijuana no longer serves you, this app is to help you take back
+          your life.
         </Text>
       </View>
     );
   } else {
     return (
       <View style={styles.pageContainer}>
-        <Text style={styles.titleText}>Page Five Title</Text>
+        <Text style={styles.titleText}>Learning About Addiction</Text>
         <Text style={styles.bodyText}>
-          If you’re taking a tolerance break, it’s likely that you will end up
-          replacing your smoking ritual with something else like drinking
-          coffee, eating more, or even smoking cigarettes. The problem with this
-          is that you’re replacing a much healthier habit with something that is
-          more destructive.
+          This app attempts to do two things. Keep track of your progress, and
+          to teach you about the addiction.
         </Text>
         <Text style={styles.bodyText}>
-          Instead of this, we suggest you try replacing THC with CBD. CBD is the
-          perfect alternative because it provides many health benefits of weed,
-          and it isn’t psychoactive, on top of this it normally contains very
-          little to zero THC. If you want to learn more about CBD check out our
-          article called “What is CBD?”.
+          The reason for this, is because you need to create a new habit. The
+          habit of being sober.
+        </Text>
+        <Text style={styles.bodyText}>
+          <Text style={{ fontWeight: "bold" }}>
+            Progression tracking is one of the strongest ways to change your
+            behavior.
+          </Text>{" "}
+          Then, after spending months or years training your brain to associate
+          marijuana with pleasure/rewards, you must now train your brain to
+          associate marijuana with all of the problems it has caused your life.
         </Text>
       </View>
     );
