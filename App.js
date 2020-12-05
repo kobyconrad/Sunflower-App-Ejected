@@ -21,6 +21,10 @@ import * as Haptics from "expo-haptics";
 import LessonOneScreen from "./components/lessons/lessonOneScreen";
 import LessonTwoScreen from "./components/lessons/lessonTwoScreen";
 import LessonThreeScreen from "./components/lessons/lessonThreeScreen";
+import LessonFourScreen from "./components/lessons/lessonFourScreen";
+import LessonFiveScreen from "./components/lessons/lessonFiveScreen";
+import LessonSixScreen from "./components/lessons/lessonSixScreen";
+import LessonSevenScreen from "./components/lessons/lessonSevenScreen";
 
 // This project uses YARN YARN YARN YARN YARN YARN YARN YARN YARN YARN YARN
 // don't fuck up haptic feedback koby
@@ -73,6 +77,26 @@ export default function App() {
         <Stack.Screen
           name="Lesson Three"
           component={LessonThree}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Lesson Four"
+          component={LessonFour}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Lesson Five"
+          component={LessonFive}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Lesson Six"
+          component={LessonSix}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Lesson Seven"
+          component={LessonSeven}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
@@ -512,7 +536,7 @@ function LearnScreen({ navigation }) {
           <TouchableHighlight
             onPress={() => {
               Haptics.selectionAsync();
-              navigation.navigate("Lesson One");
+              navigation.navigate("Lesson Four");
             }}
             underlayColor=""
           >
@@ -531,7 +555,7 @@ function LearnScreen({ navigation }) {
           <TouchableHighlight
             onPress={() => {
               Haptics.selectionAsync();
-              navigation.navigate("Lesson One");
+              navigation.navigate("Lesson Five");
             }}
             underlayColor=""
           >
@@ -549,7 +573,7 @@ function LearnScreen({ navigation }) {
           <TouchableHighlight
             onPress={() => {
               Haptics.selectionAsync();
-              navigation.navigate("Lesson One");
+              navigation.navigate("Lesson Six");
             }}
             underlayColor=""
           >
@@ -568,7 +592,7 @@ function LearnScreen({ navigation }) {
           <TouchableHighlight
             onPress={() => {
               Haptics.selectionAsync();
-              navigation.navigate("Lesson One");
+              navigation.navigate("Lesson Seven");
             }}
             underlayColor=""
           >
@@ -642,6 +666,58 @@ function LessonThree({ navigation }) {
   return (
     <View>
       <LessonThreeScreen
+        back={() => {
+          Haptics.selectionAsync();
+          navigation.navigate("Learn Screen");
+        }}
+      />
+    </View>
+  );
+}
+
+function LessonFour({ navigation }) {
+  return (
+    <View>
+      <LessonFourScreen
+        back={() => {
+          Haptics.selectionAsync();
+          navigation.navigate("Learn Screen");
+        }}
+      />
+    </View>
+  );
+}
+
+function LessonFive({ navigation }) {
+  return (
+    <View>
+      <LessonFiveScreen
+        back={() => {
+          Haptics.selectionAsync();
+          navigation.navigate("Learn Screen");
+        }}
+      />
+    </View>
+  );
+}
+
+function LessonSix({ navigation }) {
+  return (
+    <View>
+      <LessonSixScreen
+        back={() => {
+          Haptics.selectionAsync();
+          navigation.navigate("Learn Screen");
+        }}
+      />
+    </View>
+  );
+}
+
+function LessonSeven({ navigation }) {
+  return (
+    <View>
+      <LessonSevenScreen
         back={() => {
           Haptics.selectionAsync();
           navigation.navigate("Learn Screen");
