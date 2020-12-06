@@ -30,8 +30,6 @@ function LessonFiveScreen(props) {
         <ProgressBarOne screen={screen} />
         <ProgressBarTwo screen={screen} />
         <ProgressBarThree screen={screen} />
-        <ProgressBarFour screen={screen} />
-        <ProgressBarFive screen={screen} />
       </View>
 
       <View style={styles.navMenuContainer}>
@@ -60,93 +58,65 @@ function Pages({ screen }) {
   if (screen === 0) {
     return (
       <View style={styles.pageContainer}>
-        <Text style={styles.titleText}>Lesson Five Title yay</Text>
+        <Text style={styles.titleText}>Marijuana Is A Crutch</Text>
         <Text style={styles.bodyText}>
-          One of the best ways to have a successful T-break is to remove all
-          temptations to smoke. One way you could do this is by getting rid of
-          all your weed, and utensils. However, if you want to continue smoking
-          after your break that is definitely not ideal. A much better
-          alternative to this is using a timed lockbox.{" "}
+          Marijuana is a crutch that can hide what your real problems are.
+          Parents getting divorced? Just some some weed. Abusive spouse? Just
+          smoke some weed. Sad because you're overweight? Just smoke some weed.
         </Text>
         <Text style={styles.bodyText}>
-          A great routine to start while on a T-break is to exercise. Exercise
-          obviously has many health benefits, including reducing stress which
-          could be a potential trigger for breaking your tolerance break early.
-          In addition to this it can be used to fill the void and reduce the
-          urge to smoke once you are no longer smoking.
+          Nobody gets through this life without encountering some kind of
+          issues. Addiction is rarely the only problem that an addict struggles
+          with. The problem is that when you are always high, you are never
+          addressing the things that are causing you pain. You just smoke a
+          joint and forget about it.
+        </Text>
+        <Text style={styles.bodyText}>
+          You are supposed to feel pain. You are supposed to become unhappy in
+          bad situations. These are triggers that tell us something is wrong and
+          that we need to fix it.
         </Text>
       </View>
     );
   } else if (screen === 1) {
     return (
       <View style={styles.pageContainer}>
-        <Text style={styles.titleText}>Page Two Title</Text>
+        <Text style={styles.titleText}>Take All The Help You Can Get</Text>
         <Text style={styles.bodyText}>
-          CBD is a new market and unregulated so theres a lot of research to be
-          done to find great brands. Do your due diligence to find the right
-          brand for you. However, to make your search easier, we’ve done our
-          research and suggest trying a Brand called “Joy Organics”.
+          If you can get a therapist, you should probably get a therapist. It
+          can be scary, uncomfortable, expensive, and often seem like "it's not
+          necessary", but if you are in the fortunate position where you can get
+          into therapy, you probably should.
         </Text>
         <Text style={styles.bodyText}>
-          Joy Organics is a Colorado-based family owned CBD company that was
-          founded in 2018. We’ve tried other CBD brands and none so far have
-          come close to the effectiveness of Joy Organics. Here are some reasons
-          we like them:
-        </Text>
-      </View>
-    );
-  } else if (screen === 2) {
-    return (
-      <View style={styles.pageContainer}>
-        <Text style={styles.titleText}>Page Three Title</Text>
-        <Text style={styles.bodyText}>
-          Water is a great way to flush things out of your system, and keep you
-          hydrated and healthy. It will even lessen the need to take frequent
-          tolerance breaks, so drink plenty of water!
-        </Text>
-        <Text style={styles.bodyText}>
-          Taking a tolerance break can be hard, but you don’t have to go it
-          alone. It’s very likely that if you’re taking a tolerance break, there
-          are many other people who are also taking tolerance breaks. You could
-          get your friends together and do a tolerance break at the same time.
-        </Text>
-      </View>
-    );
-  } else if (screen === 3) {
-    return (
-      <View style={styles.pageContainer}>
-        <Text style={styles.titleText}>Page Four Title</Text>
-        <Text style={styles.bodyText}>
-          If you’ve been smoking for a while you may find that smoking weed is
-          your main hobby. To keep you on track, find a new hobby or activity to
-          keep you busy and fill the void. If you would like suggestions on
-          something you can do, check out our article on “Activities to do
-          Instead of Smoking”.
-        </Text>
-        <Text style={styles.bodyText}>
-          Meditation is good practice to pickup because the more you do it, the
-          better you will be able to manage your moods. This could be an amazing
-          aid to keep you from breaking your T-break.
+          If you can't get a good therapist, and even in addition to it, take
+          advantage of all of the free resources in the world. Learn how to
+          master your mind. Go on YouTube and Google, learn about your dopamine
+          system, learn how addiction works. Go on r/leaves and read other
+          peoples stories. Identify what your problems are, the things that you
+          struggle with beyond your addiction, and take baby steps towards
+          addressing them.
         </Text>
       </View>
     );
   } else {
     return (
       <View style={styles.pageContainer}>
-        <Text style={styles.titleText}>Page Five Title</Text>
-        <Text style={styles.bodyText}>
-          If you’re taking a tolerance break, it’s likely that you will end up
-          replacing your smoking ritual with something else like drinking
-          coffee, eating more, or even smoking cigarettes. The problem with this
-          is that you’re replacing a much healthier habit with something that is
-          more destructive.
+        <Text style={styles.titleText}>
+          You Don't Need Marijuana To Be Happy
         </Text>
         <Text style={styles.bodyText}>
-          Instead of this, we suggest you try replacing THC with CBD. CBD is the
-          perfect alternative because it provides many health benefits of weed,
-          and it isn’t psychoactive, on top of this it normally contains very
-          little to zero THC. If you want to learn more about CBD check out our
-          article called “What is CBD?”.
+          It's easy to have a thorn in your foot and say "smoking weed makes the
+          pain go away". It's a lot better to just take the thorn out of your
+          foot.
+        </Text>
+        <Text style={styles.bodyText}>
+          It's never actually this easy, but addressing your problems will
+          actually fix them instead of simply ignoring them until they get
+          worse. Just remember it's okay for things to feel bad once you stop
+          smoking. Don't use marijuana as a crutch that's preventing you from
+          living your best life. True freedom and accomplishment lies in
+          tackling the problems that life puts in front of you.
         </Text>
       </View>
     );
@@ -170,7 +140,7 @@ function BackArrow({ screen, backFunction }) {
 }
 
 function NextArrow({ screen, nextFunction, finishFunction }) {
-  if (screen < 4) {
+  if (screen < 2) {
     return (
       <TouchableHighlight
         onPress={nextFunction}
