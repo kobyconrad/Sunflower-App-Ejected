@@ -31,7 +31,6 @@ function LessonFourScreen(props) {
         <ProgressBarTwo screen={screen} />
         <ProgressBarThree screen={screen} />
         <ProgressBarFour screen={screen} />
-        <ProgressBarFive screen={screen} />
       </View>
 
       <View style={styles.navMenuContainer}>
@@ -60,93 +59,86 @@ function Pages({ screen }) {
   if (screen === 0) {
     return (
       <View style={styles.pageContainer}>
-        <Text style={styles.titleText}>Lesson Four Title</Text>
+        <Text style={styles.titleText}>Changing Your Associations</Text>
         <Text style={styles.bodyText}>
-          One of the best ways to have a successful T-break is to remove all
-          temptations to smoke. One way you could do this is by getting rid of
-          all your weed, and utensils. However, if you want to continue smoking
-          after your break that is definitely not ideal. A much better
-          alternative to this is using a timed lockbox.{" "}
+          Deciding to stop smoking and to become sober requires a fundamental
+          shift in what feelings and emotions you associate with marijuana.
         </Text>
         <Text style={styles.bodyText}>
-          A great routine to start while on a T-break is to exercise. Exercise
-          obviously has many health benefits, including reducing stress which
-          could be a potential trigger for breaking your tolerance break early.
-          In addition to this it can be used to fill the void and reduce the
-          urge to smoke once you are no longer smoking.
+          When you are deep in the addiction, it's very common for people to say
+          that they "love" marijuana. Even after becoming sober, many refer to
+          it as an ex girlfriend or an ex lover who simply became toxic.
+        </Text>
+        <Text style={styles.bodyText}>
+          Marijuana is not something to be loved. The first step to no longer
+          "craving" marijuana, is realizing you don't want it.
         </Text>
       </View>
     );
   } else if (screen === 1) {
     return (
       <View style={styles.pageContainer}>
-        <Text style={styles.titleText}>Page Two Title</Text>
-        <Text style={styles.bodyText}>
-          CBD is a new market and unregulated so theres a lot of research to be
-          done to find great brands. Do your due diligence to find the right
-          brand for you. However, to make your search easier, we’ve done our
-          research and suggest trying a Brand called “Joy Organics”.
+        <Text style={styles.titleText}>
+          You Don't Love Weed, You Love Dopamine
         </Text>
         <Text style={styles.bodyText}>
-          Joy Organics is a Colorado-based family owned CBD company that was
-          founded in 2018. We’ve tried other CBD brands and none so far have
-          come close to the effectiveness of Joy Organics. Here are some reasons
-          we like them:
+          It can help to understand that marijuana is simply a plant. You don't
+          love the plant, you love the dopamine it provides your brain when you
+          get high.
+        </Text>
+        <Text style={styles.bodyText}>
+          <Text style={{ fontWeight: "bold" }}>Good!</Text> It's healthy to love
+          dopamine.
+        </Text>
+        <Text style={styles.bodyText}>
+          Dopamine is what drives you to accomplish great things. It's the
+          reward for working out, visiting friends, and accomplishing your
+          goals. Chase the things you love with the same emotion and passion you
+          once had for marijuana.
         </Text>
       </View>
     );
   } else if (screen === 2) {
     return (
       <View style={styles.pageContainer}>
-        <Text style={styles.titleText}>Page Three Title</Text>
-        <Text style={styles.bodyText}>
-          Water is a great way to flush things out of your system, and keep you
-          hydrated and healthy. It will even lessen the need to take frequent
-          tolerance breaks, so drink plenty of water!
+        <Text style={styles.titleText}>
+          Learn To Associate Being Sober With Rewards
         </Text>
         <Text style={styles.bodyText}>
-          Taking a tolerance break can be hard, but you don’t have to go it
-          alone. It’s very likely that if you’re taking a tolerance break, there
-          are many other people who are also taking tolerance breaks. You could
-          get your friends together and do a tolerance break at the same time.
-        </Text>
-      </View>
-    );
-  } else if (screen === 3) {
-    return (
-      <View style={styles.pageContainer}>
-        <Text style={styles.titleText}>Page Four Title</Text>
-        <Text style={styles.bodyText}>
-          If you’ve been smoking for a while you may find that smoking weed is
-          your main hobby. To keep you on track, find a new hobby or activity to
-          keep you busy and fill the void. If you would like suggestions on
-          something you can do, check out our article on “Activities to do
-          Instead of Smoking”.
+          One of the main things this app tries to do, is help you to associate
+          being sober with rewards. It's a little silly, but "getting a
+          sunflower" for every day you stay sober, is a simple way to reward our
+          brains for staying sober. Take time to look at your days (or even
+          minutes) sober, the sunflowers that you have earned, feel proud of
+          what you accomplished.
         </Text>
         <Text style={styles.bodyText}>
-          Meditation is good practice to pickup because the more you do it, the
-          better you will be able to manage your moods. This could be an amazing
-          aid to keep you from breaking your T-break.
+          The real rewards for staying sober are all around you. It's the family
+          you visited instead of getting high. It's the body you built instead
+          of the one you destroyed. It's the things you learned instead of the
+          things you forgot. Sobriety is a super power 1,000 times more
+          rewarding than getting stoned.
         </Text>
       </View>
     );
   } else {
     return (
       <View style={styles.pageContainer}>
-        <Text style={styles.titleText}>Page Five Title</Text>
+        <Text style={styles.titleText}>Build New Pathways</Text>
         <Text style={styles.bodyText}>
-          If you’re taking a tolerance break, it’s likely that you will end up
-          replacing your smoking ritual with something else like drinking
-          coffee, eating more, or even smoking cigarettes. The problem with this
-          is that you’re replacing a much healthier habit with something that is
-          more destructive.
+          Every time you smoked marijuana, you taught your brain to associate
+          marijuana with pleasure/rewards. You can rebuild your brain using this
+          same method.
         </Text>
         <Text style={styles.bodyText}>
-          Instead of this, we suggest you try replacing THC with CBD. CBD is the
-          perfect alternative because it provides many health benefits of weed,
-          and it isn’t psychoactive, on top of this it normally contains very
-          little to zero THC. If you want to learn more about CBD check out our
-          article called “What is CBD?”.
+          If you want to heal your brain faster, give it dopamine as a reward
+          for things other than marijuana. Every time you exercise, you teach
+          your brain how to get dopamine. Every time you spend time with
+          friends, you teach your brain how to get dopamine. Every time you
+          learn something new, you teach your brain how to get dopamine. These
+          actions change the pathways in your brain so instead of craving
+          marijuana as a means to obtain dopamine, it craves exercise, social
+          interaction, and the pursuit of rewarding information.
         </Text>
       </View>
     );
@@ -170,7 +162,7 @@ function BackArrow({ screen, backFunction }) {
 }
 
 function NextArrow({ screen, nextFunction, finishFunction }) {
-  if (screen < 4) {
+  if (screen < 3) {
     return (
       <TouchableHighlight
         onPress={nextFunction}
