@@ -58,7 +58,11 @@ export default function App() {
           component={HomeScreen}
           options={{ title: "🌻 Sunflower", headerShown: false }}
         />
-        <Stack.Screen name="Edit Date" component={EditDateScreen} />
+        <Stack.Screen
+          name="Edit Date"
+          component={EditDateScreen}
+          options={{ animationEnabled: false, headerShown: false }}
+        />
         <Stack.Screen
           name="Learn Screen"
           component={LearnScreen}
@@ -354,7 +358,7 @@ function HomeScreen({ navigation }) {
       <Image
         source={require("./assets/clock-fixed.gif")}
         resizeMode={"contain"}
-        style={{ width: "60%", marginTop: 40 }}
+        style={{ width: "60%", marginTop: 40, marginBottom: 100 }}
       />
 
       <View style={styles.navContainer}>
@@ -373,7 +377,7 @@ function HomeScreen({ navigation }) {
           onPress={() => navigation.navigate("Edit Date")}
         /> */}
 
-        <View style={styles.buttonContainer}>
+        {/* <View style={styles.buttonContainer}>
           <TouchableHighlight
             onPress={() => navigation.navigate("Edit Date")}
             underlayColor=""
@@ -382,7 +386,7 @@ function HomeScreen({ navigation }) {
               <Text style={styles.buttonText}>Edit Date</Text>
             </View>
           </TouchableHighlight>
-        </View>
+        </View> */}
       </View>
 
       <View style={styles.menuContainer}>
@@ -400,9 +404,17 @@ function HomeScreen({ navigation }) {
             <Text style={styles.menuText}>learn</Text>
           </View>
         </TouchableHighlight>
-        <View style={styles.menuItemContainer}>
-          <Text style={styles.menuText}>sponsor</Text>
-        </View>
+        <TouchableHighlight
+          onPress={() => {
+            Haptics.selectionAsync();
+            navigation.navigate("Edit Date");
+          }}
+          underlayColor=""
+        >
+          <View style={styles.menuItemContainer}>
+            <Text style={styles.menuText}>edit</Text>
+          </View>
+        </TouchableHighlight>
       </View>
     </View>
   );
@@ -451,6 +463,41 @@ function EditDateScreen({ navigation }) {
         >
           <View style={styles.button}>
             <Text style={styles.buttonText}>Save Date</Text>
+          </View>
+        </TouchableHighlight>
+      </View>
+      <View style={styles.menuContainer}>
+        <TouchableHighlight
+          onPress={() => {
+            Haptics.selectionAsync();
+            navigation.navigate("Home");
+          }}
+          underlayColor=""
+        >
+          <View style={styles.menuItemContainer}>
+            <Text style={styles.menuTextSelect}>time</Text>
+          </View>
+        </TouchableHighlight>
+        <TouchableHighlight
+          onPress={() => {
+            Haptics.selectionAsync();
+            navigation.navigate("Learn Screen");
+          }}
+          underlayColor=""
+        >
+          <View style={styles.menuItemContainer}>
+            <Text style={styles.menuText}>learn</Text>
+          </View>
+        </TouchableHighlight>
+        <TouchableHighlight
+          onPress={() => {
+            Haptics.selectionAsync();
+            navigation.navigate("Edit Date");
+          }}
+          underlayColor=""
+        >
+          <View style={styles.menuItemSelectContainer}>
+            <Text style={styles.menuText}>edit</Text>
           </View>
         </TouchableHighlight>
       </View>
@@ -630,9 +677,17 @@ function LearnScreen({ navigation }) {
           <Text style={styles.menuTextSelect}>learn</Text>
         </View>
 
-        <View style={styles.menuItemContainer}>
-          <Text style={styles.menuText}>sponsor</Text>
-        </View>
+        <TouchableHighlight
+          onPress={() => {
+            Haptics.selectionAsync();
+            navigation.navigate("Edit Date");
+          }}
+          underlayColor=""
+        >
+          <View style={styles.menuItemContainer}>
+            <Text style={styles.menuText}>edit</Text>
+          </View>
+        </TouchableHighlight>
       </View>
     </View>
   );
