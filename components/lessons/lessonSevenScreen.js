@@ -30,8 +30,6 @@ function LessonSevenScreen(props) {
         <ProgressBarOne screen={screen} />
         <ProgressBarTwo screen={screen} />
         <ProgressBarThree screen={screen} />
-        <ProgressBarFour screen={screen} />
-        <ProgressBarFive screen={screen} />
       </View>
 
       <View style={styles.navMenuContainer}>
@@ -60,93 +58,63 @@ function Pages({ screen }) {
   if (screen === 0) {
     return (
       <View style={styles.pageContainer}>
-        <Text style={styles.titleText}>Lesson Seven Title</Text>
+        <Text style={styles.titleText}>You're A Better Person Sober</Text>
         <Text style={styles.bodyText}>
-          One of the best ways to have a successful T-break is to remove all
-          temptations to smoke. One way you could do this is by getting rid of
-          all your weed, and utensils. However, if you want to continue smoking
-          after your break that is definitely not ideal. A much better
-          alternative to this is using a timed lockbox.{" "}
+          One of the most common lies that we tell ourselves to justify our use,
+          is that marijuana makes us a better person. It makes us more creative.
+          It makes doing things more enjoyable.
         </Text>
         <Text style={styles.bodyText}>
-          A great routine to start while on a T-break is to exercise. Exercise
-          obviously has many health benefits, including reducing stress which
-          could be a potential trigger for breaking your tolerance break early.
-          In addition to this it can be used to fill the void and reduce the
-          urge to smoke once you are no longer smoking.
+          Even when we get sober, we often have this cognitive dissonance that
+          we recognize all of these problems that marijuana causes us, but we
+          miss the feeling that it once gave us.
+        </Text>
+        <Text style={styles.bodyText}>
+          Marijuana, never made you a better person.
         </Text>
       </View>
     );
   } else if (screen === 1) {
     return (
       <View style={styles.pageContainer}>
-        <Text style={styles.titleText}>Page Two Title</Text>
+        <Text style={styles.titleText}>Marijuana Prevents Your Growth</Text>
         <Text style={styles.bodyText}>
-          CBD is a new market and unregulated so theres a lot of research to be
-          done to find great brands. Do your due diligence to find the right
-          brand for you. However, to make your search easier, we’ve done our
-          research and suggest trying a Brand called “Joy Organics”.
+          Besides teaching you about addiction, the only thing marijuana ever
+          did was to mess up your reward system, and prevent your growth. The
+          person you are sober is vastly more creative, more valuable, and a
+          better version of yourself.
         </Text>
         <Text style={styles.bodyText}>
-          Joy Organics is a Colorado-based family owned CBD company that was
-          founded in 2018. We’ve tried other CBD brands and none so far have
-          come close to the effectiveness of Joy Organics. Here are some reasons
-          we like them:
-        </Text>
-      </View>
-    );
-  } else if (screen === 2) {
-    return (
-      <View style={styles.pageContainer}>
-        <Text style={styles.titleText}>Page Three Title</Text>
-        <Text style={styles.bodyText}>
-          Water is a great way to flush things out of your system, and keep you
-          hydrated and healthy. It will even lessen the need to take frequent
-          tolerance breaks, so drink plenty of water!
-        </Text>
-        <Text style={styles.bodyText}>
-          Taking a tolerance break can be hard, but you don’t have to go it
-          alone. It’s very likely that if you’re taking a tolerance break, there
-          are many other people who are also taking tolerance breaks. You could
-          get your friends together and do a tolerance break at the same time.
-        </Text>
-      </View>
-    );
-  } else if (screen === 3) {
-    return (
-      <View style={styles.pageContainer}>
-        <Text style={styles.titleText}>Page Four Title</Text>
-        <Text style={styles.bodyText}>
-          If you’ve been smoking for a while you may find that smoking weed is
-          your main hobby. To keep you on track, find a new hobby or activity to
-          keep you busy and fill the void. If you would like suggestions on
-          something you can do, check out our article on “Activities to do
-          Instead of Smoking”.
-        </Text>
-        <Text style={styles.bodyText}>
-          Meditation is good practice to pickup because the more you do it, the
-          better you will be able to manage your moods. This could be an amazing
-          aid to keep you from breaking your T-break.
+          If you spent the last 24 hours sober, think of everything you did. The
+          friends you talked to, the things you learned. Did you make ourself
+          food? Did you clean your room? Did your brush your teeth? What did you
+          do to take care of yourself that you weren't doing high? I gaurantee
+          you lived a more healthy life than if you were stoned from the moment
+          you woke up.
         </Text>
       </View>
     );
   } else {
     return (
       <View style={styles.pageContainer}>
-        <Text style={styles.titleText}>Page Five Title</Text>
+        <Text style={styles.titleText}>Internalize Your Best Self</Text>
         <Text style={styles.bodyText}>
-          If you’re taking a tolerance break, it’s likely that you will end up
-          replacing your smoking ritual with something else like drinking
-          coffee, eating more, or even smoking cigarettes. The problem with this
-          is that you’re replacing a much healthier habit with something that is
-          more destructive.
+          What does your best self look like? Imagine that person, operating at
+          100% capacity. Free of addictions, of a cloudy mind, of everything
+          holding him or her back.
         </Text>
         <Text style={styles.bodyText}>
-          Instead of this, we suggest you try replacing THC with CBD. CBD is the
-          perfect alternative because it provides many health benefits of weed,
-          and it isn’t psychoactive, on top of this it normally contains very
-          little to zero THC. If you want to learn more about CBD check out our
-          article called “What is CBD?”.
+          This is the last section of the lessons this apps contains, so I will
+          leave it with the only personal reference in all of the lessons. I
+          never knew what I was capable of sober. I was a banking executive, I
+          finished college, I ran my own companies. When I finally got sober, I
+          blew all of that out of the water. I finally learned to code after 7
+          years stuck in a haze, I had a rediculous increase in my salary, I
+          started competing as an athlete.
+        </Text>
+        <Text style={styles.bodyText}>
+          I thought marijuana was part of my best self, but it wasn't even
+          close.
         </Text>
       </View>
     );
@@ -170,7 +138,7 @@ function BackArrow({ screen, backFunction }) {
 }
 
 function NextArrow({ screen, nextFunction, finishFunction }) {
-  if (screen < 4) {
+  if (screen < 2) {
     return (
       <TouchableHighlight
         onPress={nextFunction}

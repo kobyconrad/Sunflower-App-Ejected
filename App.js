@@ -471,7 +471,7 @@ function LearnScreen({ navigation }) {
     >
       <View style={styles.learnScreenTitleContainer}>
         <Text style={styles.learnScreenTitleText}>
-          Learn About Marijuana Addiction
+          Click To Learn About Marijuana Addiction
         </Text>
       </View>
 
@@ -581,11 +581,13 @@ function LearnScreen({ navigation }) {
               <Text style={styles.learnItemTitleText}>
                 Lesson 6: It's Okay To Fail ❤️
               </Text>
-              <Text style={styles.learnItemSubtitleText}>
-                While moderation rarely works, it's also okay to fail. You
-                should fight for your sobriety, but don't quit fighting if you
-                relapse.
-              </Text>
+              <View>
+                <Text style={styles.learnItemSubtitleText}>
+                  While moderation rarely works, it's also okay to fail. You
+                  should fight for your sobriety, but don't quit fighting if you
+                  relapse.
+                </Text>
+              </View>
             </View>
           </TouchableHighlight>
 
