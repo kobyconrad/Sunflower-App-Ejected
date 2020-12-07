@@ -30,8 +30,6 @@ function LessonSixScreen(props) {
         <ProgressBarOne screen={screen} />
         <ProgressBarTwo screen={screen} />
         <ProgressBarThree screen={screen} />
-        <ProgressBarFour screen={screen} />
-        <ProgressBarFive screen={screen} />
       </View>
 
       <View style={styles.navMenuContainer}>
@@ -60,93 +58,66 @@ function Pages({ screen }) {
   if (screen === 0) {
     return (
       <View style={styles.pageContainer}>
-        <Text style={styles.titleText}>Lesson Six Title</Text>
+        <Text style={styles.titleText}>Relapse: A Tricky Topic</Text>
         <Text style={styles.bodyText}>
-          One of the best ways to have a successful T-break is to remove all
-          temptations to smoke. One way you could do this is by getting rid of
-          all your weed, and utensils. However, if you want to continue smoking
-          after your break that is definitely not ideal. A much better
-          alternative to this is using a timed lockbox.{" "}
+          This is a tricky concept to talk about. Moderation is very often a
+          path to failure. After learning to abuse marijuana, making the
+          decision to quit almost always needs to be "final" for most people.
         </Text>
         <Text style={styles.bodyText}>
-          A great routine to start while on a T-break is to exercise. Exercise
-          obviously has many health benefits, including reducing stress which
-          could be a potential trigger for breaking your tolerance break early.
-          In addition to this it can be used to fill the void and reduce the
-          urge to smoke once you are no longer smoking.
+          That being said, relapse is very often part of recovery. I know very
+          few people who were completely successful becoming sober their very
+          first try.
+        </Text>
+        <Text style={styles.bodyText}>
+          It's important to strive for success, but don't become depressed and
+          fall back into addiction if you fail. Get back up and keep fighting
+          for your sobriety.{" "}
         </Text>
       </View>
     );
   } else if (screen === 1) {
     return (
       <View style={styles.pageContainer}>
-        <Text style={styles.titleText}>Page Two Title</Text>
-        <Text style={styles.bodyText}>
-          CBD is a new market and unregulated so theres a lot of research to be
-          done to find great brands. Do your due diligence to find the right
-          brand for you. However, to make your search easier, we’ve done our
-          research and suggest trying a Brand called “Joy Organics”.
+        <Text style={styles.titleText}>
+          There Is No Reset Button On Learning
         </Text>
         <Text style={styles.bodyText}>
-          Joy Organics is a Colorado-based family owned CBD company that was
-          founded in 2018. We’ve tried other CBD brands and none so far have
-          come close to the effectiveness of Joy Organics. Here are some reasons
-          we like them:
-        </Text>
-      </View>
-    );
-  } else if (screen === 2) {
-    return (
-      <View style={styles.pageContainer}>
-        <Text style={styles.titleText}>Page Three Title</Text>
-        <Text style={styles.bodyText}>
-          Water is a great way to flush things out of your system, and keep you
-          hydrated and healthy. It will even lessen the need to take frequent
-          tolerance breaks, so drink plenty of water!
+          Despite resetting your quit timer when you relapse, there is no reset
+          button on what you have learned. To steal the words of people much
+          smarter than me, failure is the chance to start again, simply with
+          more wisdom.
         </Text>
         <Text style={styles.bodyText}>
-          Taking a tolerance break can be hard, but you don’t have to go it
-          alone. It’s very likely that if you’re taking a tolerance break, there
-          are many other people who are also taking tolerance breaks. You could
-          get your friends together and do a tolerance break at the same time.
-        </Text>
-      </View>
-    );
-  } else if (screen === 3) {
-    return (
-      <View style={styles.pageContainer}>
-        <Text style={styles.titleText}>Page Four Title</Text>
-        <Text style={styles.bodyText}>
-          If you’ve been smoking for a while you may find that smoking weed is
-          your main hobby. To keep you on track, find a new hobby or activity to
-          keep you busy and fill the void. If you would like suggestions on
-          something you can do, check out our article on “Activities to do
-          Instead of Smoking”.
+          The hardest time, is the first 24 days. Discovering what marijuana is
+          actually doing to your life, how withdrawals effect you, and
+          everything else related to your journey towards sobriety, it doesn't
+          go away if you slip up.
         </Text>
         <Text style={styles.bodyText}>
-          Meditation is good practice to pickup because the more you do it, the
-          better you will be able to manage your moods. This could be an amazing
-          aid to keep you from breaking your T-break.
+          So aim for success with the intention of never smoking again. But if
+          you relapse, keep practicing self love and just get back up.{" "}
         </Text>
       </View>
     );
   } else {
     return (
       <View style={styles.pageContainer}>
-        <Text style={styles.titleText}>Page Five Title</Text>
+        <Text style={styles.titleText}>Tips To Overcome Relapse</Text>
         <Text style={styles.bodyText}>
-          If you’re taking a tolerance break, it’s likely that you will end up
-          replacing your smoking ritual with something else like drinking
-          coffee, eating more, or even smoking cigarettes. The problem with this
-          is that you’re replacing a much healthier habit with something that is
-          more destructive.
+          If you end up smoking, it can very often trigger the start of a cycle
+          back into addiction. It's possible to catch yourself from falling
+          down.
         </Text>
         <Text style={styles.bodyText}>
-          Instead of this, we suggest you try replacing THC with CBD. CBD is the
-          perfect alternative because it provides many health benefits of weed,
-          and it isn’t psychoactive, on top of this it normally contains very
-          little to zero THC. If you want to learn more about CBD check out our
-          article called “What is CBD?”.
+          Try retracing the things you did when you first got sober. Write down
+          what being sober means to you. Tell a trusted friend what you are
+          going through. Read through the posts on r/leaves of other people who
+          are struggling. Exercise, spend time with friends, take it seriously.
+        </Text>
+        <Text style={styles.bodyText}>
+          It's okay fail. Just don't let yourself fall back into something that
+          causes you pain.
         </Text>
       </View>
     );
@@ -170,7 +141,7 @@ function BackArrow({ screen, backFunction }) {
 }
 
 function NextArrow({ screen, nextFunction, finishFunction }) {
-  if (screen < 4) {
+  if (screen < 2) {
     return (
       <TouchableHighlight
         onPress={nextFunction}
