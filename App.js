@@ -385,7 +385,7 @@ function HomeScreen({ navigation }) {
             <View style={styles.button}>
               <Text style={styles.buttonText}>Edit Date</Text>
             </View>
-          </TouchableHighlight>
+          </TouchableHighlight> im a bad dev :(
         </View> */}
       </View>
 
