@@ -25,6 +25,7 @@ import LessonFourScreen from "./components/lessons/lessonFourScreen";
 import LessonFiveScreen from "./components/lessons/lessonFiveScreen";
 import LessonSixScreen from "./components/lessons/lessonSixScreen";
 import LessonSevenScreen from "./components/lessons/lessonSevenScreen";
+import Onboarding from "./components/lessons/onboarding";
 
 // This project uses YARN YARN YARN YARN YARN YARN YARN YARN YARN YARN YARN
 // don't fuck up haptic feedback koby
@@ -52,7 +53,7 @@ const getData = async () => {
 const storeUserData = async (value) => {
   try {
     const jsonValue = JSON.stringify(value);
-    await AsyncStorage.setItem("user-data-test", jsonValue);
+    await AsyncStorage.setItem("user-data-test-14", jsonValue);
   } catch (e) {
     // saving error
   }
@@ -60,7 +61,7 @@ const storeUserData = async (value) => {
 
 const getUserData = async () => {
   try {
-    const jsonValue = await AsyncStorage.getItem("user-data-test");
+    const jsonValue = await AsyncStorage.getItem("user-data-test-14");
     return jsonValue != null ? JSON.parse(jsonValue) : null;
   } catch (e) {
     // error reading value
@@ -68,84 +69,165 @@ const getUserData = async () => {
 };
 
 export default function App() {
+  const [load, setLoad] = useState("loading");
+
   useEffect(() => {
     async function handleNewSession() {
       let currentUserData = await getUserData();
+      console.log(currentUserData);
       if (currentUserData === null) {
+        setLoad("new");
         let userData = {
           firstSeen: new Date(),
           sessonCount: 0,
+          onboarded: false,
           paid: false,
         };
-
         storeUserData(userData);
+      } else if (currentUserData.onboarded === false) {
+        let updatedUserData = currentUserData;
+        updatedUserData.sessonCount = updatedUserData.sessonCount + 1;
+        setLoad("not-onboarded");
+        storeUserData(updatedUserData);
       } else {
         let updatedUserData = currentUserData;
         updatedUserData.sessonCount = updatedUserData.sessonCount + 1;
+        setLoad(updatedUserData);
         storeUserData(updatedUserData);
       }
     }
 
     handleNewSession();
-
     console.log("load");
   }, []);
-  return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{ title: "🌻 Sunflower", headerShown: false }}
-        />
-        <Stack.Screen
-          name="Edit Date"
-          component={EditDateScreen}
-          options={{ animationEnabled: false, headerShown: false }}
-        />
-        <Stack.Screen
-          name="Learn Screen"
-          component={LearnScreen}
-          options={{ animationEnabled: false, headerShown: false }}
-        />
-        <Stack.Screen
-          name="Lesson One"
-          component={LessonOne}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Lesson Two"
-          component={LessonTwo}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Lesson Three"
-          component={LessonThree}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Lesson Four"
-          component={LessonFour}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Lesson Five"
-          component={LessonFive}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Lesson Six"
-          component={LessonSix}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Lesson Seven"
-          component={LessonSeven}
-          options={{ headerShown: false }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
+
+  if (load === "new" || load === "not-onboarded") {
+    console.log("did i load onboarding screen?");
+    return (
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Onboarding">
+          <Stack.Screen
+            name="Onboarding"
+            component={OnboardingScreen}
+            options={{ animationEnabled: false, headerShown: false }}
+          />
+          <Stack.Screen
+            name="Time"
+            component={HomeScreen}
+            options={{ title: "🌻 Sunflower", headerShown: false }}
+          />
+          <Stack.Screen
+            name="Edit Date"
+            component={EditDateScreen}
+            options={{ animationEnabled: false, headerShown: false }}
+          />
+          <Stack.Screen
+            name="Learn Screen"
+            component={LearnScreen}
+            options={{ animationEnabled: false, headerShown: false }}
+          />
+          <Stack.Screen
+            name="Lesson One"
+            component={LessonOne}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Lesson Two"
+            component={LessonTwo}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Lesson Three"
+            component={LessonThree}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Lesson Four"
+            component={LessonFour}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Lesson Five"
+            component={LessonFive}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Lesson Six"
+            component={LessonSix}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Lesson Seven"
+            component={LessonSeven}
+            options={{ headerShown: false }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    ); // OnboardingScreen
+  } else {
+    console.log("did i load NOT onboarding?");
+    return (
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Onboarding Screen">
+          <Stack.Screen
+            name="Onboarding Screen"
+            component={OnboardingScreen}
+            options={{ animationEnabled: false, headerShown: false }}
+          />
+          <Stack.Screen
+            name="Time"
+            component={HomeScreen}
+            options={{ title: "🌻 Sunflower", headerShown: false }}
+          />
+          <Stack.Screen
+            name="Edit Date"
+            component={EditDateScreen}
+            options={{ animationEnabled: false, headerShown: false }}
+          />
+          <Stack.Screen
+            name="Learn Screen"
+            component={LearnScreen}
+            options={{ animationEnabled: false, headerShown: false }}
+          />
+          <Stack.Screen
+            name="Lesson One"
+            component={LessonOne}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Lesson Two"
+            component={LessonTwo}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Lesson Three"
+            component={LessonThree}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Lesson Four"
+            component={LessonFour}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Lesson Five"
+            component={LessonFive}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Lesson Six"
+            component={LessonSix}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Lesson Seven"
+            component={LessonSeven}
+            options={{ headerShown: false }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    );
+  }
 }
 
 function HomeScreen({ navigation }) {
@@ -500,7 +582,7 @@ function EditDateScreen({ navigation }) {
         <TouchableHighlight
           onPress={() => {
             storeData(date);
-            navigation.navigate("Home");
+            navigation.navigate("Time");
           }}
           underlayColor=""
         >
@@ -513,7 +595,7 @@ function EditDateScreen({ navigation }) {
         <TouchableHighlight
           onPress={() => {
             Haptics.selectionAsync();
-            navigation.navigate("Home");
+            navigation.navigate("Time");
           }}
           underlayColor=""
         >
@@ -707,7 +789,7 @@ function LearnScreen({ navigation }) {
         <TouchableHighlight
           onPress={() => {
             Haptics.selectionAsync();
-            navigation.navigate("Home");
+            navigation.navigate("Time");
           }}
           underlayColor=""
         >
@@ -821,6 +903,31 @@ function LessonSeven({ navigation }) {
         back={() => {
           Haptics.selectionAsync();
           navigation.navigate("Learn Screen");
+        }}
+      />
+    </View>
+  );
+}
+
+function OnboardingScreen({ navigation }) {
+  console.log("am i rendered????");
+  return (
+    <View>
+      <Onboarding
+        finish={() => {
+          console.log("done onboarding");
+
+          async function finishOnboarding() {
+            let currentUserData = await getUserData();
+            let updatedUserData = currentUserData;
+            updatedUserData.onboarded = true;
+            storeUserData(updatedUserData);
+            console.log("user has been onboarded");
+          }
+
+          finishOnboarding();
+          Haptics.selectionAsync();
+          navigation.navigate("Time");
         }}
       />
     </View>
