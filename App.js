@@ -72,7 +72,6 @@ export default function App() {
     async function handleNewSession() {
       let currentUserData = await getUserData();
       if (currentUserData === null) {
-        // if i've never seen you before,
         let userData = {
           firstSeen: new Date(),
           sessonCount: 0,
@@ -80,11 +79,7 @@ export default function App() {
         };
 
         storeUserData(userData);
-        console.log("stored new user data, probably");
       } else {
-        console.log("i've seen this homi before, this is the data");
-        // post the saved data
-        console.log(currentUserData);
         let updatedUserData = currentUserData;
         updatedUserData.sessonCount = updatedUserData.sessonCount + 1;
         storeUserData(updatedUserData);
