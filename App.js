@@ -53,7 +53,7 @@ const getData = async () => {
 const storeUserData = async (value) => {
   try {
     const jsonValue = JSON.stringify(value);
-    await AsyncStorage.setItem("user-data-test-14", jsonValue);
+    await AsyncStorage.setItem("user-data-test-15", jsonValue);
   } catch (e) {
     // saving error
   }
@@ -61,7 +61,7 @@ const storeUserData = async (value) => {
 
 const getUserData = async () => {
   try {
-    const jsonValue = await AsyncStorage.getItem("user-data-test-14");
+    const jsonValue = await AsyncStorage.getItem("user-data-test-15");
     return jsonValue != null ? JSON.parse(jsonValue) : null;
   } catch (e) {
     // error reading value
@@ -74,7 +74,6 @@ export default function App() {
   useEffect(() => {
     async function handleNewSession() {
       let currentUserData = await getUserData();
-      console.log(currentUserData);
       if (currentUserData === null) {
         setLoad("new");
         let userData = {
@@ -98,11 +97,9 @@ export default function App() {
     }
 
     handleNewSession();
-    console.log("load");
   }, []);
 
   if (load === "new" || load === "not-onboarded") {
-    console.log("did i load onboarding screen?");
     return (
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Onboarding">
@@ -165,7 +162,6 @@ export default function App() {
       </NavigationContainer>
     ); // OnboardingScreen
   } else {
-    console.log("did i load NOT onboarding?");
     return (
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Onboarding Screen">
@@ -910,19 +906,15 @@ function LessonSeven({ navigation }) {
 }
 
 function OnboardingScreen({ navigation }) {
-  console.log("am i rendered????");
   return (
     <View>
       <Onboarding
         finish={() => {
-          console.log("done onboarding");
-
           async function finishOnboarding() {
             let currentUserData = await getUserData();
             let updatedUserData = currentUserData;
             updatedUserData.onboarded = true;
             storeUserData(updatedUserData);
-            console.log("user has been onboarded");
           }
 
           finishOnboarding();
