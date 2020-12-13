@@ -9,6 +9,30 @@ import {
 } from "react-native";
 import * as Haptics from "expo-haptics";
 import { XCircle, ArrowLeftCircle } from "react-native-feather";
+import DateTimePicker from "@react-native-community/datetimepicker";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+const storeData = async (value) => {
+  console.log(value);
+  try {
+    const jsonValue = JSON.stringify(value);
+    await AsyncStorage.setItem("quit-date", jsonValue);
+  } catch (e) {
+    console.log(e);
+    // saving error
+  }
+};
+
+const getData = async () => {
+  try {
+    const jsonValue = await AsyncStorage.getItem("quit-date");
+    console.log(jsonValue);
+    return jsonValue != null ? JSON.parse(jsonValue) : null;
+  } catch (e) {
+    console.log(e);
+    // error reading value
+  }
+};
 
 function Onboarding(props) {
   const [screen, setScreen] = useState(0);
@@ -21,18 +45,19 @@ function Onboarding(props) {
   function nextFunction() {
     Haptics.selectionAsync();
     let currentScreen = screen;
+    // storeData(date);
     setScreen(currentScreen + 1);
   }
 
   return (
     <View style={styles.lessonContainer}>
-      <View style={styles.progressContainer}>
+      {/* <View style={styles.progressContainer}>
         <ProgressBarOne screen={screen} />
         <ProgressBarTwo screen={screen} />
         <ProgressBarThree screen={screen} />
         <ProgressBarFour screen={screen} />
         <ProgressBarFive screen={screen} />
-      </View>
+      </View> */}
 
       <View style={styles.navMenuContainer}>
         <BackArrow screen={screen} backFunction={backFunction} />
@@ -45,36 +70,82 @@ function Onboarding(props) {
         /> */}
       </View>
 
-      <Pages screen={screen} />
+      <Pages screen={screen} finish={props.finish} />
 
-      <NextArrow
+      {/* <NextArrow
         screen={screen}
         nextFunction={nextFunction}
         finishFunction={props.finish}
-      />
+      /> */}
     </View>
   );
 }
 
-function Pages({ screen }) {
+function Pages({ screen, finish }) {
+  const [date, setDate] = useState(new Date());
+
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    setDate(currentDate);
+  };
+
   if (screen === 0) {
     return (
       <View style={styles.pageContainer}>
-        <Text style={styles.titleText}>ONBOARDING nice ladies</Text>
+        {/* <Text style={styles.titleText}>Ready to stop smoking marijuana?</Text>
         <Text style={styles.bodyText}>
-          One of the best ways to have a successful T-break is to remove all
-          temptations to smoke. One way you could do this is by getting rid of
-          all your weed, and utensils. However, if you want to continue smoking
-          after your break that is definitely not ideal. A much better
-          alternative to this is using a timed lockbox.{" "}
-        </Text>
-        <Text style={styles.bodyText}>
-          A great routine to start while on a T-break is to exercise. Exercise
-          obviously has many health benefits, including reducing stress which
-          could be a potential trigger for breaking your tolerance break early.
-          In addition to this it can be used to fill the void and reduce the
-          urge to smoke once you are no longer smoking.
-        </Text>
+          Progression tracking for marijuana addiction. Every day you stay
+          sober, a new flower will grow.
+        </Text> */}
+        <View style={styles.titleContainer}>
+          <Text style={styles.titleText}>Set Your Quit Date</Text>
+        </View>
+
+        <DateTimePicker
+          testID="dateTimePicker"
+          value={date}
+          mode={"date"}
+          is24Hour={true}
+          display="spinner"
+          onChange={onChange}
+        />
+        <View style={styles.titleContainer}>
+          <Text style={styles.titleText}>Set Your Quit Time</Text>
+        </View>
+
+        <DateTimePicker
+          testID="dateTimePicker"
+          value={date}
+          mode={"time"}
+          is24Hour={true}
+          display="spinner"
+          onChange={onChange}
+          style={{ backgroundColor: "white" }}
+        />
+
+        <TouchableHighlight
+          onPress={() => {
+            storeData(date);
+            getData();
+            finish();
+          }}
+          underlayColor=""
+          style={styles.buttonPositioning}
+        >
+          <View style={styles.nextButtonContainer}>
+            <Text style={styles.nextButtonText}>finish</Text>
+          </View>
+        </TouchableHighlight>
+
+        {/* <TouchableHighlight
+        onPress={finishFunction}
+        underlayColor=""
+        style={styles.buttonPositioning}
+      >
+        <View style={styles.nextButtonContainer}>
+          <Text style={styles.nextButtonText}>finish</Text>
+        </View>
+      </TouchableHighlight> */}
       </View>
     );
   } else if (screen === 1) {
@@ -170,7 +241,7 @@ function BackArrow({ screen, backFunction }) {
 }
 
 function NextArrow({ screen, nextFunction, finishFunction }) {
-  if (screen < 4) {
+  if (screen < 0) {
     return (
       <TouchableHighlight
         onPress={nextFunction}
@@ -241,7 +312,7 @@ const styles = StyleSheet.create({
   lessonContainer: {
     width: "100%",
     height: "100%",
-    backgroundColor: "#6A49E8",
+    backgroundColor: "#fff",
     paddingTop: "12%",
     paddingLeft: 20,
     paddingRight: 20,
@@ -282,13 +353,13 @@ const styles = StyleSheet.create({
     width: 90,
     height: 45,
     borderRadius: 8,
-    backgroundColor: "white",
+    backgroundColor: "#6A49E8",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
   },
   nextButtonText: {
-    color: "#6A49E8",
+    color: "#fff",
     fontWeight: "bold",
     fontSize: 18,
   },
@@ -306,13 +377,18 @@ const styles = StyleSheet.create({
   titleText: {
     fontSize: 28,
     fontWeight: "900",
-    color: "white",
+    color: "#6A49E8",
   },
   bodyText: {
-    color: "white",
+    color: "#6A49E8",
     fontSize: 18,
     marginTop: 15,
     lineHeight: 25,
+  },
+  titleContainer: {
+    display: "flex",
+    alignItems: "center",
+    marginTop: 35,
   },
 });
 

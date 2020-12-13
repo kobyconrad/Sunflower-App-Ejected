@@ -53,7 +53,7 @@ const getData = async () => {
 const storeUserData = async (value) => {
   try {
     const jsonValue = JSON.stringify(value);
-    await AsyncStorage.setItem("user-data-test-15", jsonValue);
+    await AsyncStorage.setItem("user-data-test-23", jsonValue);
   } catch (e) {
     // saving error
   }
@@ -61,7 +61,7 @@ const storeUserData = async (value) => {
 
 const getUserData = async () => {
   try {
-    const jsonValue = await AsyncStorage.getItem("user-data-test-15");
+    const jsonValue = await AsyncStorage.getItem("user-data-test-23");
     return jsonValue != null ? JSON.parse(jsonValue) : null;
   } catch (e) {
     // error reading value
@@ -557,7 +557,7 @@ function EditDateScreen({ navigation }) {
           value={date}
           mode={"date"}
           is24Hour={true}
-          display="default"
+          display="spinner"
           onChange={onChange}
         />
       </View>
@@ -570,7 +570,7 @@ function EditDateScreen({ navigation }) {
         value={date}
         mode={"time"}
         is24Hour={true}
-        display="default"
+        display="spinner"
         onChange={onChange}
       />
 
