@@ -49,7 +49,52 @@ const getData = async () => {
   }
 };
 
+const storeUserData = async (value) => {
+  try {
+    const jsonValue = JSON.stringify(value);
+    await AsyncStorage.setItem("user-data-test", jsonValue);
+  } catch (e) {
+    // saving error
+  }
+};
+
+const getUserData = async () => {
+  try {
+    const jsonValue = await AsyncStorage.getItem("user-data-test");
+    return jsonValue != null ? JSON.parse(jsonValue) : null;
+  } catch (e) {
+    // error reading value
+  }
+};
+
 export default function App() {
+  useEffect(() => {
+    async function handleNewSession() {
+      let currentUserData = await getUserData();
+      if (currentUserData === null) {
+        // if i've never seen you before,
+        let userData = {
+          firstSeen: new Date(),
+          sessonCount: 0,
+          paid: false,
+        };
+
+        storeUserData(userData);
+        console.log("stored new user data, probably");
+      } else {
+        console.log("i've seen this homi before, this is the data");
+        // post the saved data
+        console.log(currentUserData);
+        let updatedUserData = currentUserData;
+        updatedUserData.sessonCount = updatedUserData.sessonCount + 1;
+        storeUserData(updatedUserData);
+      }
+    }
+
+    handleNewSession();
+
+    console.log("load");
+  }, []);
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
@@ -433,14 +478,17 @@ function EditDateScreen({ navigation }) {
       <View style={styles.titleContainer}>
         <Text style={styles.titleText}>Select your quit date</Text>
       </View>
-      <DateTimePicker
-        testID="dateTimePicker"
-        value={date}
-        mode={"date"}
-        is24Hour={true}
-        display="default"
-        onChange={onChange}
-      />
+      <View>
+        <DateTimePicker
+          testID="dateTimePicker"
+          value={date}
+          mode={"date"}
+          is24Hour={true}
+          display="default"
+          onChange={onChange}
+        />
+      </View>
+
       <View style={styles.titleContainer}>
         <Text style={styles.titleText}>Select your quit time</Text>
       </View>
