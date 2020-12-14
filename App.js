@@ -474,7 +474,7 @@ function HomeScreen({ navigation }) {
       </View>
 
       <Image
-        source={require("./assets/clock-fixed.gif")}
+        source={require("./assets/clock.svg")}
         resizeMode={"contain"}
         style={{ width: "60%", marginTop: 40, marginBottom: 100 }}
       />
