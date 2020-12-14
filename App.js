@@ -937,7 +937,7 @@ const styles = StyleSheet.create({
     width: "100%",
     display: "flex",
     alignItems: "center",
-    marginTop: 20,
+    marginTop: 10,
   },
   titleText: {
     fontSize: 18,
@@ -946,7 +946,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     width: "100%",
     height: 60,
-    marginTop: 30,
+    marginTop: 10,
     marginBottom: 60,
     display: "flex",
     alignItems: "center",
