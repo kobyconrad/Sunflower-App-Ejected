@@ -286,4 +286,4 @@ const styles = StyleSheet.create({
 
 export default LessonSevenScreen;
 
-// psst im bad programmer :( very bad
+// psst im bad programmer :( very bad i really need to finish this
