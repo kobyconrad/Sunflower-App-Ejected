@@ -15,7 +15,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import DateTimePicker from "@react-native-community/datetimepicker";
-import Clock from "./assets/clock.png";
+// import Clock from "./assets/clock.svg";
 import { back } from "react-native/Libraries/Animated/src/Easing";
 import * as Haptics from "expo-haptics";
 import LessonOneScreen from "./components/lessons/lessonOneScreen";
@@ -474,7 +474,7 @@ function HomeScreen({ navigation }) {
       </View>
 
       <Image
-        source={require("./assets/clock.svg")}
+        source={require("./assets/clock-fixed.gif")}
         resizeMode={"contain"}
         style={{ width: "60%", marginTop: 40, marginBottom: 100 }}
       />
