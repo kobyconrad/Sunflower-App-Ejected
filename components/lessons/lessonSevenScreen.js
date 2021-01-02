@@ -6,6 +6,8 @@ import {
   Button,
   StyleSheet,
   TouchableHighlight,
+  SafeAreaView,
+  ScrollView,
 } from "react-native";
 import * as Haptics from "expo-haptics";
 import { XCircle, ArrowLeftCircle } from "react-native-feather";
@@ -43,7 +45,11 @@ function LessonSevenScreen(props) {
         />
       </View>
 
-      <Pages screen={screen} />
+      <SafeAreaView>
+        <ScrollView>
+          <Pages screen={screen} />
+        </ScrollView>
+      </SafeAreaView>
 
       <NextArrow
         screen={screen}
