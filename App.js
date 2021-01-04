@@ -437,11 +437,17 @@ function HomeScreen({ navigation }) {
         flex: 1,
         alignItems: "center",
         justifyContent: "space-between",
+        backgroundColor: "#6A49E8",
       }}
     >
       <Image
         source={mySource}
-        style={{ position: "absolute", height: "100%", top: -30 }}
+        style={{
+          position: "absolute",
+          height: "100%",
+          top: -30,
+          width: "100%",
+        }}
         resizeMode="contain"
       />
 
