@@ -446,7 +446,6 @@ function HomeScreen({ navigation }) {
           position: "absolute",
           height: "100%",
           top: -30,
-          width: "100%",
         }}
         resizeMode="contain"
       />
