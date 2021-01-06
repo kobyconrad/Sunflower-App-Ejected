@@ -15,8 +15,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import DateTimePicker from "@react-native-community/datetimepicker";
-// import Clock from "./assets/clock.svg";
-import { back } from "react-native/Libraries/Animated/src/Easing";
 import * as Haptics from "expo-haptics";
 import LessonOneScreen from "./components/lessons/lessonOneScreen";
 import LessonTwoScreen from "./components/lessons/lessonTwoScreen";
@@ -29,7 +27,6 @@ import Onboarding from "./components/lessons/onboarding";
 import * as Segment from "expo-analytics-segment";
 
 // This project uses YARN YARN YARN YARN YARN YARN YARN YARN YARN YARN YARN
-// don't fuck up haptic feedback koby
 
 const Stack = createStackNavigator();
 
@@ -558,7 +555,7 @@ function HomeScreen({ navigation }) {
 function EditDateScreen({ navigation }) {
   const [date, setDate] = useState(new Date());
 
-  Segment.track("edit-date-screen-view");
+  Segment.screen("edit-date-screen-view");
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
@@ -568,7 +565,7 @@ function EditDateScreen({ navigation }) {
   return (
     <View style={styles.displayContainer}>
       <View style={styles.titleContainer}>
-        <Text style={styles.titleText}>Select your quit date</Text>
+        <Text style={styles.titleText}>Set Your Quit Date</Text>
       </View>
       <View>
         <DateTimePicker
@@ -582,7 +579,7 @@ function EditDateScreen({ navigation }) {
       </View>
 
       <View style={styles.titleContainer}>
-        <Text style={styles.titleText}>Select your quit time</Text>
+        <Text style={styles.titleText}>Set Your Quit Time</Text>
       </View>
       <DateTimePicker
         testID="dateTimePicker"
@@ -602,7 +599,7 @@ function EditDateScreen({ navigation }) {
           underlayColor=""
         >
           <View style={styles.button}>
-            <Text style={styles.buttonText}>Save Date</Text>
+            <Text style={styles.buttonText}>Save New Date</Text>
           </View>
         </TouchableHighlight>
       </View>
@@ -959,22 +956,23 @@ const styles = StyleSheet.create({
     width: "100%",
     display: "flex",
     alignItems: "center",
-    marginTop: 10,
+    marginTop: 5,
   },
   titleText: {
-    fontSize: 18,
-    fontWeight: "bold",
+    fontSize: 24,
+    fontWeight: "900",
+    color: "#6A49E8",
   },
   buttonContainer: {
     width: "100%",
     height: 60,
-    marginTop: 10,
+    marginTop: 4,
     marginBottom: 60,
     display: "flex",
     alignItems: "center",
   },
   button: {
-    width: 140,
+    width: 180,
     height: 50,
     backgroundColor: "#000100",
     display: "flex",
