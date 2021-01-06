@@ -123,19 +123,21 @@ function Pages({ screen, finish }) {
           style={{ backgroundColor: "white" }}
         />
 
-        <TouchableHighlight
-          onPress={() => {
-            storeData(date);
-            getData();
-            finish();
-          }}
-          underlayColor=""
-          style={styles.buttonPositioning}
-        >
-          <View style={styles.nextButtonContainer}>
-            <Text style={styles.nextButtonText}>finish</Text>
-          </View>
-        </TouchableHighlight>
+        <View style={{ width: "100%", height: 45, marginBottom: 20 }}>
+          <TouchableHighlight
+            onPress={() => {
+              storeData(date);
+              getData();
+              finish();
+            }}
+            underlayColor=""
+            style={styles.buttonPositioning}
+          >
+            <View style={styles.nextButtonContainer}>
+              <Text style={styles.nextButtonText}>finish</Text>
+            </View>
+          </TouchableHighlight>
+        </View>
 
         {/* <TouchableHighlight
         onPress={finishFunction}
@@ -317,6 +319,9 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
     paddingBottom: 20,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
   progressContainer: {
     width: "100%",
@@ -357,6 +362,7 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    marginTop: 10,
   },
   nextButtonText: {
     color: "#fff",
@@ -365,14 +371,13 @@ const styles = StyleSheet.create({
   },
   buttonPositioning: {
     position: "absolute",
-    bottom: 50,
     right: 20,
   },
   pageContainer: {
     width: "100%",
     height: "100%",
-    marginTop: 15,
-    paddingLeft: 10,
+    display: "flex",
+    justifyContent: "center",
   },
   titleText: {
     fontSize: 28,
@@ -388,7 +393,7 @@ const styles = StyleSheet.create({
   titleContainer: {
     display: "flex",
     alignItems: "center",
-    marginTop: 35,
+    marginTop: 25,
   },
 });
 
