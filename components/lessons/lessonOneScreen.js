@@ -111,7 +111,6 @@ function Pages({ screen }) {
         </Text>
         <Text style={styles.bodyText}>
           This can cause people to feel a bit lonely when they decide to quit.
-          My hope is that this app will help you feel a little less lonely.
         </Text>
       </View>
     );
@@ -154,8 +153,7 @@ function Pages({ screen }) {
           truly want to do?
         </Text>
         <Text style={styles.bodyText}>
-          If marijuana no longer serves you, this app is to help you take back
-          your life.
+          If marijuana no longer serves you, it is time to take back your life.
         </Text>
       </View>
     );
@@ -169,8 +167,8 @@ function Pages({ screen }) {
           to teach you about the addiction.
         </Text>
         <Text style={styles.bodyText}>
-          The reason for this, is because you need to create a new habit. The
-          habit of being sober.
+          These are two very powerful tools that can help you create a new
+          habit. The habit of being sober.
         </Text>
         <Text style={styles.bodyText}>
           <Text style={{ fontWeight: "bold" }}>
