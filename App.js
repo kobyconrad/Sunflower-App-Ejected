@@ -23,7 +23,7 @@ import LessonFourScreen from "./components/lessons/lessonFourScreen";
 import LessonFiveScreen from "./components/lessons/lessonFiveScreen";
 import LessonSixScreen from "./components/lessons/lessonSixScreen";
 import LessonSevenScreen from "./components/lessons/lessonSevenScreen";
-import Onboarding from "./components/lessons/onboarding";
+import Onboarding from "./components/onboarding/onboarding";
 import * as Segment from "expo-analytics-segment";
 
 // This project uses YARN YARN YARN YARN YARN YARN YARN YARN YARN YARN YARN
@@ -167,7 +167,7 @@ export default function App() {
           />
         </Stack.Navigator>
       </NavigationContainer>
-    ); // OnboardingScreen
+    );
   } else {
     return (
       <NavigationContainer>
@@ -235,8 +235,6 @@ export default function App() {
 
 function HomeScreen({ navigation }) {
   const [time, setTime] = useState(0);
-
-  // Segment.screen("timer-screen-view");
 
   useEffect(() => {
     setTimeout(() => {
@@ -469,14 +467,6 @@ function HomeScreen({ navigation }) {
         }}
       ></View>
 
-      {/* <View style={styles.headerContainer}>
-        <Image
-          source={require(`./assets/sunflower-logo-v2.png`)}
-          style={{ height: "100%", width: "50%", marginTop: 34 }}
-          resizeMode="contain"
-        />
-      </View> */}
-
       <View>
         <Text style={styles.counterTitleText}>You've Stayed Sober For</Text>
         <View style={styles.counterContainer}>
@@ -493,33 +483,7 @@ function HomeScreen({ navigation }) {
         style={{ width: "60%", marginTop: 40, marginBottom: 100 }}
       />
 
-      <View style={styles.navContainer}>
-        {/* <Button
-          title="Reset"
-          onPress={() => {
-            let currentDate = new Date();
-            console.log(currentDate);
-
-            storeData(currentDate);
-          }}
-        />
-
-        <Button
-          title="Edit Date"
-          onPress={() => navigation.navigate("Edit Date")}
-        /> */}
-
-        {/* <View style={styles.buttonContainer}>
-          <TouchableHighlight
-            onPress={() => navigation.navigate("Edit Date")}
-            underlayColor=""
-          >
-            <View style={styles.button}>
-              <Text style={styles.buttonText}>Edit Date</Text>
-            </View>
-          </TouchableHighlight> im a bad dev :(
-        </View> */}
-      </View>
+      <View style={styles.navContainer}></View>
 
       <View style={styles.menuContainer}>
         <View style={styles.menuItemSelectContainer}>
@@ -555,7 +519,7 @@ function HomeScreen({ navigation }) {
 function EditDateScreen({ navigation }) {
   const [date, setDate] = useState(new Date());
 
-  Segment.screen("edit-date-screen-view");
+  Segment.track("edit-date-screen-view");
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;

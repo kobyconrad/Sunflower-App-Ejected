@@ -1,24 +1,16 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-import {
-  View,
-  Text,
-  Button,
-  StyleSheet,
-  TouchableHighlight,
-} from "react-native";
+import { View, Text, StyleSheet, TouchableHighlight } from "react-native";
 import * as Haptics from "expo-haptics";
 import { XCircle, ArrowLeftCircle } from "react-native-feather";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const storeData = async (value) => {
-  console.log(value);
   try {
     const jsonValue = JSON.stringify(value);
     await AsyncStorage.setItem("quit-date", jsonValue);
   } catch (e) {
-    console.log(e);
     // saving error
   }
 };
@@ -26,10 +18,8 @@ const storeData = async (value) => {
 const getData = async () => {
   try {
     const jsonValue = await AsyncStorage.getItem("quit-date");
-    console.log(jsonValue);
     return jsonValue != null ? JSON.parse(jsonValue) : null;
   } catch (e) {
-    console.log(e);
     // error reading value
   }
 };
@@ -92,11 +82,6 @@ function Pages({ screen, finish }) {
   if (screen === 0) {
     return (
       <View style={styles.pageContainer}>
-        {/* <Text style={styles.titleText}>Ready to stop smoking marijuana?</Text>
-        <Text style={styles.bodyText}>
-          Progression tracking for marijuana addiction. Every day you stay
-          sober, a new flower will grow.
-        </Text> */}
         <View style={styles.titleContainer}>
           <Text style={styles.titleText}>Set Your Quit Date</Text>
         </View>
@@ -138,88 +123,13 @@ function Pages({ screen, finish }) {
             </View>
           </TouchableHighlight>
         </View>
-
-        {/* <TouchableHighlight
-        onPress={finishFunction}
-        underlayColor=""
-        style={styles.buttonPositioning}
-      >
-        <View style={styles.nextButtonContainer}>
-          <Text style={styles.nextButtonText}>finish</Text>
-        </View>
-      </TouchableHighlight> */}
-      </View>
-    );
-  } else if (screen === 1) {
-    return (
-      <View style={styles.pageContainer}>
-        <Text style={styles.titleText}>Page Two Title</Text>
-        <Text style={styles.bodyText}>
-          CBD is a new market and unregulated so theres a lot of research to be
-          done to find great brands. Do your due diligence to find the right
-          brand for you. However, to make your search easier, we’ve done our
-          research and suggest trying a Brand called “Joy Organics”.
-        </Text>
-        <Text style={styles.bodyText}>
-          Joy Organics is a Colorado-based family owned CBD company that was
-          founded in 2018. We’ve tried other CBD brands and none so far have
-          come close to the effectiveness of Joy Organics. Here are some reasons
-          we like them:
-        </Text>
-      </View>
-    );
-  } else if (screen === 2) {
-    return (
-      <View style={styles.pageContainer}>
-        <Text style={styles.titleText}>Page Three Title</Text>
-        <Text style={styles.bodyText}>
-          Water is a great way to flush things out of your system, and keep you
-          hydrated and healthy. It will even lessen the need to take frequent
-          tolerance breaks, so drink plenty of water!
-        </Text>
-        <Text style={styles.bodyText}>
-          Taking a tolerance break can be hard, but you don’t have to go it
-          alone. It’s very likely that if you’re taking a tolerance break, there
-          are many other people who are also taking tolerance breaks. You could
-          get your friends together and do a tolerance break at the same time.
-        </Text>
-      </View>
-    );
-  } else if (screen === 3) {
-    return (
-      <View style={styles.pageContainer}>
-        <Text style={styles.titleText}>Page Four Title</Text>
-        <Text style={styles.bodyText}>
-          If you’ve been smoking for a while you may find that smoking weed is
-          your main hobby. To keep you on track, find a new hobby or activity to
-          keep you busy and fill the void. If you would like suggestions on
-          something you can do, check out our article on “Activities to do
-          Instead of Smoking”.
-        </Text>
-        <Text style={styles.bodyText}>
-          Meditation is good practice to pickup because the more you do it, the
-          better you will be able to manage your moods. This could be an amazing
-          aid to keep you from breaking your T-break.
-        </Text>
       </View>
     );
   } else {
     return (
       <View style={styles.pageContainer}>
-        <Text style={styles.titleText}>Page Five Title</Text>
-        <Text style={styles.bodyText}>
-          If you’re taking a tolerance break, it’s likely that you will end up
-          replacing your smoking ritual with something else like drinking
-          coffee, eating more, or even smoking cigarettes. The problem with this
-          is that you’re replacing a much healthier habit with something that is
-          more destructive.
-        </Text>
-        <Text style={styles.bodyText}>
-          Instead of this, we suggest you try replacing THC with CBD. CBD is the
-          perfect alternative because it provides many health benefits of weed,
-          and it isn’t psychoactive, on top of this it normally contains very
-          little to zero THC. If you want to learn more about CBD check out our
-          article called “What is CBD?”.
+        <Text>
+          There was a major error, please report to the developer. I'm so sorry!
         </Text>
       </View>
     );
