@@ -79,7 +79,7 @@ export default function App() {
 
   Segment.initialize({ androidWriteKey, iosWriteKey });
   Segment.identify(userId);
-  Segment.track("please-track-me");
+  Segment.track("session-tracker");
 
   useEffect(() => {
     async function handleNewSession() {
@@ -239,7 +239,7 @@ export default function App() {
 function HomeScreen({ navigation }) {
   const [time, setTime] = useState(0);
 
-  Segment.track("timer-screen-view");
+  // Segment.screen("timer-screen-view");
 
   useEffect(() => {
     setTimeout(() => {
