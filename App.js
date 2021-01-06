@@ -26,6 +26,7 @@ import LessonFiveScreen from "./components/lessons/lessonFiveScreen";
 import LessonSixScreen from "./components/lessons/lessonSixScreen";
 import LessonSevenScreen from "./components/lessons/lessonSevenScreen";
 import Onboarding from "./components/lessons/onboarding";
+import * as Segment from "expo-analytics-segment";
 
 // This project uses YARN YARN YARN YARN YARN YARN YARN YARN YARN YARN YARN
 // don't fuck up haptic feedback koby
@@ -68,8 +69,17 @@ const getUserData = async () => {
   }
 };
 
+const userId = "universal123";
+
 export default function App() {
   const [load, setLoad] = useState("loading");
+
+  const iosWriteKey = "dYDrjLXzJdCwztz5hDlfqYsfZNoWi0iM";
+  const androidWriteKey = "kcGZd5M0tCqjlGyhKBAFuhyNyDCXA6l9";
+
+  Segment.initialize({ androidWriteKey, iosWriteKey });
+  Segment.identify(userId);
+  Segment.track("please-track-me");
 
   useEffect(() => {
     async function handleNewSession() {
@@ -228,6 +238,8 @@ export default function App() {
 
 function HomeScreen({ navigation }) {
   const [time, setTime] = useState(0);
+
+  Segment.track("timer-screen-view");
 
   useEffect(() => {
     setTimeout(() => {
@@ -546,6 +558,8 @@ function HomeScreen({ navigation }) {
 function EditDateScreen({ navigation }) {
   const [date, setDate] = useState(new Date());
 
+  Segment.track("edit-date-screen-view");
+
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
     setDate(currentDate);
@@ -632,6 +646,8 @@ function EditDateScreen({ navigation }) {
 }
 
 function LearnScreen({ navigation }) {
+  Segment.track("learn-screen-view");
+
   return (
     <View
       style={{
@@ -911,6 +927,7 @@ function LessonSeven({ navigation }) {
 }
 
 function OnboardingScreen({ navigation }) {
+  Segment.track("onboarding-screen-view");
   return (
     <View>
       <Onboarding
