@@ -98,7 +98,7 @@ function Pages({ screen }) {
         </Text>
         <Text style={styles.bodyText}>
           If you spent the last 24 hours sober, think of everything you did. The
-          friends you talked to, the things you learned. Did you make ourself
+          friends you talked to, the things you learned. Did you make yourself
           food? Did you clean your room? Did your brush your teeth? What did you
           do to take care of yourself that you weren't doing high? I gaurantee
           you lived a more healthy life than if you were stoned from the moment
@@ -121,13 +121,15 @@ function Pages({ screen }) {
           leave it with the only personal reference in all of the lessons. I
           never knew what I was capable of sober. I was a banking executive, I
           finished college, I ran my own companies. When I finally got sober, I
-          blew all of that out of the water. I finally learned to code after 7
-          years stuck in a haze, I had a rediculous increase in my salary, I
-          started competing as an athlete.
+          blew all of that out of the water. I learned to code after 7 years
+          stuck in a haze, I had a rediculous increase in my salary, I started
+          competing as an athlete.
         </Text>
         <Text style={styles.bodyText}>
           I thought marijuana was part of my best self, but it wasn't even
-          close.
+          close. I hope this app helps you to live your best life, and if you're
+          willing to share I would love to hear your story - just email me at
+          koby@roomservice.dev.
         </Text>
       </View>
     );

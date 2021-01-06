@@ -101,8 +101,8 @@ function Pages({ screen }) {
           more wisdom.
         </Text>
         <Text style={styles.bodyText}>
-          The hardest time, is the first 24 days. Discovering what marijuana is
-          actually doing to your life, how withdrawals effect you, and
+          The hardest part, is the first few weeks. Discovering what marijuana
+          is actually doing to your life, how withdrawals effect you, and
           everything else related to your journey towards sobriety, it doesn't
           go away if you slip up.
         </Text>
@@ -119,7 +119,7 @@ function Pages({ screen }) {
         <Text style={styles.titleText}>Tips To Overcome Relapse</Text>
         <Text style={styles.bodyText}>
           If you end up smoking, it can very often trigger the start of a cycle
-          back into addiction. It's possible to catch yourself from falling
+          back into addiction. But it's possible to catch yourself from falling
           down.
         </Text>
         <Text style={styles.bodyText}>

@@ -78,7 +78,7 @@ function Pages({ screen }) {
           understand the effect it has on your mind.
         </Text>
         <Text style={styles.bodyText}>
-          When you smoke marijuana, what happens? You get happy, you get the
+          What happens when you smoke marijuana? You get happy, you get
           munchies, and then you get tired.
         </Text>
         <Text style={styles.bodyText}>
@@ -129,7 +129,8 @@ function Pages({ screen }) {
           It is also why, once you stop smoking, you may experience a very hard
           time eating for up to 5 days afterwards. It's important to try and
           make yourself eat a healthy amount. Eating plays an important role in
-          feeding your brain and helping you overcome the negative effects.
+          providing energy to your brain and helping you overcome negative
+          withdrawal effects.
         </Text>
       </View>
     );

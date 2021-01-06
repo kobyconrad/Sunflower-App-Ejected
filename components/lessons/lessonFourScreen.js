@@ -146,12 +146,12 @@ function Pages({ screen }) {
         <Text style={styles.bodyText}>
           If you want to heal your brain faster, give it dopamine as a reward
           for things other than marijuana. Every time you exercise, you teach
-          your brain how to get dopamine. Every time you spend time with
-          friends, you teach your brain how to get dopamine. Every time you
-          learn something new, you teach your brain how to get dopamine. These
-          actions change the pathways in your brain so instead of craving
-          marijuana as a means to obtain dopamine, it craves exercise, social
-          interaction, and the pursuit of rewarding information.
+          your brain how to get dopamine. Every time you hang out with friends,
+          you teach your brain how to get dopamine. Every time you learn
+          something new, you teach your brain how to get dopamine. These actions
+          change the pathways in your brain so instead of craving marijuana as a
+          means to obtain dopamine, it craves exercise, social interaction, and
+          the pursuit of rewarding information.
         </Text>
       </View>
     );

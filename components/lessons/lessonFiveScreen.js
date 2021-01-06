@@ -73,7 +73,7 @@ function Pages({ screen }) {
         <Text style={styles.titleText}>Marijuana Is A Crutch</Text>
         <Text style={styles.bodyText}>
           Marijuana is a crutch that can hide what your real problems are.
-          Parents getting divorced? Just some some weed. Abusive spouse? Just
+          Parents getting divorced? Just smoke some weed. Abusive spouse? Just
           smoke some weed. Sad because you're overweight? Just smoke some weed.
         </Text>
         <Text style={styles.bodyText}>
