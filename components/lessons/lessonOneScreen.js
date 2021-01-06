@@ -48,7 +48,11 @@ function LessonOneScreen(props) {
         />
       </View>
 
-      <SafeAreaView>
+      <SafeAreaView
+        style={{
+          height: "78%",
+        }}
+      >
         <ScrollView>
           <Pages screen={screen} />
         </ScrollView>
@@ -323,7 +327,7 @@ const styles = StyleSheet.create({
   },
   buttonPositioning: {
     position: "absolute",
-    bottom: 50,
+    bottom: 38,
     right: 20,
   },
   pageContainer: {
