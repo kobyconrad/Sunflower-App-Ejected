@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import * as Haptics from "expo-haptics";
 import { XCircle, ArrowLeftCircle } from "react-native-feather";
+import * as Segment from "expo-analytics-segment";
 
 function LessonTwoScreen(props) {
   const [screen, setScreen] = useState(0);
@@ -64,6 +65,7 @@ function LessonTwoScreen(props) {
 
 function Pages({ screen }) {
   if (screen === 0) {
+    Segment.track("lesson-two-start");
     return (
       <View style={styles.pageContainer}>
         <Text style={styles.titleText}>What Is THC Doing To My Mind?</Text>
@@ -154,6 +156,7 @@ function Pages({ screen }) {
       </View>
     );
   } else {
+    Segment.track("lesson-two-end");
     return (
       <View style={styles.pageContainer}>
         <Text style={styles.titleText}>Anger</Text>
