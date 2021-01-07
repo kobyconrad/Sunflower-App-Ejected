@@ -81,6 +81,8 @@ export default function App() {
   useEffect(() => {
     async function handleNewSession() {
       let currentUserData = await getUserData();
+      // console.log(currentUserData);
+
       if (currentUserData === null) {
         setLoad("new");
         let userData = {
@@ -98,7 +100,7 @@ export default function App() {
       } else {
         let updatedUserData = currentUserData;
         updatedUserData.sessonCount = updatedUserData.sessonCount + 1;
-        setLoad(updatedUserData);
+        setLoad("onboarded");
         storeUserData(updatedUserData);
       }
     }
@@ -106,6 +108,7 @@ export default function App() {
     handleNewSession();
   }, []);
 
+  console.log("load var = ", load);
   if (load === "new" || load === "not-onboarded") {
     return (
       <NavigationContainer>
@@ -172,11 +175,11 @@ export default function App() {
     return (
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Onboarding Screen">
-          <Stack.Screen
+          {/* <Stack.Screen
             name="Onboarding Screen"
             component={OnboardingScreen}
             options={{ animationEnabled: false, headerShown: false }}
-          />
+          /> */}
           <Stack.Screen
             name="Time"
             component={HomeScreen}
