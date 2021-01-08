@@ -81,7 +81,6 @@ export default function App() {
   useEffect(() => {
     async function handleNewSession() {
       let currentUserData = await getUserData();
-      // console.log(currentUserData);
 
       if (currentUserData === null) {
         setLoad("new");
@@ -108,7 +107,6 @@ export default function App() {
     handleNewSession();
   }, []);
 
-  console.log("load var = ", load);
   if (load === "new" || load === "not-onboarded") {
     return (
       <NavigationContainer>
