@@ -171,6 +171,8 @@ export default function App() {
         </Stack.Navigator>
       </NavigationContainer>
     );
+  } else if (load === "loading") {
+    return <View></View>;
   } else {
     return (
       <NavigationContainer>
