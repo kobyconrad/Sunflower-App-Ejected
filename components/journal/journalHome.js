@@ -31,7 +31,7 @@ const getData = async () => {
 
 function JournalHome() {
   const [screen, setScreen] = useState("home");
-  const [text, setJournalText] = useState("placeholder value");
+  const [text, setJournalText] = useState("");
 
   if (screen === "home") {
     // Journal Homepage Screen
@@ -97,7 +97,7 @@ function JournalHome() {
     return (
       <View
         style={{
-          backgroundColor: "#fff",
+          backgroundColor: "#FBFCFE",
           height: "100%",
           zIndex: 100,
           paddingTop: 60,
@@ -110,12 +110,23 @@ function JournalHome() {
         </View>
 
         <TextInput
+          multiline={true}
+          numberOfLines={4}
+          placeholder={"This is placeholder text"}
           style={{
             height: 160,
             borderColor: "gray",
             borderWidth: 1,
+            borderBottomWidth: 3,
+            borderRightWidth: 2,
             padding: 12,
-            margin: 12,
+            paddingTop: 12,
+            margin: 18,
+            marginTop: 0,
+            borderRadius: 4,
+            fontSize: 15,
+            borderColor: "#B8BFC8",
+            textAlignVertical: "top",
           }}
           onChangeText={(inputText) => setJournalText(inputText)}
           value={text}
@@ -130,7 +141,7 @@ function JournalHome() {
         >
           <TouchableHighlight
             onPress={() => {
-              console.log("press me");
+              setJournalText("");
               setScreen("home");
               Haptics.selectionAsync();
             }}
@@ -164,6 +175,7 @@ function JournalHome() {
               }
 
               handleStorage();
+              setJournalText("");
 
               Haptics.selectionAsync();
             }}
@@ -208,7 +220,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   entryExerciseTitleContainer: {
-    backgroundColor: "#f2f2f2",
     padding: 18,
   },
   cancelButtonContainer: {
