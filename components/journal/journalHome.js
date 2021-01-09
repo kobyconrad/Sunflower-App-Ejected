@@ -1,14 +1,40 @@
 import * as React from "react";
 import { useState } from "react";
-import { View, Text, StyleSheet, TouchableHighlight } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableHighlight,
+  TextInput,
+} from "react-native";
 import { Book } from "react-native-feather";
 import * as Haptics from "expo-haptics";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+const storeData = async (value) => {
+  try {
+    const jsonValue = JSON.stringify(value);
+    await AsyncStorage.setItem("journal-entries-test", jsonValue);
+  } catch (e) {
+    // saving error
+  }
+};
+
+const getData = async () => {
+  try {
+    const jsonValue = await AsyncStorage.getItem("journal-entries-test");
+    return jsonValue != null ? JSON.parse(jsonValue) : null;
+  } catch (e) {
+    // error reading value
+  }
+};
 
 function JournalHome() {
   const [screen, setScreen] = useState("home");
+  const [text, setJournalText] = useState("placeholder value");
 
   if (screen === "home") {
-    console.log("home", screen);
+    // Journal Homepage Screen
     return (
       <View
         style={{
@@ -67,7 +93,7 @@ function JournalHome() {
       </View>
     );
   } else {
-    console.log("not-home", screen);
+    // Exercise Screen
     return (
       <View
         style={{
@@ -83,21 +109,73 @@ function JournalHome() {
           </Text>
         </View>
 
-        <TouchableHighlight
-          onPress={() => {
-            console.log("press me");
-            setScreen("home");
-            Haptics.selectionAsync();
+        <TextInput
+          style={{
+            height: 160,
+            borderColor: "gray",
+            borderWidth: 1,
+            padding: 12,
+            margin: 12,
           }}
-          underlayColor=""
-          style={{}}
+          onChangeText={(inputText) => setJournalText(inputText)}
+          value={text}
+        />
+
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+          }}
         >
-          <View style={styles.cancelButtonContainer}>
-            <Text style={{ fontSize: 18, fontWeight: "900", color: "white" }}>
-              delete
-            </Text>
-          </View>
-        </TouchableHighlight>
+          <TouchableHighlight
+            onPress={() => {
+              console.log("press me");
+              setScreen("home");
+              Haptics.selectionAsync();
+            }}
+            underlayColor=""
+            style={{}}
+          >
+            <View style={styles.cancelButtonContainer}>
+              <Text style={{ fontSize: 18, fontWeight: "900", color: "white" }}>
+                delete
+              </Text>
+            </View>
+          </TouchableHighlight>
+
+          <TouchableHighlight
+            onPress={() => {
+              setScreen("home");
+
+              async function handleStorage() {
+                let currentDate = new Date();
+                let storedData = await getData();
+                if (storedData !== null) {
+                  storedData[currentDate] = text;
+                } else {
+                  storedData = {};
+                  storedData[currentDate] = text;
+                }
+
+                storeData(storedData);
+                let newStoredData = await getData();
+                console.log(newStoredData);
+              }
+
+              handleStorage();
+
+              Haptics.selectionAsync();
+            }}
+            underlayColor=""
+          >
+            <View style={styles.finishButtonContainer}>
+              <Text style={{ fontSize: 18, fontWeight: "900", color: "white" }}>
+                finish
+              </Text>
+            </View>
+          </TouchableHighlight>
+        </View>
       </View>
     );
   }
@@ -137,6 +215,16 @@ const styles = StyleSheet.create({
     width: 100,
     height: 45,
     backgroundColor: "#FA344C",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 8,
+    margin: 4,
+  },
+  finishButtonContainer: {
+    height: 45,
+    width: 220,
+    backgroundColor: "#6A49E8",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
