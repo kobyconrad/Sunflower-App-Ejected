@@ -25,6 +25,7 @@ import LessonSixScreen from "./components/lessons/lessonSixScreen";
 import LessonSevenScreen from "./components/lessons/lessonSevenScreen";
 import Onboarding from "./components/onboarding/onboarding";
 import * as Segment from "expo-analytics-segment";
+import JournalHome from "./components/journal/journalHome";
 
 // This project uses YARN YARN YARN YARN YARN YARN YARN YARN YARN YARN YARN
 
@@ -193,6 +194,11 @@ export default function App() {
           <Stack.Screen
             name="Learn Screen"
             component={LearnScreen}
+            options={{ animationEnabled: false, headerShown: false }}
+          />
+          <Stack.Screen
+            name="Journal Screen"
+            component={JournalScreen}
             options={{ animationEnabled: false, headerShown: false }}
           />
           <Stack.Screen
@@ -495,12 +501,12 @@ function HomeScreen({ navigation }) {
         <TouchableHighlight
           onPress={() => {
             Haptics.selectionAsync();
-            navigation.navigate("Learn Screen");
+            navigation.navigate("Journal Screen");
           }}
           underlayColor=""
         >
           <View style={styles.menuItemContainer}>
-            <Text style={styles.menuText}>learn</Text>
+            <Text style={styles.menuText}>journal</Text>
           </View>
         </TouchableHighlight>
         <TouchableHighlight
@@ -908,6 +914,45 @@ function OnboardingScreen({ navigation }) {
           navigation.navigate("Time");
         }}
       />
+    </View>
+  );
+}
+
+function JournalScreen({ navigation }) {
+  return (
+    <View>
+      <JournalHome />
+      {/* nav bar */}
+
+      <View style={styles.menuContainer}>
+        <TouchableHighlight
+          onPress={() => {
+            Haptics.selectionAsync();
+            navigation.navigate("Time");
+          }}
+          underlayColor=""
+        >
+          <View style={styles.menuItemContainer}>
+            <Text style={styles.menuText}>time</Text>
+          </View>
+        </TouchableHighlight>
+
+        <View style={styles.menuItemSelectContainer}>
+          <Text style={styles.menuTextSelect}>journal</Text>
+        </View>
+
+        <TouchableHighlight
+          onPress={() => {
+            Haptics.selectionAsync();
+            navigation.navigate("Edit Date");
+          }}
+          underlayColor=""
+        >
+          <View style={styles.menuItemContainer}>
+            <Text style={styles.menuText}>edit</Text>
+          </View>
+        </TouchableHighlight>
+      </View>
     </View>
   );
 }
