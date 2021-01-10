@@ -8,6 +8,8 @@ import {
   TextInput,
   SafeAreaView,
   ScrollView,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 import { Book, Frown, Meh, Smile } from "react-native-feather";
 import * as Haptics from "expo-haptics";
@@ -17,7 +19,7 @@ import { useEffect } from "react";
 const storeData = async (value) => {
   try {
     const jsonValue = JSON.stringify(value);
-    await AsyncStorage.setItem("journal-entries-test", jsonValue);
+    await AsyncStorage.setItem("journal-entries-test-2", jsonValue);
   } catch (e) {
     // saving error
   }
@@ -25,12 +27,18 @@ const storeData = async (value) => {
 
 const getData = async () => {
   try {
-    const jsonValue = await AsyncStorage.getItem("journal-entries-test");
+    const jsonValue = await AsyncStorage.getItem("journal-entries-test-2");
     return jsonValue != null ? JSON.parse(jsonValue) : null;
   } catch (e) {
     // error reading value
   }
 };
+
+// const DismissKeyboard = ({ children }) => {
+//   return (
+
+//   );
+// };
 
 function JournalHome() {
   const [screen, setScreen] = useState("home");
@@ -49,7 +57,7 @@ function JournalHome() {
   console.log(entries);
   let myComponentList = (
     <View>
-      <Text>fail</Text>
+      <Text></Text>
     </View>
   );
   if (entries !== null) {
@@ -59,12 +67,22 @@ function JournalHome() {
       let currentMood = entries[key].mood;
 
       return (
-        <JournalEntry
-          myKey={key}
-          text={currentText}
-          date={currentDate}
-          mood={currentMood}
-        />
+        <TouchableHighlight
+          onPress={() => {
+            //   setScreen("journal-entry");
+            console.log("go to view screen");
+            Haptics.selectionAsync();
+          }}
+          underlayColor=""
+          style={{}}
+        >
+          <JournalEntry
+            myKey={key}
+            text={currentText}
+            date={currentDate}
+            mood={currentMood}
+          />
+        </TouchableHighlight>
       );
     });
   }
@@ -305,121 +323,132 @@ function JournalHome() {
       }
     }
     return (
-      <View
-        style={{
-          backgroundColor: "#FBFCFE",
-          height: "100%",
-          zIndex: 100,
-          paddingTop: 50,
+      <TouchableWithoutFeedback
+        onPress={() => {
+          console.log("do i fire");
+          Keyboard.dismiss();
         }}
       >
-        <View style={styles.entryExerciseTitleContainer}>
-          <Text style={{ fontSize: 20, fontWeight: "900", color: "#313853" }}>
-            How did you feel today?
-          </Text>
-        </View>
-
-        <MoodSelector moodSetting={mood} />
-
-        <View style={styles.entryExerciseTitleContainer}>
-          <Text style={{ fontSize: 20, fontWeight: "900", color: "#313853" }}>
-            What did you accomplish today, because you were sober?
-          </Text>
-        </View>
-
-        <TextInput
-          multiline={true}
-          numberOfLines={4}
-          placeholder={
-            "I cleaned my room, worked out at the gym, and had dinner with my family..."
-          }
-          style={{
-            height: 160,
-            borderColor: "gray",
-            borderWidth: 1,
-            borderBottomWidth: 3,
-            borderRightWidth: 2,
-            padding: 12,
-            paddingTop: 12,
-            margin: 18,
-            marginTop: 0,
-            borderRadius: 4,
-            fontSize: 15,
-            borderColor: "#B8BFC8",
-            textAlignVertical: "top",
-          }}
-          onChangeText={(inputText) => setJournalText(inputText)}
-          value={text}
-        />
-
         <View
           style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "center",
+            backgroundColor: "#FBFCFE",
+            height: "100%",
+            zIndex: 100,
+            paddingTop: 50,
           }}
         >
-          <TouchableHighlight
-            onPress={() => {
-              setJournalText("");
-              setScreen("home");
-              setMood("none");
-              Haptics.selectionAsync();
+          <View style={styles.entryExerciseTitleContainer}>
+            <Text style={{ fontSize: 20, fontWeight: "900", color: "#313853" }}>
+              How did you feel today?
+            </Text>
+          </View>
+
+          <MoodSelector moodSetting={mood} />
+
+          <View style={styles.entryExerciseTitleContainer}>
+            <Text style={{ fontSize: 20, fontWeight: "900", color: "#313853" }}>
+              What did you accomplish today, because you were sober?
+            </Text>
+          </View>
+
+          <TextInput
+            multiline={true}
+            numberOfLines={4}
+            placeholder={
+              "I cleaned my room, worked out at the gym, and had dinner with my family..."
+            }
+            style={{
+              height: 160,
+              borderColor: "gray",
+              borderWidth: 1,
+              borderBottomWidth: 3,
+              borderRightWidth: 2,
+              padding: 12,
+              paddingTop: 12,
+              margin: 18,
+              marginTop: 0,
+              borderRadius: 4,
+              fontSize: 15,
+              borderColor: "#B8BFC8",
+              textAlignVertical: "top",
             }}
-            underlayColor=""
-            style={{}}
+            onChangeText={(inputText) => setJournalText(inputText)}
+            value={text}
+          />
+
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+            }}
           >
-            <View style={styles.cancelButtonContainer}>
-              <Text style={{ fontSize: 18, fontWeight: "900", color: "white" }}>
-                delete
-              </Text>
-            </View>
-          </TouchableHighlight>
+            <TouchableHighlight
+              onPress={() => {
+                setJournalText("");
+                setScreen("home");
+                setMood("none");
+                Haptics.selectionAsync();
+              }}
+              underlayColor=""
+              style={{}}
+            >
+              <View style={styles.cancelButtonContainer}>
+                <Text
+                  style={{ fontSize: 18, fontWeight: "900", color: "white" }}
+                >
+                  delete
+                </Text>
+              </View>
+            </TouchableHighlight>
 
-          <TouchableHighlight
-            onPress={() => {
-              setScreen("home");
+            <TouchableHighlight
+              onPress={() => {
+                setScreen("home");
 
-              async function handleStorage() {
-                console.log("do i store?");
-                let currentDate = new Date();
-                let storedData = await getData();
-                if (storedData !== null) {
-                  let entryObj = {};
-                  entryObj.text = text;
-                  if (mood !== "none") {
-                    entryObj.mood = mood;
+                async function handleStorage() {
+                  console.log("do i store?");
+                  let currentDate = new Date();
+                  let storedData = await getData();
+                  if (storedData !== null) {
+                    let entryObj = {};
+                    entryObj.text = text;
+                    if (mood !== "none") {
+                      entryObj.mood = mood;
+                    }
+                    storedData[currentDate] = entryObj;
+                  } else {
+                    storedData = {};
+                    let entryObj = {};
+                    entryObj.text = text;
+                    if (mood !== "none") {
+                      entryObj.mood = mood;
+                    }
+                    storedData[currentDate] = entryObj;
                   }
-                  storedData[currentDate] = entryObj;
-                } else {
-                  storedData = {};
-                  let entryObj = {};
-                  entryObj.text = text;
-                  if (mood !== "none") {
-                    entryObj.mood = mood;
-                  }
-                  storedData[currentDate] = entryObj;
+                  storeData(storedData);
+                  setEntries(storedData);
                 }
-                storeData(storedData);
-                setEntries(storedData);
-              }
 
-              handleStorage();
-              setJournalText("");
-              setMood("none");
+                handleStorage();
+                setJournalText("");
+                setMood("none");
 
-              Haptics.selectionAsync();
-            }}
-            underlayColor=""
-          >
-            <View style={styles.finishButtonContainer}>
-              <Text style={{ fontSize: 18, fontWeight: "900", color: "white" }}>
-                finish
-              </Text>
-            </View>
-          </TouchableHighlight>
+                Haptics.selectionAsync();
+              }}
+              underlayColor=""
+            >
+              <View style={styles.finishButtonContainer}>
+                <Text
+                  style={{ fontSize: 18, fontWeight: "900", color: "white" }}
+                >
+                  finish
+                </Text>
+              </View>
+            </TouchableHighlight>
+          </View>
         </View>
-      </View>
+      </TouchableWithoutFeedback>
     );
   }
 }
