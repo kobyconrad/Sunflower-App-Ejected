@@ -6,10 +6,13 @@ import {
   StyleSheet,
   TouchableHighlight,
   TextInput,
+  SafeAreaView,
+  ScrollView,
 } from "react-native";
 import { Book, Frown, Meh, Smile } from "react-native-feather";
 import * as Haptics from "expo-haptics";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useEffect } from "react";
 
 const storeData = async (value) => {
   try {
@@ -33,7 +36,38 @@ function JournalHome() {
   const [screen, setScreen] = useState("home");
   const [text, setJournalText] = useState("");
   const [mood, setMood] = useState("none");
+  const [entries, setEntries] = useState({});
 
+  useEffect(() => {
+    async function grabData() {
+      let currentData = await getData();
+      setEntries(currentData);
+    }
+    grabData();
+  }, []);
+
+  console.log(entries);
+  let myComponentList = (
+    <View>
+      <Text>fail</Text>
+    </View>
+  );
+  if (entries !== null) {
+    myComponentList = Object.keys(entries).map((key) => {
+      let currentDate = key;
+      let currentText = entries[key].text;
+      let currentMood = entries[key].mood;
+
+      return (
+        <JournalEntry
+          myKey={key}
+          text={currentText}
+          date={currentDate}
+          mood={currentMood}
+        />
+      );
+    });
+  }
   if (screen === "home") {
     // Journal Homepage Screen
     return (
@@ -79,17 +113,36 @@ function JournalHome() {
           </TouchableHighlight>
         </View>
 
-        <View style={styles.feedContainer}>
-          <Text>THIS IS JOURNALLLL</Text>
-          <Text>THIS IS JOURNALLLL</Text>
-          <Text>THIS IS JOURNALLLL</Text>
-          <Text>THIS IS JOURNALLLL</Text>
-          <Text>THIS IS JOURNALLLL</Text>
-          <Text>THIS IS JOURNALLLL</Text>
-          <Text>THIS IS JOURNALLLL</Text>
-          <Text>THIS IS JOURNALLLL</Text>
-          <Text>THIS IS JOURNALLLL</Text>
-        </View>
+        <View
+          style={{
+            backgroundColor: "#fff",
+            width: "100%",
+            height: "6%",
+            top: 0,
+            position: "absolute",
+            zIndex: 2,
+          }}
+        ></View>
+
+        <SafeAreaView
+          style={{
+            height: "65%",
+            display: "flex",
+            flexDirection: "column-reverse",
+          }}
+        >
+          <ScrollView
+            style={{}}
+            contentContainerStyle={{
+              display: "flex",
+              justifyContent: "flex-end",
+              flexDirection: "column-reverse",
+              paddingTop: 20,
+            }}
+          >
+            <View style={styles.feedContainer}>{myComponentList}</View>
+          </ScrollView>
+        </SafeAreaView>
       </View>
     );
   } else {
@@ -328,6 +381,7 @@ function JournalHome() {
               setScreen("home");
 
               async function handleStorage() {
+                console.log("do i store?");
                 let currentDate = new Date();
                 let storedData = await getData();
                 if (storedData !== null) {
@@ -346,9 +400,8 @@ function JournalHome() {
                   }
                   storedData[currentDate] = entryObj;
                 }
-
                 storeData(storedData);
-                let newStoredData = await getData();
+                setEntries(storedData);
               }
 
               handleStorage();
@@ -371,10 +424,47 @@ function JournalHome() {
   }
 }
 
+function JournalEntry(props) {
+  let mood = props.mood;
+  let currentDate = new Date(props.date);
+  let stringDate = currentDate.toDateString();
+
+  let moodComponent = <View></View>;
+
+  if (mood === "frown") {
+    moodComponent = <Frown stroke="#D9042B" width={22} height={22} />;
+  } else if (mood === "meh") {
+    moodComponent = <Meh stroke="#FFB719" width={22} height={22} />;
+  } else if (mood === "smile") {
+    moodComponent = <Smile stroke="#02B268" width={22} height={22} />;
+  }
+
+  return (
+    <View style={styles.exerciseContainer} key={props.key}>
+      <View style={styles.exerciseTitleContainer}>
+        <Text style={{ fontSize: 16, fontWeight: "900", color: "#313853" }}>
+          {stringDate}
+        </Text>
+        <Text style={{ fontSize: 14, marginTop: 6, color: "#8892AB" }}>
+          {props.text}
+        </Text>
+      </View>
+
+      <View style={styles.iconContainer}>{moodComponent}</View>
+    </View>
+  );
+}
+
 const styles = StyleSheet.create({
-  feedContainer: {},
+  feedContainer: {
+    display: "flex",
+    alignItems: "center",
+    marginBottom: 15,
+    flexDirection: "column-reverse",
+  },
   exerciseContainer: {
-    height: 120,
+    minHeight: 120,
+    maxHeight: 300,
     backgroundColor: "#fff",
     marginTop: 15,
     display: "flex",
