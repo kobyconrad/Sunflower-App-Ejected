@@ -7,7 +7,7 @@ import {
   TouchableHighlight,
   TextInput,
 } from "react-native";
-import { Book } from "react-native-feather";
+import { Book, Frown, Meh, Smile } from "react-native-feather";
 import * as Haptics from "expo-haptics";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -32,6 +32,7 @@ const getData = async () => {
 function JournalHome() {
   const [screen, setScreen] = useState("home");
   const [text, setJournalText] = useState("");
+  const [mood, setMood] = useState("none");
 
   if (screen === "home") {
     // Journal Homepage Screen
@@ -94,15 +95,181 @@ function JournalHome() {
     );
   } else {
     // Exercise Screen
+    function MoodSelector(props) {
+      console.log(props.moodSetting);
+      if (props.moodSetting === "none") {
+        return (
+          <View
+            style={{
+              display: "flex",
+              alignItems: "center",
+              flexDirection: "row",
+              justifyContent: "space-around",
+              marginBottom: 20,
+              marginTop: 20,
+            }}
+          >
+            <Frown
+              stroke="#B8BFC8"
+              width={55}
+              height={55}
+              onPress={() => {
+                setMood("frown");
+              }}
+            />
+            <Meh
+              stroke="#B8BFC8"
+              width={55}
+              height={55}
+              onPress={() => {
+                setMood("meh");
+              }}
+            />
+            <Smile
+              stroke="#B8BFC8"
+              width={55}
+              height={55}
+              onPress={() => {
+                setMood("smile");
+              }}
+            />
+          </View>
+        );
+      } else if (props.moodSetting === "frown") {
+        return (
+          <View
+            style={{
+              display: "flex",
+              alignItems: "center",
+              flexDirection: "row",
+              justifyContent: "space-around",
+              marginBottom: 20,
+              marginTop: 20,
+            }}
+          >
+            <Frown
+              stroke="#D9042B"
+              width={55}
+              height={55}
+              onPress={() => {
+                setMood("frown");
+              }}
+            />
+            <Meh
+              stroke="#B8BFC8"
+              width={55}
+              height={55}
+              onPress={() => {
+                setMood("meh");
+              }}
+            />
+            <Smile
+              stroke="#B8BFC8"
+              width={55}
+              height={55}
+              onPress={() => {
+                setMood("smile");
+              }}
+            />
+          </View>
+        );
+      } else if (props.moodSetting === "meh") {
+        return (
+          <View
+            style={{
+              display: "flex",
+              alignItems: "center",
+              flexDirection: "row",
+              justifyContent: "space-around",
+              marginBottom: 20,
+              marginTop: 20,
+            }}
+          >
+            <Frown
+              stroke="#B8BFC8"
+              width={55}
+              height={55}
+              onPress={() => {
+                setMood("frown");
+              }}
+            />
+            <Meh
+              stroke="#FFB719"
+              width={55}
+              height={55}
+              onPress={() => {
+                setMood("meh");
+              }}
+            />
+            <Smile
+              stroke="#B8BFC8"
+              width={55}
+              height={55}
+              onPress={() => {
+                setMood("smile");
+              }}
+            />
+          </View>
+        );
+      } else if (props.moodSetting === "smile") {
+        return (
+          <View
+            style={{
+              display: "flex",
+              alignItems: "center",
+              flexDirection: "row",
+              justifyContent: "space-around",
+              marginBottom: 20,
+              marginTop: 20,
+            }}
+          >
+            <Frown
+              stroke="#B8BFC8"
+              width={55}
+              height={55}
+              onPress={() => {
+                setMood("frown");
+              }}
+            />
+            <Meh
+              stroke="#B8BFC8"
+              width={55}
+              height={55}
+              onPress={() => {
+                setMood("meh");
+              }}
+            />
+            <Smile
+              stroke="#02B268"
+              width={55}
+              height={55}
+              onPress={() => {
+                setMood("smile");
+              }}
+            />
+          </View>
+        );
+      } else {
+        return <View></View>;
+      }
+    }
     return (
       <View
         style={{
           backgroundColor: "#FBFCFE",
           height: "100%",
           zIndex: 100,
-          paddingTop: 60,
+          paddingTop: 50,
         }}
       >
+        <View style={styles.entryExerciseTitleContainer}>
+          <Text style={{ fontSize: 20, fontWeight: "900", color: "#313853" }}>
+            How did you feel today?
+          </Text>
+        </View>
+
+        <MoodSelector moodSetting={mood} />
+
         <View style={styles.entryExerciseTitleContainer}>
           <Text style={{ fontSize: 20, fontWeight: "900", color: "#313853" }}>
             What did you accomplish today, because you were sober?
@@ -112,7 +279,9 @@ function JournalHome() {
         <TextInput
           multiline={true}
           numberOfLines={4}
-          placeholder={"This is placeholder text"}
+          placeholder={
+            "I cleaned my room, worked out at the gym, and had dinner with my family..."
+          }
           style={{
             height: 160,
             borderColor: "gray",
@@ -143,6 +312,7 @@ function JournalHome() {
             onPress={() => {
               setJournalText("");
               setScreen("home");
+              setMood("none");
               Haptics.selectionAsync();
             }}
             underlayColor=""
@@ -163,10 +333,20 @@ function JournalHome() {
                 let currentDate = new Date();
                 let storedData = await getData();
                 if (storedData !== null) {
-                  storedData[currentDate] = text;
+                  let entryObj = {};
+                  entryObj.text = text;
+                  if (mood !== "none") {
+                    entryObj.mood = mood;
+                  }
+                  storedData[currentDate] = entryObj;
                 } else {
                   storedData = {};
-                  storedData[currentDate] = text;
+                  let entryObj = {};
+                  entryObj.text = text;
+                  if (mood !== "none") {
+                    entryObj.mood = mood;
+                  }
+                  storedData[currentDate] = entryObj;
                 }
 
                 storeData(storedData);
@@ -176,6 +356,7 @@ function JournalHome() {
 
               handleStorage();
               setJournalText("");
+              setMood("none");
 
               Haptics.selectionAsync();
             }}
