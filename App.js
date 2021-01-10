@@ -128,6 +128,11 @@ export default function App() {
             options={{ animationEnabled: false, headerShown: false }}
           />
           <Stack.Screen
+            name="Journal Screen"
+            component={JournalScreen}
+            options={{ animationEnabled: false, headerShown: false }}
+          />
+          <Stack.Screen
             name="Learn Screen"
             component={LearnScreen}
             options={{ animationEnabled: false, headerShown: false }}
