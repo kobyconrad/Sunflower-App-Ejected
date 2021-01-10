@@ -54,7 +54,6 @@ function JournalHome() {
         >
           <TouchableHighlight
             onPress={() => {
-              console.log("press me");
               setScreen("journal-entry");
               Haptics.selectionAsync();
             }}
@@ -96,7 +95,6 @@ function JournalHome() {
   } else {
     // Exercise Screen
     function MoodSelector(props) {
-      console.log(props.moodSetting);
       if (props.moodSetting === "none") {
         return (
           <View
@@ -351,7 +349,6 @@ function JournalHome() {
 
                 storeData(storedData);
                 let newStoredData = await getData();
-                console.log(newStoredData);
               }
 
               handleStorage();
