@@ -11,7 +11,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
-import { Book, Frown, Meh, Smile } from "react-native-feather";
+import { Book, Frown, Meh, Smile, Trash2 } from "react-native-feather";
 import * as Haptics from "expo-haptics";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect } from "react";
@@ -45,6 +45,7 @@ function JournalHome() {
   const [text, setJournalText] = useState("");
   const [mood, setMood] = useState("none");
   const [entries, setEntries] = useState({});
+  const [currentKey, setCurrentKey] = useState("");
 
   useEffect(() => {
     async function grabData() {
@@ -54,7 +55,6 @@ function JournalHome() {
     grabData();
   }, []);
 
-  console.log(entries);
   let myComponentList = (
     <View>
       <Text></Text>
@@ -66,24 +66,28 @@ function JournalHome() {
       let currentText = entries[key].text;
       let currentMood = entries[key].mood;
 
-      return (
-        <TouchableHighlight
-          onPress={() => {
-            //   setScreen("journal-entry");
-            console.log("go to view screen");
-            Haptics.selectionAsync();
-          }}
-          underlayColor=""
-          style={{}}
-        >
-          <JournalEntry
-            myKey={key}
-            text={currentText}
-            date={currentDate}
-            mood={currentMood}
-          />
-        </TouchableHighlight>
-      );
+      if (entries[key].deleted !== true) {
+        return (
+          <TouchableHighlight
+            onPress={() => {
+              setMood(currentMood);
+              setJournalText(currentText);
+              setCurrentKey(key);
+              Haptics.selectionAsync();
+              setScreen("journal-entry");
+            }}
+            underlayColor=""
+            style={{}}
+          >
+            <JournalEntry
+              myKey={key}
+              text={currentText}
+              date={currentDate}
+              mood={currentMood}
+            />
+          </TouchableHighlight>
+        );
+      }
     });
   }
   if (screen === "home") {
@@ -163,7 +167,7 @@ function JournalHome() {
         </SafeAreaView>
       </View>
     );
-  } else {
+  } else if (screen === "journal-entry") {
     // Exercise Screen
     function MoodSelector(props) {
       if (props.moodSetting === "none") {
@@ -325,7 +329,6 @@ function JournalHome() {
     return (
       <TouchableWithoutFeedback
         onPress={() => {
-          console.log("do i fire");
           Keyboard.dismiss();
         }}
       >
@@ -388,6 +391,7 @@ function JournalHome() {
                 setJournalText("");
                 setScreen("home");
                 setMood("none");
+                setCurrentKey("");
                 Haptics.selectionAsync();
               }}
               underlayColor=""
@@ -397,7 +401,7 @@ function JournalHome() {
                 <Text
                   style={{ fontSize: 18, fontWeight: "900", color: "white" }}
                 >
-                  delete
+                  cancel
                 </Text>
               </View>
             </TouchableHighlight>
@@ -408,7 +412,12 @@ function JournalHome() {
 
                 async function handleStorage() {
                   console.log("do i store?");
+
                   let currentDate = new Date();
+                  if (currentKey.length > 1) {
+                    currentDate = new Date(currentKey);
+                  }
+
                   let storedData = await getData();
                   if (storedData !== null) {
                     let entryObj = {};
@@ -433,6 +442,7 @@ function JournalHome() {
                 handleStorage();
                 setJournalText("");
                 setMood("none");
+                setCurrentKey("");
 
                 Haptics.selectionAsync();
               }}
@@ -447,9 +457,65 @@ function JournalHome() {
               </View>
             </TouchableHighlight>
           </View>
+
+          {/* // delete button */}
+          <TouchableHighlight
+            style={{
+              bottom: 0,
+              right: 0,
+              position: "absolute",
+              margin: 18,
+              backgroundColor: "#FA344C",
+              padding: 4,
+              borderRadius: 6,
+            }}
+            onPress={() => {
+              setScreen("home");
+
+              async function handleStorage() {
+                console.log("do i store?");
+                let currentDate = new Date();
+                let storedData = await getData();
+                if (storedData !== null) {
+                  let entryObj = {};
+                  entryObj.deleted = true;
+                  //   entryObj.text = text;
+                  //   if (mood !== "none") {
+                  //     entryObj.mood = mood;
+                  //   }
+                  storedData[currentKey] = entryObj;
+                } else {
+                  storedData = {};
+                  let entryObj = {};
+                  entryObj.deleted = true;
+                  //   entryObj.text = text;
+                  //   if (mood !== "none") {
+                  //     entryObj.mood = mood;
+                  //   }
+                  storedData[currentDate] = entryObj;
+                }
+                storeData(storedData);
+                setEntries(storedData);
+              }
+
+              handleStorage();
+              setJournalText("");
+              setMood("none");
+              setCurrentKey("");
+
+              Haptics.selectionAsync();
+            }}
+            underlayColor=""
+          >
+            <View>
+              <Trash2 stroke="#fff" width={30} height={30} />
+            </View>
+          </TouchableHighlight>
         </View>
       </TouchableWithoutFeedback>
     );
+  } else {
+    return <View></View>;
   }
 }
 
@@ -522,7 +588,7 @@ const styles = StyleSheet.create({
   cancelButtonContainer: {
     width: 100,
     height: 45,
-    backgroundColor: "#FA344C",
+    backgroundColor: "#B8BFC8",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
