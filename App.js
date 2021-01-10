@@ -596,12 +596,12 @@ function EditDateScreen({ navigation }) {
         <TouchableHighlight
           onPress={() => {
             Haptics.selectionAsync();
-            navigation.navigate("Learn Screen");
+            navigation.navigate("Journal Screen");
           }}
           underlayColor=""
         >
           <View style={styles.menuItemContainer}>
-            <Text style={styles.menuText}>learn</Text>
+            <Text style={styles.menuText}>journal</Text>
           </View>
         </TouchableHighlight>
         <TouchableHighlight
