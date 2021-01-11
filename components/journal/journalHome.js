@@ -34,12 +34,6 @@ const getData = async () => {
   }
 };
 
-// const DismissKeyboard = ({ children }) => {
-//   return (
-
-//   );
-// };
-
 function JournalHome() {
   const [screen, setScreen] = useState("home");
   const [text, setJournalText] = useState("");
@@ -56,7 +50,7 @@ function JournalHome() {
   }, []);
 
   let myComponentList = (
-    <View>
+    <View key={`${Math.random() * 100}`}>
       <Text></Text>
     </View>
   );
@@ -69,6 +63,7 @@ function JournalHome() {
       if (entries[key].deleted !== true) {
         return (
           <TouchableHighlight
+            key={key}
             onPress={() => {
               setMood(currentMood);
               setJournalText(currentText);
@@ -80,7 +75,7 @@ function JournalHome() {
             style={{}}
           >
             <JournalEntry
-              myKey={key}
+              key={key}
               text={currentText}
               date={currentDate}
               mood={currentMood}
@@ -411,8 +406,6 @@ function JournalHome() {
                 setScreen("home");
 
                 async function handleStorage() {
-                  console.log("do i store?");
-
                   let currentDate = new Date();
                   if (currentKey.length > 1) {
                     currentDate = new Date(currentKey);
@@ -466,14 +459,13 @@ function JournalHome() {
               position: "absolute",
               margin: 18,
               backgroundColor: "#FA344C",
-              padding: 4,
+              padding: 5,
               borderRadius: 6,
             }}
             onPress={() => {
               setScreen("home");
 
               async function handleStorage() {
-                console.log("do i store?");
                 let currentDate = new Date();
                 let storedData = await getData();
                 if (storedData !== null) {
@@ -508,7 +500,7 @@ function JournalHome() {
             underlayColor=""
           >
             <View>
-              <Trash2 stroke="#fff" width={30} height={30} />
+              <Trash2 stroke="#fff" width={28} height={28} />
             </View>
           </TouchableHighlight>
         </View>
