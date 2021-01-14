@@ -60,8 +60,6 @@ const getUserData = async () => {
   }
 };
 
-const userId = "universal123";
-
 export default function App() {
   const [load, setLoad] = useState("loading");
 
@@ -69,7 +67,6 @@ export default function App() {
   const androidWriteKey = "kcGZd5M0tCqjlGyhKBAFuhyNyDCXA6l9";
 
   Segment.initialize({ androidWriteKey, iosWriteKey });
-  Segment.identify(userId);
   Segment.track("session-tracker");
 
   useEffect(() => {
