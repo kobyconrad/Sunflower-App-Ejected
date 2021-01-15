@@ -387,25 +387,35 @@ function HomeScreen({ navigation }) {
           position: "absolute",
           height: "100%",
           width: "100%",
-          opacity: 0.2,
+          opacity: 0.05,
         }}
       ></View>
 
-      <View>
-        <Text style={styles.counterTitleText}>You've Stayed Sober For</Text>
-        <View style={styles.counterContainer}>
-          {ReturnDays()}
-          {ReturnHours()}
-          {ReturnMinutes()}
-          {ReturnSeconds()}
+      <View
+        style={{
+          width: "100%",
+          height: "88%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <View style={styles.timeContainer}>
+          <Text style={styles.counterTitleText}>You've Stayed Sober For</Text>
+          <View style={styles.counterContainer}>
+            {ReturnDays()}
+            {ReturnHours()}
+            {ReturnMinutes()}
+            {ReturnSeconds()}
+          </View>
         </View>
-      </View>
 
-      <Image
-        source={require("./assets/clock-fixed.gif")}
-        resizeMode={"contain"}
-        style={{ width: "60%", marginTop: 40, marginBottom: 100 }}
-      />
+        <Image
+          source={require("./assets/clock-fixed.gif")}
+          resizeMode={"contain"}
+          style={{ width: "60%", marginTop: 20 }}
+        />
+      </View>
 
       <View style={styles.navContainer}></View>
 
@@ -638,8 +648,8 @@ const styles = StyleSheet.create({
   },
   counterText: {
     margin: 5,
-    fontSize: 32,
-    fontWeight: "700",
+    fontSize: 24,
+    fontWeight: "800",
   },
   counterContainer: {
     display: "flex",
@@ -648,9 +658,16 @@ const styles = StyleSheet.create({
   },
   counterTitleText: {
     fontSize: 24,
-    fontWeight: "600",
-    marginBottom: 20,
-    marginTop: 120,
+    fontWeight: "400",
+    marginBottom: 5,
+  },
+  timeContainer: {
+    backgroundColor: "rgba(255, 255, 255,  .7)",
+    width: "100%",
+    display: "flex",
+    alignItems: "center",
+    paddingTop: 20,
+    paddingBottom: 20,
   },
   navContainer: {
     display: "flex",
