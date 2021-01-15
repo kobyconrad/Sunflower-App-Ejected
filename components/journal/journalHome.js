@@ -15,6 +15,7 @@ import { Book, Frown, Meh, Smile, Trash2 } from "react-native-feather";
 import * as Haptics from "expo-haptics";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect } from "react";
+import * as Segment from "expo-analytics-segment";
 
 const storeData = async (value) => {
   try {
@@ -42,6 +43,7 @@ function JournalHome() {
   const [currentKey, setCurrentKey] = useState("");
 
   useEffect(() => {
+    Segment.screen("journal-home-screen");
     async function grabData() {
       let currentData = await getData();
       setEntries(currentData);
@@ -436,6 +438,7 @@ function JournalHome() {
                 setJournalText("");
                 setMood("none");
                 setCurrentKey("");
+                Segment.track("completed-journal-entry");
 
                 Haptics.selectionAsync();
               }}

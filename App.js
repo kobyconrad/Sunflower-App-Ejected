@@ -60,14 +60,13 @@ const getUserData = async () => {
   }
 };
 
+const iosWriteKey = "dYDrjLXzJdCwztz5hDlfqYsfZNoWi0iM";
+const androidWriteKey = "kcGZd5M0tCqjlGyhKBAFuhyNyDCXA6l9";
+Segment.initialize({ androidWriteKey, iosWriteKey });
+Segment.track("session-tracker");
+
 export default function App() {
   const [load, setLoad] = useState("loading");
-
-  const iosWriteKey = "dYDrjLXzJdCwztz5hDlfqYsfZNoWi0iM";
-  const androidWriteKey = "kcGZd5M0tCqjlGyhKBAFuhyNyDCXA6l9";
-
-  Segment.initialize({ androidWriteKey, iosWriteKey });
-  Segment.track("session-tracker");
 
   useEffect(() => {
     async function handleNewSession() {
@@ -444,7 +443,9 @@ function HomeScreen({ navigation }) {
 function EditDateScreen({ navigation }) {
   const [date, setDate] = useState(new Date());
 
-  Segment.track("edit-date-screen-view");
+  useEffect(() => {
+    Segment.screen("edit-date-screen-view");
+  }, []);
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
@@ -532,7 +533,10 @@ function EditDateScreen({ navigation }) {
 }
 
 function OnboardingScreen({ navigation }) {
-  Segment.track("onboarding-screen-view");
+  useEffect(() => {
+    Segment.screen("onboarding-screen-view");
+  }, []);
+
   return (
     <View>
       <Onboarding
