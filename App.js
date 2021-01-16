@@ -411,9 +411,13 @@ function HomeScreen({ navigation }) {
         </View>
 
         <Image
-          source={require("./assets/clock-fixed.gif")}
+          source={require("./assets/clock-simon-final.gif")}
           resizeMode={"contain"}
-          style={{ width: "60%", marginTop: 20 }}
+          style={{
+            width: "60%",
+            height: 250,
+            marginTop: 20,
+          }}
         />
       </View>
 
@@ -612,6 +616,7 @@ const styles = StyleSheet.create({
     height: "100%",
     display: "flex",
     justifyContent: "center",
+    backgroundColor: "#fff",
   },
   titleContainer: {
     width: "100%",
