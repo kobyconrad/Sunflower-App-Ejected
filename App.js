@@ -415,7 +415,7 @@ function HomeScreen({ navigation }) {
           resizeMode={"contain"}
           style={{
             width: "60%",
-            height: 250,
+            height: 300,
             marginTop: 20,
           }}
         />
