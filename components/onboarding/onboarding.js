@@ -291,8 +291,8 @@ const styles = StyleSheet.create({
   },
   titleText: {
     fontSize: 24,
-    fontWeight: "900",
-    color: "#6A49E8",
+    fontWeight: "800",
+    color: "#000100",
   },
   bodyText: {
     color: "#6A49E8",

@@ -116,11 +116,11 @@ function JournalHome() {
             <View style={styles.exerciseContainer}>
               <View style={styles.exerciseTitleContainer}>
                 <Text
-                  style={{ fontSize: 16, fontWeight: "900", color: "#313853" }}
+                  style={{ fontSize: 18, fontWeight: "800", color: "#000100" }}
                 >
                   Add Sober Journal Entry
                 </Text>
-                <Text style={{ fontSize: 14, marginTop: 6, color: "#8892AB" }}>
+                <Text style={{ fontSize: 14, marginTop: 6, color: "#2E2E2E" }}>
                   Rewire your brain to associate sobriety with reward.
                 </Text>
               </View>
@@ -338,7 +338,7 @@ function JournalHome() {
           }}
         >
           <View style={styles.entryExerciseTitleContainer}>
-            <Text style={{ fontSize: 20, fontWeight: "900", color: "#313853" }}>
+            <Text style={{ fontSize: 24, fontWeight: "800", color: "#000100" }}>
               How did you feel today?
             </Text>
           </View>
@@ -346,7 +346,7 @@ function JournalHome() {
           <MoodSelector moodSetting={mood} />
 
           <View style={styles.entryExerciseTitleContainer}>
-            <Text style={{ fontSize: 20, fontWeight: "900", color: "#313853" }}>
+            <Text style={{ fontSize: 24, fontWeight: "800", color: "#000100" }}>
               What did you accomplish today, because you were sober?
             </Text>
           </View>
@@ -532,10 +532,10 @@ function JournalEntry(props) {
   return (
     <View style={styles.exerciseContainer} key={props.key}>
       <View style={styles.exerciseTitleContainer}>
-        <Text style={{ fontSize: 16, fontWeight: "900", color: "#313853" }}>
+        <Text style={{ fontSize: 18, fontWeight: "800", color: "#000100" }}>
           {stringDate}
         </Text>
-        <Text style={{ fontSize: 14, marginTop: 6, color: "#8892AB" }}>
+        <Text style={{ fontSize: 14, marginTop: 6, color: "#2E2E2E" }}>
           {props.text}
         </Text>
       </View>
