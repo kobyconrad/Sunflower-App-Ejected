@@ -19,6 +19,7 @@ import * as Haptics from "expo-haptics";
 import Onboarding from "./components/onboarding/onboarding";
 import * as Segment from "expo-analytics-segment";
 import JournalHome from "./components/journal/journalHome";
+import ActivityLogExercise from "./components/journal/activityLogExercise";
 
 // This project uses YARN YARN YARN YARN YARN YARN YARN YARN YARN YARN YARN
 
@@ -121,6 +122,11 @@ export default function App() {
             component={JournalScreen}
             options={{ animationEnabled: false, headerShown: false }}
           />
+          <Stack.Screen
+            name="Activity Log 0"
+            component={ActivityLog0}
+            options={{ animationEnabled: false, headerShown: false }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     );
@@ -149,6 +155,11 @@ export default function App() {
           <Stack.Screen
             name="Journal Screen"
             component={JournalScreen}
+            options={{ animationEnabled: false, headerShown: false }}
+          />
+          <Stack.Screen
+            name="Activity Log 0"
+            component={ActivityLog0}
             options={{ animationEnabled: false, headerShown: false }}
           />
         </Stack.Navigator>
@@ -572,9 +583,13 @@ function OnboardingScreen({ navigation }) {
 }
 
 function JournalScreen({ navigation }) {
+  const NavActivityLog0 = function () {
+    navigation.navigate("Activity Log 0");
+  };
+
   return (
     <View>
-      <JournalHome />
+      <JournalHome NavActivityLog0={NavActivityLog0} />
       {/* nav bar */}
 
       <View style={styles.menuContainer}>
@@ -608,6 +623,14 @@ function JournalScreen({ navigation }) {
       </View>
     </View>
   );
+}
+
+function ActivityLog0({ navigation }) {
+  const NavJournalScreen = function () {
+    navigation.navigate("Journal Screen");
+  };
+
+  return <ActivityLogExercise NavJournalScreen={NavJournalScreen} />;
 }
 
 const styles = StyleSheet.create({

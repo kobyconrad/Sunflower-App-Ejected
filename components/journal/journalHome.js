@@ -35,12 +35,14 @@ const getData = async () => {
   }
 };
 
-function JournalHome() {
+function JournalHome(props) {
   const [screen, setScreen] = useState("home");
   const [text, setJournalText] = useState("");
   const [mood, setMood] = useState("none");
   const [entries, setEntries] = useState({});
   const [currentKey, setCurrentKey] = useState("");
+
+  let NavActivityLog0 = props.NavActivityLog0;
 
   useEffect(() => {
     Segment.screen("journal-home-screen");
@@ -107,8 +109,9 @@ function JournalHome() {
         >
           <TouchableHighlight
             onPress={() => {
-              setScreen("journal-entry");
+              // setScreen("journal-entry");
               Haptics.selectionAsync();
+              NavActivityLog0();
             }}
             underlayColor=""
             style={{}}
