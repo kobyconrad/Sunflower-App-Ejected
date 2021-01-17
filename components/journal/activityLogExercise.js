@@ -13,35 +13,65 @@ import { useState } from "react";
 
 function ActivityLogExercise(props) {
   const [screen, setScreen] = useState(0);
-  const [exerciseStyle, setExerciseStyle] = useState(true);
-  const [socialStyle, setSocialStyle] = useState(true);
+  const [exerciseStyle, setExerciseStyle] = useState(false);
+  const [socialStyle, setSocialStyle] = useState(false);
+  const [workStyle, setWorkStyle] = useState(false);
+  const [learnStyle, setLearnStyle] = useState(false);
 
-  let touchProps = {
+  let exerciseTouchProps = {
     style: exerciseStyle
-      ? styles.activityItemContainer
-      : styles.activityItemContainerOn,
+      ? styles.activityItemContainerOn
+      : styles.activityItemContainer,
   };
-  let touchPropsBody = {
+  let exerciseTouchPropsBody = {
     style: exerciseStyle
-      ? styles.activityItemBodyContainer
-      : styles.activityItemBodyContainerOn,
+      ? styles.activityItemBodyContainerOn
+      : styles.activityItemBodyContainer,
   };
-  let touchPropsBodyText = {
-    style: exerciseStyle ? styles.paragraphText : styles.paragraphTextOn,
+  let exerciseTouchPropsBodyText = {
+    style: exerciseStyle ? styles.paragraphTextOn : styles.paragraphText,
   };
 
   let socialTouchPropsContainer = {
     style: socialStyle
-      ? styles.activityItemContainer
-      : styles.activityItemContainerOn,
+      ? styles.activityItemContainerOn
+      : styles.activityItemContainer,
   };
   let socialTouchPropsBody = {
     style: socialStyle
-      ? styles.activityItemBodyContainer
-      : styles.activityItemBodyContainerOn,
+      ? styles.activityItemBodyContainerOn
+      : styles.activityItemBodyContainer,
   };
   let socialTouchPropsBodyText = {
-    style: socialStyle ? styles.paragraphText : styles.paragraphTextOn,
+    style: socialStyle ? styles.paragraphTextOn : styles.paragraphText,
+  };
+
+  let workTouchPropsContainer = {
+    style: workStyle
+      ? styles.activityItemContainerOn
+      : styles.activityItemContainer,
+  };
+  let workTouchPropsBody = {
+    style: workStyle
+      ? styles.activityItemBodyContainerOn
+      : styles.activityItemBodyContainer,
+  };
+  let workTouchPropsBodyText = {
+    style: workStyle ? styles.paragraphTextOn : styles.paragraphText,
+  };
+
+  let learnTouchPropsContainer = {
+    style: learnStyle
+      ? styles.activityItemContainerOn
+      : styles.activityItemContainer,
+  };
+  let learnTouchPropsBody = {
+    style: learnStyle
+      ? styles.activityItemBodyContainerOn
+      : styles.activityItemBodyContainer,
+  };
+  let learnTouchPropsBodyText = {
+    style: learnStyle ? styles.paragraphTextOn : styles.paragraphText,
   };
 
   let NavJournalScreen = props.NavJournalScreen;
@@ -57,7 +87,7 @@ function ActivityLogExercise(props) {
         <SafeAreaView
           style={{
             height: "67%",
-            marginTop: 10,
+            marginTop: 14,
           }}
         >
           <ScrollView style={{}} contentContainerStyle={{}}>
@@ -73,7 +103,7 @@ function ActivityLogExercise(props) {
                 style={{ width: "100%", display: "flex" }}
                 activeOpacity={0.6}
               >
-                <View {...touchProps}>
+                <View {...exerciseTouchProps}>
                   <View style={styles.activityTitleContainer}>
                     <Image
                       source={require(`./../../assets/arm-emoji.png`)}
@@ -89,8 +119,8 @@ function ActivityLogExercise(props) {
                       Exercise
                     </Text>
                   </View>
-                  <View {...touchPropsBody}>
-                    <Text {...touchPropsBodyText}>
+                  <View {...exerciseTouchPropsBody}>
+                    <Text {...exerciseTouchPropsBodyText}>
                       ex: Going for a run, lifting weights, practicing sports.
                     </Text>
                   </View>
@@ -134,12 +164,14 @@ function ActivityLogExercise(props) {
               <TouchableHighlight
                 onPress={() => {
                   Haptics.selectionAsync();
+                  let current = workStyle;
+                  setWorkStyle(!current);
                 }}
                 underlayColor=""
                 style={{ width: "100%", display: "flex" }}
                 activeOpacity={0.6}
               >
-                <View style={styles.activityItemContainer}>
+                <View {...workTouchPropsContainer}>
                   <View style={styles.activityTitleContainer}>
                     <Image
                       source={require(`./../../assets/work-emoji.png`)}
@@ -155,14 +187,8 @@ function ActivityLogExercise(props) {
                       Rewarding Work
                     </Text>
                   </View>
-                  <View style={styles.activityItemBodyContainer}>
-                    <Text
-                      style={{
-                        fontSize: 14,
-                        fontWeight: "400",
-                        color: "#000100",
-                      }}
-                    >
+                  <View {...workTouchPropsBody}>
+                    <Text {...workTouchPropsBodyText}>
                       ex: Any work that you feel proud of, or gave you a sense
                       of purpose.
                     </Text>
@@ -173,12 +199,14 @@ function ActivityLogExercise(props) {
               <TouchableHighlight
                 onPress={() => {
                   Haptics.selectionAsync();
+                  let current = learnStyle;
+                  setLearnStyle(!current);
                 }}
                 underlayColor=""
                 style={{ width: "100%", display: "flex" }}
                 activeOpacity={0.6}
               >
-                <View style={styles.activityItemContainer}>
+                <View {...learnTouchPropsContainer}>
                   <View style={styles.activityTitleContainer}>
                     <Image
                       source={require(`./../../assets/books-emoji.png`)}
@@ -194,14 +222,8 @@ function ActivityLogExercise(props) {
                       Learning New Things
                     </Text>
                   </View>
-                  <View style={styles.activityItemBodyContainer}>
-                    <Text
-                      style={{
-                        fontSize: 14,
-                        fontWeight: "400",
-                        color: "#000100",
-                      }}
-                    >
+                  <View {...learnTouchPropsBody}>
+                    <Text {...learnTouchPropsBodyText}>
                       ex: Anything you learned that was pleasurable and brought
                       joy.
                     </Text>
