@@ -14,6 +14,7 @@ import { useState } from "react";
 function ActivityLogExercise(props) {
   const [screen, setScreen] = useState(0);
   const [exerciseStyle, setExerciseStyle] = useState(true);
+  const [socialStyle, setSocialStyle] = useState(true);
 
   let touchProps = {
     style: exerciseStyle
@@ -27,6 +28,20 @@ function ActivityLogExercise(props) {
   };
   let touchPropsBodyText = {
     style: exerciseStyle ? styles.paragraphText : styles.paragraphTextOn,
+  };
+
+  let socialTouchPropsContainer = {
+    style: socialStyle
+      ? styles.activityItemContainer
+      : styles.activityItemContainerOn,
+  };
+  let socialTouchPropsBody = {
+    style: socialStyle
+      ? styles.activityItemBodyContainer
+      : styles.activityItemBodyContainerOn,
+  };
+  let socialTouchPropsBodyText = {
+    style: socialStyle ? styles.paragraphText : styles.paragraphTextOn,
   };
 
   let NavJournalScreen = props.NavJournalScreen;
@@ -85,12 +100,14 @@ function ActivityLogExercise(props) {
               <TouchableHighlight
                 onPress={() => {
                   Haptics.selectionAsync();
+                  let current = socialStyle;
+                  setSocialStyle(!current);
                 }}
                 underlayColor=""
                 style={{ width: "100%", display: "flex" }}
                 activeOpacity={0.6}
               >
-                <View style={styles.activityItemContainer}>
+                <View {...socialTouchPropsContainer}>
                   <View style={styles.activityTitleContainer}>
                     <Image
                       source={require(`./../../assets/family-emoji.png`)}
@@ -106,14 +123,8 @@ function ActivityLogExercise(props) {
                       Social Activity
                     </Text>
                   </View>
-                  <View style={styles.activityItemBodyContainer}>
-                    <Text
-                      style={{
-                        fontSize: 14,
-                        fontWeight: "400",
-                        color: "#000100",
-                      }}
-                    >
+                  <View {...socialTouchPropsBody}>
+                    <Text {...socialTouchPropsBodyText}>
                       ex: Spending time with family, friends, or loved ones.
                     </Text>
                   </View>
