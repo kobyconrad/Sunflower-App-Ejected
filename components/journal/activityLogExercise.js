@@ -328,7 +328,10 @@ function ActivityLogExercise(props) {
   } else if (screen === 1) {
     return (
       <View style={styles.screenContainer}>
-        <Text>Next Screen</Text>
+        <Text style={styles.titleText}>Briefly write down what you did.</Text>
+        <Text style={styles.subtitleText}>
+          What down what you accomplished! How did being sober make an impact?
+        </Text>
         <View style={styles.exerciseNavContainer}>
           <TouchableHighlight
             onPress={() => {
@@ -351,7 +354,50 @@ function ActivityLogExercise(props) {
           <TouchableHighlight
             onPress={() => {
               Haptics.selectionAsync();
+              setScreen(2);
+            }}
+            underlayColor=""
+            style={{ width: "63%", height: "100%", display: "flex" }}
+          >
+            <View style={styles.nextContainer}>
+              <Text style={{ fontSize: 18, color: "#fff", fontWeight: "800" }}>
+                next
+              </Text>
+            </View>
+          </TouchableHighlight>
+        </View>
+      </View>
+    );
+  } else if (screen === 2) {
+    return (
+      <View style={styles.screenContainer}>
+        <Text style={styles.titleText}>How did it make you feel?</Text>
+        <Text style={styles.subtitleText}>
+          What impact did completeing these activites have on your mood?
+        </Text>
+        <View style={styles.exerciseNavContainer}>
+          <TouchableHighlight
+            onPress={() => {
+              Haptics.selectionAsync();
               setScreen(1);
+            }}
+            underlayColor=""
+            style={{
+              width: "33%",
+              height: "100%",
+              display: "flex",
+            }}
+          >
+            <View style={styles.cancelContainer}>
+              <Text style={{ fontSize: 18, color: "#fff", fontWeight: "800" }}>
+                back
+              </Text>
+            </View>
+          </TouchableHighlight>
+          <TouchableHighlight
+            onPress={() => {
+              Haptics.selectionAsync();
+              // setScreen(2);
             }}
             underlayColor=""
             style={{ width: "63%", height: "100%", display: "flex" }}
