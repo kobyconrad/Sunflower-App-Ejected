@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import * as Haptics from "expo-haptics";
 import { useState } from "react";
+import { Book, Frown, Meh, Smile, Trash2 } from "react-native-feather";
 
 const storeData = async (value) => {
   try {
@@ -39,6 +40,7 @@ function ActivityLogExercise(props) {
   const [workStyle, setWorkStyle] = useState(false);
   const [learnStyle, setLearnStyle] = useState(false);
   const [journalText, setJournalText] = useState("");
+  const [mood, setMood] = useState("none");
 
   let exerciseTouchProps = {
     style: exerciseStyle
@@ -281,6 +283,7 @@ function ActivityLogExercise(props) {
                 currentObj[currentDate] = {};
                 currentObj[currentDate].activities = {};
                 currentObj[currentDate].text = "";
+                currentObj[currentDate].mood = "none";
               } else {
                 currentObj = currentEntry;
               }
@@ -401,12 +404,173 @@ function ActivityLogExercise(props) {
       </View>
     );
   } else if (screen === 2) {
+    function MoodSelector(props) {
+      if (props.moodSetting === "none") {
+        return (
+          <View
+            style={{
+              display: "flex",
+              alignItems: "center",
+              flexDirection: "row",
+              justifyContent: "space-around",
+              marginBottom: 20,
+              marginTop: 20,
+            }}
+          >
+            <Frown
+              stroke="#B8BFC8"
+              width={55}
+              height={55}
+              onPress={() => {
+                setMood("frown");
+              }}
+            />
+            <Meh
+              stroke="#B8BFC8"
+              width={55}
+              height={55}
+              onPress={() => {
+                setMood("meh");
+              }}
+            />
+            <Smile
+              stroke="#B8BFC8"
+              width={55}
+              height={55}
+              onPress={() => {
+                setMood("smile");
+              }}
+            />
+          </View>
+        );
+      } else if (props.moodSetting === "frown") {
+        return (
+          <View
+            style={{
+              display: "flex",
+              alignItems: "center",
+              flexDirection: "row",
+              justifyContent: "space-around",
+              marginBottom: 20,
+              marginTop: 20,
+            }}
+          >
+            <Frown
+              stroke="#D9042B"
+              width={55}
+              height={55}
+              onPress={() => {
+                setMood("frown");
+              }}
+            />
+            <Meh
+              stroke="#B8BFC8"
+              width={55}
+              height={55}
+              onPress={() => {
+                setMood("meh");
+              }}
+            />
+            <Smile
+              stroke="#B8BFC8"
+              width={55}
+              height={55}
+              onPress={() => {
+                setMood("smile");
+              }}
+            />
+          </View>
+        );
+      } else if (props.moodSetting === "meh") {
+        return (
+          <View
+            style={{
+              display: "flex",
+              alignItems: "center",
+              flexDirection: "row",
+              justifyContent: "space-around",
+              marginBottom: 20,
+              marginTop: 20,
+            }}
+          >
+            <Frown
+              stroke="#B8BFC8"
+              width={55}
+              height={55}
+              onPress={() => {
+                setMood("frown");
+              }}
+            />
+            <Meh
+              stroke="#FFB719"
+              width={55}
+              height={55}
+              onPress={() => {
+                setMood("meh");
+              }}
+            />
+            <Smile
+              stroke="#B8BFC8"
+              width={55}
+              height={55}
+              onPress={() => {
+                setMood("smile");
+              }}
+            />
+          </View>
+        );
+      } else if (props.moodSetting === "smile") {
+        return (
+          <View
+            style={{
+              display: "flex",
+              alignItems: "center",
+              flexDirection: "row",
+              justifyContent: "space-around",
+              marginBottom: 20,
+              marginTop: 20,
+            }}
+          >
+            <Frown
+              stroke="#B8BFC8"
+              width={55}
+              height={55}
+              onPress={() => {
+                setMood("frown");
+              }}
+            />
+            <Meh
+              stroke="#B8BFC8"
+              width={55}
+              height={55}
+              onPress={() => {
+                setMood("meh");
+              }}
+            />
+            <Smile
+              stroke="#02B268"
+              width={55}
+              height={55}
+              onPress={() => {
+                setMood("smile");
+              }}
+            />
+          </View>
+        );
+      } else {
+        return <View></View>;
+      }
+    }
+
     return (
       <View style={styles.screenContainer}>
         <Text style={styles.titleText}>How did it make you feel?</Text>
         <Text style={styles.subtitleText}>
           What impact did completeing these activites have on your mood?
         </Text>
+
+        <MoodSelector moodSetting={mood} />
+
         <View style={styles.exerciseNavContainer}>
           <TouchableHighlight
             onPress={() => {
@@ -431,6 +595,13 @@ function ActivityLogExercise(props) {
               Haptics.selectionAsync();
               // setScreen(2);
               console.log(currentEntry);
+
+              let currentObj = currentEntry;
+              let currentKey = Object.keys(currentObj)[0];
+              currentObj[currentKey].mood = mood;
+              setCurrentEntry(currentObj);
+              console.log(currentEntry);
+              NavJournalScreen();
             }}
             underlayColor=""
             style={{ width: "63%", height: "100%", display: "flex" }}
