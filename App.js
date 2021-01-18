@@ -170,21 +170,28 @@ export default function App() {
 
 function HomeScreen({ navigation }) {
   const [time, setTime] = useState(0);
+  const [initialLoad, setInitialLoad] = useState(true);
+
+  async function timeDifference() {
+    let currentDate = new Date();
+    let savedData = await getData();
+    let quitDate = new Date(savedData);
+
+    let currentTotalTime = currentDate.getTime();
+    let quitTotalTime = quitDate.getTime();
+    let difference = currentTotalTime - quitTotalTime;
+    let differenceInSeconds = difference / 1000;
+
+    setTime(timeObject(differenceInSeconds));
+  }
+
+  if (initialLoad) {
+    setInitialLoad(false);
+    timeDifference();
+  }
 
   useEffect(() => {
     setTimeout(() => {
-      async function timeDifference() {
-        let currentDate = new Date();
-        let savedData = await getData();
-        let quitDate = new Date(savedData);
-
-        let currentTotalTime = currentDate.getTime();
-        let quitTotalTime = quitDate.getTime();
-        let difference = currentTotalTime - quitTotalTime;
-        let differenceInSeconds = difference / 1000;
-
-        setTime(timeObject(differenceInSeconds));
-      }
       timeDifference();
     }, 1000);
   });
