@@ -20,6 +20,7 @@ import Onboarding from "./components/onboarding/onboarding";
 import * as Segment from "expo-analytics-segment";
 import JournalHome from "./components/journal/journalHome";
 import ActivityLogExercise from "./components/journal/activityLogExercise";
+import * as SplashScreen from "expo-splash-screen";
 
 // This project uses YARN YARN YARN YARN YARN YARN YARN YARN YARN YARN YARN
 
@@ -65,6 +66,14 @@ const iosWriteKey = "dYDrjLXzJdCwztz5hDlfqYsfZNoWi0iM";
 const androidWriteKey = "kcGZd5M0tCqjlGyhKBAFuhyNyDCXA6l9";
 Segment.initialize({ androidWriteKey, iosWriteKey });
 Segment.track("session-tracker");
+
+SplashScreen.preventAutoHideAsync();
+async function renderPage() {
+  await SplashScreen.hideAsync();
+}
+setTimeout(() => {
+  renderPage();
+}, 800);
 
 export default function App() {
   const [load, setLoad] = useState("loading");
