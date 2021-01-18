@@ -16,6 +16,7 @@ import * as Haptics from "expo-haptics";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect } from "react";
 import * as Segment from "expo-analytics-segment";
+import { useIsFocused } from "@react-navigation/native";
 
 const storeData = async (value) => {
   try {
@@ -44,14 +45,18 @@ function JournalHome(props) {
 
   let NavActivityLog0 = props.NavActivityLog0;
 
+  const isFocused = useIsFocused();
+
   useEffect(() => {
+    console.log("render");
     Segment.screen("journal-home-screen");
     async function grabData() {
       let currentData = await getData();
+      console.log(currentData);
       setEntries(currentData);
     }
     grabData();
-  }, []);
+  }, [isFocused]);
 
   let myComponentList = (
     <View key={`${Math.random() * 100}`}>

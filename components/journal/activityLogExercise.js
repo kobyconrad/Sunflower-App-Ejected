@@ -12,6 +12,7 @@ import {
 import * as Haptics from "expo-haptics";
 import { useState } from "react";
 import { Book, Frown, Meh, Smile, Trash2 } from "react-native-feather";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const storeData = async (value) => {
   try {
@@ -594,14 +595,24 @@ function ActivityLogExercise(props) {
             onPress={() => {
               Haptics.selectionAsync();
               // setScreen(2);
-              console.log(currentEntry);
+              // console.log(currentEntry);
 
               let currentObj = currentEntry;
               let currentKey = Object.keys(currentObj)[0];
               currentObj[currentKey].mood = mood;
               setCurrentEntry(currentObj);
-              console.log(currentEntry);
-              NavJournalScreen();
+              // console.log(currentEntry);
+
+              let currentData = {};
+              async function grabData() {
+                currentData = await getData();
+                currentData[currentKey] = currentEntry[currentKey];
+                storeData(currentData);
+                NavJournalScreen();
+              }
+              grabData();
+
+              // console.log(currentData);
             }}
             underlayColor=""
             style={{ width: "63%", height: "100%", display: "flex" }}
