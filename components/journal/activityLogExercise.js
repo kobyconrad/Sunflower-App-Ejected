@@ -7,6 +7,7 @@ import {
   SafeAreaView,
   ScrollView,
   Image,
+  TextInput,
 } from "react-native";
 import * as Haptics from "expo-haptics";
 import { useState } from "react";
@@ -37,6 +38,7 @@ function ActivityLogExercise(props) {
   const [socialStyle, setSocialStyle] = useState(false);
   const [workStyle, setWorkStyle] = useState(false);
   const [learnStyle, setLearnStyle] = useState(false);
+  const [journalText, setJournalText] = useState("");
 
   let exerciseTouchProps = {
     style: exerciseStyle
@@ -115,7 +117,6 @@ function ActivityLogExercise(props) {
               <TouchableHighlight
                 onPress={() => {
                   Haptics.selectionAsync();
-                  console.log(exerciseStyle);
                   let current = exerciseStyle;
                   setExerciseStyle(!current);
                 }}
@@ -279,6 +280,7 @@ function ActivityLogExercise(props) {
                 let currentDate = new Date();
                 currentObj[currentDate] = {};
                 currentObj[currentDate].activities = {};
+                currentObj[currentDate].text = "";
               } else {
                 currentObj = currentEntry;
               }
@@ -311,7 +313,7 @@ function ActivityLogExercise(props) {
                 currentObj[currentKey].activities.learn = false;
               }
 
-              console.log(currentObj);
+              setCurrentEntry(currentObj);
             }}
             underlayColor=""
             style={{ width: "63%", height: "100%", display: "flex" }}
@@ -332,6 +334,31 @@ function ActivityLogExercise(props) {
         <Text style={styles.subtitleText}>
           What down what you accomplished! How did being sober make an impact?
         </Text>
+        <TextInput
+          multiline={true}
+          numberOfLines={4}
+          placeholder={
+            "I cleaned my room, worked out at the gym, and had dinner with my family..."
+          }
+          style={{
+            height: 160,
+            borderColor: "gray",
+            borderWidth: 1,
+            borderBottomWidth: 3,
+            borderRightWidth: 2,
+            padding: 12,
+            paddingTop: 12,
+            marginTop: 0,
+            borderRadius: 4,
+            fontSize: 15,
+            borderColor: "#B8BFC8",
+            textAlignVertical: "top",
+            width: "100%",
+            marginTop: 20,
+          }}
+          onChangeText={(inputText) => setJournalText(inputText)}
+          value={journalText}
+        />
         <View style={styles.exerciseNavContainer}>
           <TouchableHighlight
             onPress={() => {
@@ -355,6 +382,11 @@ function ActivityLogExercise(props) {
             onPress={() => {
               Haptics.selectionAsync();
               setScreen(2);
+
+              let currentObj = currentEntry;
+              let currentKey = Object.keys(currentObj)[0];
+              currentObj[currentKey].text = journalText;
+              setCurrentEntry(currentObj);
             }}
             underlayColor=""
             style={{ width: "63%", height: "100%", display: "flex" }}
@@ -398,13 +430,14 @@ function ActivityLogExercise(props) {
             onPress={() => {
               Haptics.selectionAsync();
               // setScreen(2);
+              console.log(currentEntry);
             }}
             underlayColor=""
             style={{ width: "63%", height: "100%", display: "flex" }}
           >
             <View style={styles.nextContainer}>
               <Text style={{ fontSize: 18, color: "#fff", fontWeight: "800" }}>
-                next
+                finish
               </Text>
             </View>
           </TouchableHighlight>
