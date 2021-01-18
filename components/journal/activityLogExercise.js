@@ -11,8 +11,28 @@ import {
 import * as Haptics from "expo-haptics";
 import { useState } from "react";
 
+const storeData = async (value) => {
+  try {
+    const jsonValue = JSON.stringify(value);
+    await AsyncStorage.setItem("journal-entries-test-2", jsonValue);
+  } catch (e) {
+    // saving error
+  }
+};
+
+const getData = async () => {
+  try {
+    const jsonValue = await AsyncStorage.getItem("journal-entries-test-2");
+    return jsonValue != null ? JSON.parse(jsonValue) : null;
+  } catch (e) {
+    // error reading value
+  }
+};
+
 function ActivityLogExercise(props) {
   const [screen, setScreen] = useState(0);
+  const [currentEntry, setCurrentEntry] = useState({});
+
   const [exerciseStyle, setExerciseStyle] = useState(false);
   const [socialStyle, setSocialStyle] = useState(false);
   const [workStyle, setWorkStyle] = useState(false);
@@ -253,6 +273,45 @@ function ActivityLogExercise(props) {
             onPress={() => {
               Haptics.selectionAsync();
               setScreen(1);
+
+              let currentObj = {};
+              if (Object.keys(currentEntry).length === 0) {
+                let currentDate = new Date();
+                currentObj[currentDate] = {};
+                currentObj[currentDate].activities = {};
+              } else {
+                currentObj = currentEntry;
+              }
+
+              let currentKey = Object.keys(currentObj)[0];
+
+              // currentObj[currentKey]
+
+              if (exerciseStyle) {
+                currentObj[currentKey].activities.exercise = true;
+              } else {
+                currentObj[currentKey].activities.exercise = false;
+              }
+
+              if (socialStyle) {
+                currentObj[currentKey].activities.social = true;
+              } else {
+                currentObj[currentKey].activities.social = false;
+              }
+
+              if (workStyle) {
+                currentObj[currentKey].activities.work = true;
+              } else {
+                currentObj[currentKey].activities.work = false;
+              }
+
+              if (learnStyle) {
+                currentObj[currentKey].activities.learn = true;
+              } else {
+                currentObj[currentKey].activities.learn = false;
+              }
+
+              console.log(currentObj);
             }}
             underlayColor=""
             style={{ width: "63%", height: "100%", display: "flex" }}
