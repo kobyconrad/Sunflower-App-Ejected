@@ -10,6 +10,7 @@ import {
   ScrollView,
   TouchableWithoutFeedback,
   Keyboard,
+  Image,
 } from "react-native";
 import { Book, Frown, Meh, Smile, Trash2 } from "react-native-feather";
 import * as Haptics from "expo-haptics";
@@ -68,6 +69,7 @@ function JournalHome(props) {
       let currentDate = key;
       let currentText = entries[key].text;
       let currentMood = entries[key].mood;
+      let currentActivities = entries[key].activities;
 
       if (entries[key].deleted !== true) {
         return (
@@ -88,6 +90,7 @@ function JournalHome(props) {
               text={currentText}
               date={currentDate}
               mood={currentMood}
+              activities={currentActivities}
             />
           </TouchableHighlight>
         );
@@ -537,6 +540,59 @@ function JournalEntry(props) {
     moodComponent = <Smile stroke="#02B268" width={22} height={22} />;
   }
 
+  let activitiesObj = props.activities || {};
+
+  for (let key in activitiesObj) {
+    if (activitiesObj[key]) {
+      console.log(key);
+    }
+  }
+
+  let activityList = (
+    <View>
+      <Text>hello</Text>
+    </View>
+  );
+
+  activityList = Object.keys(activitiesObj).map((key) => {
+    if (activitiesObj[key]) {
+      let emoji;
+      if (key === "exercise") {
+        console.log("yayyyy true yayyy");
+        emoji = (
+          <Image
+            source={require(`./../../assets/arm-emoji.png`)}
+            style={{ width: 16, height: 16, marginRight: 6 }}
+          />
+        );
+      } else if (key === "learn") {
+        emoji = (
+          <Image
+            source={require(`./../../assets/books-emoji.png`)}
+            style={{ width: 16, height: 16, marginRight: 6 }}
+          />
+        );
+      } else if (key === "social") {
+        emoji = (
+          <Image
+            source={require(`./../../assets/family-emoji.png`)}
+            style={{ width: 16, height: 16, marginRight: 6 }}
+          />
+        );
+      } else if (key === "work") {
+        emoji = (
+          <Image
+            source={require(`./../../assets/work-emoji.png`)}
+            style={{ width: 16, height: 16, marginRight: 6 }}
+          />
+        );
+      }
+
+      console.log(key);
+      return <View key={key}>{emoji}</View>;
+    }
+  });
+
   return (
     <View style={styles.exerciseContainer} key={props.key}>
       <View style={styles.exerciseTitleContainer}>
@@ -546,6 +602,9 @@ function JournalEntry(props) {
         <Text style={{ fontSize: 14, marginTop: 6, color: "#2E2E2E" }}>
           {props.text}
         </Text>
+        <View style={{ display: "flex", flexDirection: "row", marginTop: 10 }}>
+          {activityList}
+        </View>
       </View>
 
       <View style={styles.iconContainer}>{moodComponent}</View>
