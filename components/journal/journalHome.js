@@ -586,6 +586,27 @@ function JournalEntry(props) {
             style={{ width: 16, height: 16, marginRight: 6 }}
           />
         );
+      } else if (key === "care") {
+        emoji = (
+          <Image
+            source={require(`./../../assets/care-emoji.png`)}
+            style={{ width: 16, height: 16, marginRight: 6 }}
+          />
+        );
+      } else if (key === "skill") {
+        emoji = (
+          <Image
+            source={require(`./../../assets/skill-emoji.png`)}
+            style={{ width: 16, height: 16, marginRight: 6 }}
+          />
+        );
+      } else if (key === "misc") {
+        emoji = (
+          <Image
+            source={require(`./../../assets/misc-emoji.png`)}
+            style={{ width: 16, height: 16, marginRight: 6 }}
+          />
+        );
       }
 
       console.log(key);

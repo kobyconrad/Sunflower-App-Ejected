@@ -40,6 +40,10 @@ function ActivityLogExercise(props) {
   const [socialStyle, setSocialStyle] = useState(false);
   const [workStyle, setWorkStyle] = useState(false);
   const [learnStyle, setLearnStyle] = useState(false);
+  const [careStyle, setCareStyle] = useState(false);
+  const [skillStyle, setSkillStyle] = useState(false);
+  const [miscStyle, setMiscStyle] = useState(false);
+
   const [journalText, setJournalText] = useState("");
   const [mood, setMood] = useState("none");
 
@@ -97,6 +101,48 @@ function ActivityLogExercise(props) {
   };
   let learnTouchPropsBodyText = {
     style: learnStyle ? styles.paragraphTextOn : styles.paragraphText,
+  };
+
+  let skillTouchPropsContainer = {
+    style: skillStyle
+      ? styles.activityItemContainerOn
+      : styles.activityItemContainer,
+  };
+  let skillTouchPropsBody = {
+    style: skillStyle
+      ? styles.activityItemBodyContainerOn
+      : styles.activityItemBodyContainer,
+  };
+  let skillTouchPropsBodyText = {
+    style: skillStyle ? styles.paragraphTextOn : styles.paragraphText,
+  };
+
+  let careTouchPropsContainer = {
+    style: careStyle
+      ? styles.activityItemContainerOn
+      : styles.activityItemContainer,
+  };
+  let careTouchPropsBody = {
+    style: careStyle
+      ? styles.activityItemBodyContainerOn
+      : styles.activityItemBodyContainer,
+  };
+  let careTouchPropsBodyText = {
+    style: careStyle ? styles.paragraphTextOn : styles.paragraphText,
+  };
+
+  let miscTouchPropsContainer = {
+    style: miscStyle
+      ? styles.activityItemContainerOn
+      : styles.activityItemContainer,
+  };
+  let miscTouchPropsBody = {
+    style: miscStyle
+      ? styles.activityItemBodyContainerOn
+      : styles.activityItemBodyContainer,
+  };
+  let miscTouchPropsBodyText = {
+    style: miscStyle ? styles.paragraphTextOn : styles.paragraphText,
   };
 
   let NavJournalScreen = props.NavJournalScreen;
@@ -254,6 +300,111 @@ function ActivityLogExercise(props) {
                   </View>
                 </View>
               </TouchableHighlight>
+
+              <TouchableHighlight
+                onPress={() => {
+                  Haptics.selectionAsync();
+                  let current = skillStyle;
+                  setSkillStyle(!current);
+                }}
+                underlayColor=""
+                style={{ width: "100%", display: "flex" }}
+                activeOpacity={0.6}
+              >
+                <View {...skillTouchPropsContainer}>
+                  <View style={styles.activityTitleContainer}>
+                    <Image
+                      source={require(`./../../assets/skill-emoji.png`)}
+                      style={{ width: 16, height: 16, marginRight: 6 }}
+                    />
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        fontWeight: "800",
+                        color: "#000100",
+                      }}
+                    >
+                      Practicing A Skill
+                    </Text>
+                  </View>
+                  <View {...skillTouchPropsBody}>
+                    <Text {...skillTouchPropsBodyText}>
+                      ex: Practicing any kind of skill! Instruments, cooking,
+                      programming, art, anything.
+                    </Text>
+                  </View>
+                </View>
+              </TouchableHighlight>
+
+              <TouchableHighlight
+                onPress={() => {
+                  Haptics.selectionAsync();
+                  let current = careStyle;
+                  setCareStyle(!current);
+                }}
+                underlayColor=""
+                style={{ width: "100%", display: "flex" }}
+                activeOpacity={0.6}
+              >
+                <View {...careTouchPropsContainer}>
+                  <View style={styles.activityTitleContainer}>
+                    <Image
+                      source={require(`./../../assets/care-emoji.png`)}
+                      style={{ width: 16, height: 16, marginRight: 6 }}
+                    />
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        fontWeight: "800",
+                        color: "#000100",
+                      }}
+                    >
+                      Self Care
+                    </Text>
+                  </View>
+                  <View {...careTouchPropsBody}>
+                    <Text {...careTouchPropsBodyText}>
+                      ex: Cleaning your room, doing your laundry, paying that
+                      bill you've been avoiding, etc.
+                    </Text>
+                  </View>
+                </View>
+              </TouchableHighlight>
+
+              <TouchableHighlight
+                onPress={() => {
+                  Haptics.selectionAsync();
+                  let current = miscStyle;
+                  setMiscStyle(!current);
+                }}
+                underlayColor=""
+                style={{ width: "100%", display: "flex" }}
+                activeOpacity={0.6}
+              >
+                <View {...miscTouchPropsContainer}>
+                  <View style={styles.activityTitleContainer}>
+                    <Image
+                      source={require(`./../../assets/misc-emoji.png`)}
+                      style={{ width: 16, height: 16, marginRight: 6 }}
+                    />
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        fontWeight: "800",
+                        color: "#000100",
+                      }}
+                    >
+                      Misc.
+                    </Text>
+                  </View>
+                  <View {...miscTouchPropsBody}>
+                    <Text {...miscTouchPropsBodyText}>
+                      ex: Anything not covered on this list that you found
+                      rewarding in some way.
+                    </Text>
+                  </View>
+                </View>
+              </TouchableHighlight>
             </View>
           </ScrollView>
         </SafeAreaView>
@@ -315,6 +466,24 @@ function ActivityLogExercise(props) {
                 currentObj[currentKey].activities.learn = true;
               } else {
                 currentObj[currentKey].activities.learn = false;
+              }
+
+              if (skillStyle) {
+                currentObj[currentKey].activities.skill = true;
+              } else {
+                currentObj[currentKey].activities.skill = false;
+              }
+
+              if (careStyle) {
+                currentObj[currentKey].activities.care = true;
+              } else {
+                currentObj[currentKey].activities.care = false;
+              }
+
+              if (miscStyle) {
+                currentObj[currentKey].activities.misc = true;
+              } else {
+                currentObj[currentKey].activities.misc = false;
               }
 
               setCurrentEntry(currentObj);
