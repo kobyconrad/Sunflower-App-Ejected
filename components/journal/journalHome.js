@@ -49,11 +49,9 @@ function JournalHome(props) {
   const isFocused = useIsFocused();
 
   useEffect(() => {
-    console.log("render");
     Segment.screen("journal-home-screen");
     async function grabData() {
       let currentData = await getData();
-      console.log(currentData);
       setEntries(currentData);
     }
     grabData();
@@ -129,10 +127,11 @@ function JournalHome(props) {
                 <Text
                   style={{ fontSize: 18, fontWeight: "800", color: "#000100" }}
                 >
-                  Add Sober Journal Entry
+                  New Activity Entry
                 </Text>
                 <Text style={{ fontSize: 14, marginTop: 6, color: "#2E2E2E" }}>
-                  Rewire your brain to associate sobriety with reward.
+                  Log your activities to help your brain associate sobriety with
+                  reward.
                 </Text>
               </View>
 
@@ -350,7 +349,7 @@ function JournalHome(props) {
         >
           <View style={styles.entryExerciseTitleContainer}>
             <Text style={{ fontSize: 24, fontWeight: "800", color: "#000100" }}>
-              How did you feel today?
+              How rewarding was this activity?
             </Text>
           </View>
 
@@ -358,7 +357,7 @@ function JournalHome(props) {
 
           <View style={styles.entryExerciseTitleContainer}>
             <Text style={{ fontSize: 24, fontWeight: "800", color: "#000100" }}>
-              What did you accomplish today, because you were sober?
+              Briefly write down what you did.
             </Text>
           </View>
 
@@ -542,12 +541,6 @@ function JournalEntry(props) {
 
   let activitiesObj = props.activities || {};
 
-  for (let key in activitiesObj) {
-    if (activitiesObj[key]) {
-      console.log(key);
-    }
-  }
-
   let activityList = (
     <View>
       <Text>hello</Text>
@@ -558,7 +551,6 @@ function JournalEntry(props) {
     if (activitiesObj[key]) {
       let emoji;
       if (key === "exercise") {
-        console.log("yayyyy true yayyy");
         emoji = (
           <Image
             source={require(`./../../assets/arm-emoji.png`)}
@@ -609,7 +601,6 @@ function JournalEntry(props) {
         );
       }
 
-      console.log(key);
       return <View key={key}>{emoji}</View>;
     }
   });

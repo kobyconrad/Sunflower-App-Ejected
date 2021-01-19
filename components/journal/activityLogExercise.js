@@ -13,6 +13,7 @@ import * as Haptics from "expo-haptics";
 import { useState } from "react";
 import { Book, Frown, Meh, Smile, Trash2 } from "react-native-feather";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as Segment from "expo-analytics-segment";
 
 const storeData = async (value) => {
   try {
@@ -150,9 +151,12 @@ function ActivityLogExercise(props) {
   if (screen === 0) {
     return (
       <View style={styles.screenContainer}>
-        <Text style={styles.titleText}>What did you accomplish today?</Text>
+        <Text style={styles.titleText}>
+          What activities did you accomplish today?
+        </Text>
         <Text style={styles.subtitleText}>
-          Select any activity that was healthy for your mind or body.
+          Select any activity that was a healthy method for rewarding your brain
+          with dopamine.
         </Text>
 
         <SafeAreaView
@@ -400,7 +404,7 @@ function ActivityLogExercise(props) {
                   <View {...miscTouchPropsBody}>
                     <Text {...miscTouchPropsBodyText}>
                       ex: Anything not covered on this list that you found
-                      rewarding in some way.
+                      rewarding in a healthy way.
                     </Text>
                   </View>
                 </View>
@@ -734,9 +738,10 @@ function ActivityLogExercise(props) {
 
     return (
       <View style={styles.screenContainer}>
-        <Text style={styles.titleText}>How did it make you feel?</Text>
+        <Text style={styles.titleText}>How rewarding was this activity?</Text>
         <Text style={styles.subtitleText}>
-          What impact did completeing these activites have on your mood?
+          How much pleasure, reward, or accomplish did you get for completing
+          the activity?
         </Text>
 
         <MoodSelector moodSetting={mood} />
@@ -763,14 +768,11 @@ function ActivityLogExercise(props) {
           <TouchableHighlight
             onPress={() => {
               Haptics.selectionAsync();
-              // setScreen(2);
-              // console.log(currentEntry);
 
               let currentObj = currentEntry;
               let currentKey = Object.keys(currentObj)[0];
               currentObj[currentKey].mood = mood;
               setCurrentEntry(currentObj);
-              // console.log(currentEntry);
 
               let currentData = {};
               async function grabData() {
@@ -779,9 +781,8 @@ function ActivityLogExercise(props) {
                 storeData(currentData);
                 NavJournalScreen();
               }
+              Segment.track("completed-journal-entry");
               grabData();
-
-              // console.log(currentData);
             }}
             underlayColor=""
             style={{ width: "63%", height: "100%", display: "flex" }}
