@@ -740,8 +740,8 @@ function ActivityLogExercise(props) {
       <View style={styles.screenContainer}>
         <Text style={styles.titleText}>How rewarding was this activity?</Text>
         <Text style={styles.subtitleText}>
-          How much pleasure, reward, or accomplish did you get for completing
-          the activity?
+          How much pleasure, reward, or accomplishment did you get from
+          completing the activity?
         </Text>
 
         <MoodSelector moodSetting={mood} />

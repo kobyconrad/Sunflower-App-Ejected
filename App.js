@@ -443,9 +443,20 @@ function HomeScreen({ navigation }) {
           style={{
             width: "60%",
             height: 300,
-            marginTop: 20,
+            marginTop: 0,
           }}
         />
+        <TouchableHighlight
+          onPress={() => {
+            Haptics.selectionAsync();
+            navigation.navigate("Activity Log 0");
+          }}
+          underlayColor=""
+        >
+          <View style={styles.button}>
+            <Text style={styles.buttonText}>Add Activity</Text>
+          </View>
+        </TouchableHighlight>
       </View>
 
       <View style={styles.navContainer}></View>
