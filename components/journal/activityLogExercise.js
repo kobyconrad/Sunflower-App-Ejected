@@ -509,7 +509,7 @@ function ActivityLogExercise(props) {
       <View style={styles.screenContainer}>
         <Text style={styles.titleText}>Briefly write down what you did.</Text>
         <Text style={styles.subtitleText}>
-          What down what you accomplished! How did being sober make an impact?
+          Write down what you accomplished! How did being sober make an impact?
         </Text>
         <TextInput
           multiline={true}
@@ -780,9 +780,22 @@ function ActivityLogExercise(props) {
                 if (currentData === null) {
                   currentData = {};
                 }
-                console.log(currentData);
                 currentData[currentKey] = currentEntry[currentKey];
                 storeData(currentData);
+
+                // refresh state
+                setScreen(0);
+                setCurrentEntry({});
+                setExerciseStyle(false);
+                setSocialStyle(false);
+                setWorkStyle(false);
+                setLearnStyle(false);
+                setCareStyle(false);
+                setSkillStyle(false);
+                setMiscStyle(false);
+                setJournalText("");
+                setMood("none");
+
                 NavJournalScreen();
               }
               Segment.track("completed-journal-entry");

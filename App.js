@@ -461,12 +461,12 @@ function HomeScreen({ navigation }) {
         <TouchableHighlight
           onPress={() => {
             Haptics.selectionAsync();
-            navigation.navigate("Craving Exercise");
+            navigation.navigate("Activity Log 0");
           }}
           underlayColor=""
         >
           <View style={styles.button}>
-            <Text style={styles.buttonText}>Add Craving</Text>
+            <Text style={styles.buttonText}>Add Activity</Text>
           </View>
         </TouchableHighlight>
       </View>
