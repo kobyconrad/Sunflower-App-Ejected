@@ -777,6 +777,10 @@ function ActivityLogExercise(props) {
               let currentData = {};
               async function grabData() {
                 currentData = await getData();
+                if (currentData === null) {
+                  currentData = {};
+                }
+                console.log(currentData);
                 currentData[currentKey] = currentEntry[currentKey];
                 storeData(currentData);
                 NavJournalScreen();
