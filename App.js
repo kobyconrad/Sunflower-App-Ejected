@@ -26,6 +26,8 @@ import * as SplashScreen from "expo-splash-screen";
 
 // This project uses YARN YARN YARN YARN YARN YARN YARN YARN YARN YARN YARN
 
+// about to add posthog
+
 const Stack = createStackNavigator();
 
 const storeData = async (value) => {
