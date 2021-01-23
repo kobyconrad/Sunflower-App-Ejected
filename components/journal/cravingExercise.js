@@ -38,8 +38,14 @@ function CravingExercise(props) {
   const [currentEntry, setCurrentEntry] = useState({});
   const [craving, setCraving] = useState(0);
 
-  const [exerciseStyle, setExerciseStyle] = useState(false);
+  const [coping, setCoping] = useState(false);
+  const [reward, setReward] = useState(false);
+  const [notAddicted, setNotAddicted] = useState(false);
+  const [notBad, setNotBad] = useState(false);
+  const [job, setJob] = useState(false);
+  const [occasional, setOccasional] = useState(false);
 
+  const [exerciseStyle, setExerciseStyle] = useState(false);
   const [journalText, setJournalText] = useState("");
 
   let exerciseTouchProps = {
@@ -54,6 +60,90 @@ function CravingExercise(props) {
   };
   let exerciseTouchPropsBodyText = {
     style: exerciseStyle ? styles.paragraphTextOn : styles.paragraphText,
+  };
+
+  // new shit
+
+  let copingTouchProps = {
+    style: coping
+      ? styles.activityItemContainerOn
+      : styles.activityItemContainer,
+  };
+  let copingTouchPropsBody = {
+    style: coping
+      ? styles.activityItemBodyContainerOn
+      : styles.activityItemBodyContainer,
+  };
+  let copingTouchPropsBodyText = {
+    style: coping ? styles.paragraphTextOn : styles.paragraphText,
+  };
+
+  let rewardTouchProps = {
+    style: reward
+      ? styles.activityItemContainerOn
+      : styles.activityItemContainer,
+  };
+  let rewardTouchPropsBody = {
+    style: reward
+      ? styles.activityItemBodyContainerOn
+      : styles.activityItemBodyContainer,
+  };
+  let rewardTouchPropsBodyText = {
+    style: reward ? styles.paragraphTextOn : styles.paragraphText,
+  };
+
+  let notAddictedTouchProps = {
+    style: notAddicted
+      ? styles.activityItemContainerOn
+      : styles.activityItemContainer,
+  };
+  let notAddictedTouchPropsBody = {
+    style: notAddicted
+      ? styles.activityItemBodyContainerOn
+      : styles.activityItemBodyContainer,
+  };
+  let notAddictedTouchPropsBodyText = {
+    style: notAddicted ? styles.paragraphTextOn : styles.paragraphText,
+  };
+
+  let notBadTouchProps = {
+    style: notBad
+      ? styles.activityItemContainerOn
+      : styles.activityItemContainer,
+  };
+  let notBadTouchPropsBody = {
+    style: notBad
+      ? styles.activityItemBodyContainerOn
+      : styles.activityItemBodyContainer,
+  };
+  let notBadTouchPropsBodyText = {
+    style: notBad ? styles.paragraphTextOn : styles.paragraphText,
+  };
+
+  let jobTouchProps = {
+    style: job ? styles.activityItemContainerOn : styles.activityItemContainer,
+  };
+  let jobTouchPropsBody = {
+    style: job
+      ? styles.activityItemBodyContainerOn
+      : styles.activityItemBodyContainer,
+  };
+  let jobTouchPropsBodyText = {
+    style: job ? styles.paragraphTextOn : styles.paragraphText,
+  };
+
+  let occasionalTouchProps = {
+    style: occasional
+      ? styles.activityItemContainerOn
+      : styles.activityItemContainer,
+  };
+  let occasionalTouchPropsBody = {
+    style: occasional
+      ? styles.activityItemBodyContainerOn
+      : styles.activityItemBodyContainer,
+  };
+  let occasionalTouchPropsBodyText = {
+    style: occasional ? styles.paragraphTextOn : styles.paragraphText,
   };
 
   let NavJournalScreen = props.NavJournalScreen;
@@ -194,7 +284,8 @@ function CravingExercise(props) {
           Do any of these common irrational thoughts apply?
         </Text>
         <Text style={styles.subtitleText}>
-          Scale from "I hardly notice" to "I'm 3 seconds from giving in."
+          Is your brain trying to trick you into giving up your sobriety? Select
+          one or skip this step.
         </Text>
 
         <SafeAreaView
@@ -208,17 +299,17 @@ function CravingExercise(props) {
               <TouchableHighlight
                 onPress={() => {
                   Haptics.selectionAsync();
-                  let current = exerciseStyle;
-                  setExerciseStyle(!current);
+                  let current = coping;
+                  setCoping(!current);
                 }}
                 underlayColor=""
                 style={{ width: "100%", display: "flex" }}
                 activeOpacity={0.6}
               >
-                <View {...exerciseTouchProps}>
+                <View {...copingTouchProps}>
                   <View style={styles.activityTitleContainer}>
                     <Image
-                      source={require(`./../../assets/arm-emoji.png`)}
+                      source={require(`./../../assets/coping-emoji.png`)}
                       style={{ width: 16, height: 16, marginRight: 6 }}
                     />
                     <Text
@@ -228,12 +319,184 @@ function CravingExercise(props) {
                         color: "#000100",
                       }}
                     >
-                      Exercise
+                      Coping Fallacy
                     </Text>
                   </View>
-                  <View {...exerciseTouchPropsBody}>
-                    <Text {...exerciseTouchPropsBodyText}>
-                      ex: Going for a run, lifting weights, practicing sports.
+                  <View {...copingTouchPropsBody}>
+                    <Text {...copingTouchPropsBodyText}>
+                      ex: Something horrible happened to me, and I need it to
+                      cope with life.
+                    </Text>
+                  </View>
+                </View>
+              </TouchableHighlight>
+              <TouchableHighlight
+                onPress={() => {
+                  Haptics.selectionAsync();
+                  let current = reward;
+                  setReward(!current);
+                }}
+                underlayColor=""
+                style={{ width: "100%", display: "flex" }}
+                activeOpacity={0.6}
+              >
+                <View {...rewardTouchProps}>
+                  <View style={styles.activityTitleContainer}>
+                    <Image
+                      source={require(`./../../assets/reward-emoji.png`)}
+                      style={{ width: 16, height: 16, marginRight: 6 }}
+                    />
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        fontWeight: "800",
+                        color: "#000100",
+                      }}
+                    >
+                      Reward Fallacy
+                    </Text>
+                  </View>
+                  <View {...rewardTouchPropsBody}>
+                    <Text {...rewardTouchPropsBodyText}>
+                      ex: Because I've been sober so long, I deserve it.
+                    </Text>
+                  </View>
+                </View>
+              </TouchableHighlight>
+              <TouchableHighlight
+                onPress={() => {
+                  Haptics.selectionAsync();
+                  let current = notAddicted;
+                  setNotAddicted(!current);
+                }}
+                underlayColor=""
+                style={{ width: "100%", display: "flex" }}
+                activeOpacity={0.6}
+              >
+                <View {...notAddictedTouchProps}>
+                  <View style={styles.activityTitleContainer}>
+                    <Image
+                      source={require(`./../../assets/not-addicted-emoji.png`)}
+                      style={{ width: 16, height: 16, marginRight: 6 }}
+                    />
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        fontWeight: "800",
+                        color: "#000100",
+                      }}
+                    >
+                      No Longer Addicted Fallacy
+                    </Text>
+                  </View>
+                  <View {...notAddictedTouchPropsBody}>
+                    <Text {...notAddictedTouchPropsBodyText}>
+                      ex: Staying sober has proved i'm not addicted, so I can
+                      use again.
+                    </Text>
+                  </View>
+                </View>
+              </TouchableHighlight>
+              <TouchableHighlight
+                onPress={() => {
+                  Haptics.selectionAsync();
+                  let current = notBad;
+                  setNotBad(!current);
+                }}
+                underlayColor=""
+                style={{ width: "100%", display: "flex" }}
+                activeOpacity={0.6}
+              >
+                <View {...notBadTouchProps}>
+                  <View style={styles.activityTitleContainer}>
+                    <Image
+                      source={require(`./../../assets/not-bad.png`)}
+                      style={{ width: 16, height: 16, marginRight: 6 }}
+                    />
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        fontWeight: "800",
+                        color: "#000100",
+                      }}
+                    >
+                      It's Not Bad Fallacy
+                    </Text>
+                  </View>
+                  <View {...notBadTouchPropsBody}>
+                    <Text {...notBadTouchPropsBodyText}>
+                      ex: I can't even remember why this was bad for me. Why did
+                      I stop?
+                    </Text>
+                  </View>
+                </View>
+              </TouchableHighlight>
+
+              <TouchableHighlight
+                onPress={() => {
+                  Haptics.selectionAsync();
+                  let current = job;
+                  setJob(!current);
+                }}
+                underlayColor=""
+                style={{ width: "100%", display: "flex" }}
+                activeOpacity={0.6}
+              >
+                <View {...jobTouchProps}>
+                  <View style={styles.activityTitleContainer}>
+                    <Image
+                      source={require(`./../../assets/work-emoji.png`)}
+                      style={{ width: 16, height: 16, marginRight: 6 }}
+                    />
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        fontWeight: "800",
+                        color: "#000100",
+                      }}
+                    >
+                      I Have A Job Fallacy
+                    </Text>
+                  </View>
+                  <View {...jobTouchPropsBody}>
+                    <Text {...jobTouchPropsBodyText}>
+                      ex: I have a job or I'm doing well in life, so my use is
+                      fine.
+                    </Text>
+                  </View>
+                </View>
+              </TouchableHighlight>
+
+              <TouchableHighlight
+                onPress={() => {
+                  Haptics.selectionAsync();
+                  let current = occasional;
+                  setOccasional(!current);
+                }}
+                underlayColor=""
+                style={{ width: "100%", display: "flex" }}
+                activeOpacity={0.6}
+              >
+                <View {...occasionalTouchProps}>
+                  <View style={styles.activityTitleContainer}>
+                    <Image
+                      source={require(`./../../assets/occasional-emoji.png`)}
+                      style={{ width: 16, height: 16, marginRight: 6 }}
+                    />
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        fontWeight: "800",
+                        color: "#000100",
+                      }}
+                    >
+                      Occasional Fallacy
+                    </Text>
+                  </View>
+                  <View {...occasionalTouchPropsBody}>
+                    <Text {...occasionalTouchPropsBodyText}>
+                      ex: I only do it on the weekends or special occasions, so
+                      that's okay right?
                     </Text>
                   </View>
                 </View>
