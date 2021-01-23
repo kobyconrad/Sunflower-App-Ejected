@@ -18,7 +18,7 @@ import * as Segment from "expo-analytics-segment";
 const storeData = async (value) => {
   try {
     const jsonValue = JSON.stringify(value);
-    await AsyncStorage.setItem("journal-entries-test-2", jsonValue);
+    await AsyncStorage.setItem("craving-entries-test-1", jsonValue);
   } catch (e) {
     // saving error
   }
@@ -26,7 +26,7 @@ const storeData = async (value) => {
 
 const getData = async () => {
   try {
-    const jsonValue = await AsyncStorage.getItem("journal-entries-test-2");
+    const jsonValue = await AsyncStorage.getItem("craving-entries-test-1");
     return jsonValue != null ? JSON.parse(jsonValue) : null;
   } catch (e) {
     // error reading value
@@ -577,48 +577,48 @@ function CravingExercise(props) {
           <TouchableHighlight
             onPress={() => {
               Haptics.selectionAsync();
-              NavJournalScreen();
+
               console.log(journalText);
-
-              // const [craving, setCraving] = useState(0);
-
-              // const [coping, setCoping] = useState(false);
-              // const [reward, setReward] = useState(false);
-              // const [notAddicted, setNotAddicted] = useState(false);
-              // const [notBad, setNotBad] = useState(false);
-              // const [job, setJob] = useState(false);
-              // const [occasional, setOccasional] = useState(false);
-
-              // const [journalText, setJournalText] = useState("");
 
               // creates a new entry object
               let currentDate = new Date();
               let newEntry = {};
-              newEntry[currentDate] = {};
-              newEntry[currentDate]["craving"] = craving;
-              newEntry[currentDate]["fallacy"] = {};
-              newEntry[currentDate]["text"] = journalText;
+
+              newEntry["craving"] = craving;
+              newEntry["fallacy"] = {};
+              newEntry["text"] = journalText;
 
               if (coping) {
-                newEntry[currentDate]["fallacy"]["coping"] = true;
+                newEntry["fallacy"]["coping"] = true;
               }
               if (reward) {
-                newEntry[currentDate]["fallacy"]["reward"] = true;
+                newEntry["fallacy"]["reward"] = true;
               }
               if (notAddicted) {
-                newEntry[currentDate]["fallacy"]["notAddicted"] = true;
+                newEntry["fallacy"]["notAddicted"] = true;
               }
               if (notBad) {
-                newEntry[currentDate]["fallacy"]["notBad"] = true;
+                newEntry["fallacy"]["notBad"] = true;
               }
               if (job) {
-                newEntry[currentDate]["fallacy"]["job"] = true;
+                newEntry["fallacy"]["job"] = true;
               }
               if (occasional) {
-                newEntry[currentDate]["fallacy"]["occasional"] = true;
+                newEntry["fallacy"]["occasional"] = true;
               }
 
-              console.log(newEntry);
+              let currentData = {};
+              async function handleData() {
+                currentData = await getData();
+                if (currentData === null) {
+                  currentData = {};
+                }
+                currentData[currentDate] = newEntry;
+                storeData(currentData);
+                NavJournalScreen();
+                console.log(currentData);
+              }
+              handleData();
             }}
             underlayColor=""
             style={{ width: "63%", height: "100%", display: "flex" }}
