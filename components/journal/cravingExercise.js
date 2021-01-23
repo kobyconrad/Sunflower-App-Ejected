@@ -45,24 +45,7 @@ function CravingExercise(props) {
   const [job, setJob] = useState(false);
   const [occasional, setOccasional] = useState(false);
 
-  const [exerciseStyle, setExerciseStyle] = useState(false);
   const [journalText, setJournalText] = useState("");
-
-  let exerciseTouchProps = {
-    style: exerciseStyle
-      ? styles.activityItemContainerOn
-      : styles.activityItemContainer,
-  };
-  let exerciseTouchPropsBody = {
-    style: exerciseStyle
-      ? styles.activityItemBodyContainerOn
-      : styles.activityItemBodyContainer,
-  };
-  let exerciseTouchPropsBodyText = {
-    style: exerciseStyle ? styles.paragraphTextOn : styles.paragraphText,
-  };
-
-  // new shit
 
   let copingTouchProps = {
     style: coping
@@ -281,7 +264,7 @@ function CravingExercise(props) {
     return (
       <View style={styles.screenContainer}>
         <Text style={styles.titleText}>
-          Do any of these common irrational thoughts apply?
+          Do any of these common fallacies apply?
         </Text>
         <Text style={styles.subtitleText}>
           Is your brain trying to trick you into giving up your sobriety? Select
@@ -595,6 +578,47 @@ function CravingExercise(props) {
             onPress={() => {
               Haptics.selectionAsync();
               NavJournalScreen();
+              console.log(journalText);
+
+              // const [craving, setCraving] = useState(0);
+
+              // const [coping, setCoping] = useState(false);
+              // const [reward, setReward] = useState(false);
+              // const [notAddicted, setNotAddicted] = useState(false);
+              // const [notBad, setNotBad] = useState(false);
+              // const [job, setJob] = useState(false);
+              // const [occasional, setOccasional] = useState(false);
+
+              // const [journalText, setJournalText] = useState("");
+
+              // creates a new entry object
+              let currentDate = new Date();
+              let newEntry = {};
+              newEntry[currentDate] = {};
+              newEntry[currentDate]["craving"] = craving;
+              newEntry[currentDate]["fallacy"] = {};
+              newEntry[currentDate]["text"] = journalText;
+
+              if (coping) {
+                newEntry[currentDate]["fallacy"]["coping"] = true;
+              }
+              if (reward) {
+                newEntry[currentDate]["fallacy"]["reward"] = true;
+              }
+              if (notAddicted) {
+                newEntry[currentDate]["fallacy"]["notAddicted"] = true;
+              }
+              if (notBad) {
+                newEntry[currentDate]["fallacy"]["notBad"] = true;
+              }
+              if (job) {
+                newEntry[currentDate]["fallacy"]["job"] = true;
+              }
+              if (occasional) {
+                newEntry[currentDate]["fallacy"]["occasional"] = true;
+              }
+
+              console.log(newEntry);
             }}
             underlayColor=""
             style={{ width: "63%", height: "100%", display: "flex" }}
