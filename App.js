@@ -21,12 +21,9 @@ import * as Segment from "expo-analytics-segment";
 import JournalHome from "./components/journal/journalHome";
 import ActivityLogExercise from "./components/journal/activityLogExercise";
 import CravingExercise from "./components/journal/cravingExercise";
-
 import * as SplashScreen from "expo-splash-screen";
 
 // This project uses YARN YARN YARN YARN YARN YARN YARN YARN YARN YARN YARN
-
-// about to add posthog
 
 const Stack = createStackNavigator();
 
@@ -463,12 +460,12 @@ function HomeScreen({ navigation }) {
         <TouchableHighlight
           onPress={() => {
             Haptics.selectionAsync();
-            navigation.navigate("Activity Log 0");
+            navigation.navigate("Craving Exercise");
           }}
           underlayColor=""
         >
           <View style={styles.button}>
-            <Text style={styles.buttonText}>Add Activity</Text>
+            <Text style={styles.buttonText}>Add Craving</Text>
           </View>
         </TouchableHighlight>
       </View>

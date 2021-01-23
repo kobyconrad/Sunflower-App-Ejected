@@ -36,6 +36,7 @@ const getData = async () => {
 function CravingExercise(props) {
   const [screen, setScreen] = useState(0);
   const [currentEntry, setCurrentEntry] = useState({});
+  const [craving, setCraving] = useState(0);
 
   const [exerciseStyle, setExerciseStyle] = useState(false);
 
@@ -60,11 +61,94 @@ function CravingExercise(props) {
   if (screen === 0) {
     return (
       <View style={styles.screenContainer}>
-        <Text style={styles.titleText}>How rewarding was this activity?</Text>
+        <Text style={styles.titleText}>Rate Your Craving</Text>
         <Text style={styles.subtitleText}>
-          How much pleasure, reward, or accomplishment did you get from
-          completing the activity?
+          On a scale from 1 to 5 how strong is your craving?
         </Text>
+
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-around",
+            paddingTop: 20,
+            paddingBottom: 20,
+          }}
+        >
+          <TouchableHighlight
+            onPress={() => {
+              Haptics.selectionAsync();
+              setCraving(1);
+            }}
+            underlayColor=""
+            activeOpacity={0.5}
+            style={{}}
+          >
+            <Image
+              source={require(`./../../assets/fire-emoji.png`)}
+              style={{ width: 50, height: 50, marginRight: 6 }}
+            />
+          </TouchableHighlight>
+
+          <TouchableHighlight
+            onPress={() => {
+              Haptics.selectionAsync();
+              setCraving(2);
+            }}
+            underlayColor=""
+            activeOpacity={0.5}
+            style={{}}
+          >
+            <Image
+              source={require(`./../../assets/fire-emoji.png`)}
+              style={{ width: 50, height: 50, marginRight: 6 }}
+            />
+          </TouchableHighlight>
+          <TouchableHighlight
+            onPress={() => {
+              Haptics.selectionAsync();
+              setCraving(3);
+            }}
+            underlayColor=""
+            activeOpacity={0.5}
+            style={{}}
+          >
+            <Image
+              source={require(`./../../assets/fire-emoji.png`)}
+              style={{ width: 50, height: 50, marginRight: 6 }}
+            />
+          </TouchableHighlight>
+
+          <TouchableHighlight
+            onPress={() => {
+              Haptics.selectionAsync();
+              setCraving(4);
+            }}
+            underlayColor=""
+            activeOpacity={0.5}
+            style={{}}
+          >
+            <Image
+              source={require(`./../../assets/fire-emoji.png`)}
+              style={{ width: 50, height: 50, marginRight: 6 }}
+            />
+          </TouchableHighlight>
+
+          <TouchableHighlight
+            onPress={() => {
+              Haptics.selectionAsync();
+              setCraving(5);
+            }}
+            underlayColor=""
+            activeOpacity={0.5}
+            style={{}}
+          >
+            <Image
+              source={require(`./../../assets/fire-emoji.png`)}
+              style={{ width: 50, height: 50, marginRight: 6 }}
+            />
+          </TouchableHighlight>
+        </View>
 
         <View style={styles.exerciseNavContainer}>
           <TouchableHighlight
@@ -88,7 +172,7 @@ function CravingExercise(props) {
           <TouchableHighlight
             onPress={() => {
               Haptics.selectionAsync();
-
+              console.log(craving);
               setScreen(1);
             }}
             underlayColor=""
