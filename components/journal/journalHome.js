@@ -69,7 +69,7 @@ function JournalHome(props) {
       let currentMood = entries[key].mood;
       let currentActivities = entries[key].activities;
       let craving = entries[key].craving;
-      let fallacy = entries[key.craving];
+      let fallacy = entries[key].fallacy;
 
       if (entries[key].deleted !== true) {
         if (craving) {
@@ -92,6 +92,7 @@ function JournalHome(props) {
                 date={currentDate}
                 craving={craving}
                 activities={currentActivities}
+                fallacy={fallacy}
               />
             </TouchableHighlight>
           );
@@ -568,9 +569,7 @@ function JournalEntry(props) {
 
   let cravingComponent = <View></View>;
 
-  console.log(props.craving);
   if (props.craving) {
-    console.log("hello");
     cravingComponent = (
       <Image
         source={require(`./../../assets/fire-emoji.png`)}
@@ -583,7 +582,7 @@ function JournalEntry(props) {
 
   let activityList = (
     <View>
-      <Text>hello</Text>
+      <Text></Text>
     </View>
   );
 
@@ -645,6 +644,66 @@ function JournalEntry(props) {
     }
   });
 
+  let fallacyObj = props.fallacy || {};
+
+  let fallacyList = (
+    <View>
+      <Text></Text>
+    </View>
+  );
+
+  console.log(fallacyObj);
+  fallacyList = Object.keys(fallacyObj).map((key) => {
+    if (fallacyObj[key]) {
+      let fallacyEmoji;
+      if (key === "coping") {
+        fallacyEmoji = (
+          <Image
+            source={require(`./../../assets/coping-emoji.png`)}
+            style={{ width: 16, height: 16, marginRight: 6 }}
+          />
+        );
+      } else if (key === "reward") {
+        fallacyEmoji = (
+          <Image
+            source={require(`./../../assets/reward-emoji.png`)}
+            style={{ width: 16, height: 16, marginRight: 6 }}
+          />
+        );
+      } else if (key === "notAddicted") {
+        fallacyEmoji = (
+          <Image
+            source={require(`./../../assets/not-addicted-emoji.png`)}
+            style={{ width: 16, height: 16, marginRight: 6 }}
+          />
+        );
+      } else if (key === "notBad") {
+        fallacyEmoji = (
+          <Image
+            source={require(`./../../assets/not-bad.png`)}
+            style={{ width: 16, height: 16, marginRight: 6 }}
+          />
+        );
+      } else if (key === "job") {
+        fallacyEmoji = (
+          <Image
+            source={require(`./../../assets/work-emoji.png`)}
+            style={{ width: 16, height: 16, marginRight: 6 }}
+          />
+        );
+      } else if (key === "occasional") {
+        fallacyEmoji = (
+          <Image
+            source={require(`./../../assets/occasional-emoji.png`)}
+            style={{ width: 16, height: 16, marginRight: 6 }}
+          />
+        );
+      }
+
+      return <View key={key}>{fallacyEmoji}</View>;
+    }
+  });
+
   return (
     <View style={styles.exerciseContainer} key={props.key}>
       <View style={styles.exerciseTitleContainer}>
@@ -656,6 +715,7 @@ function JournalEntry(props) {
         </Text>
         <View style={{ display: "flex", flexDirection: "row", marginTop: 10 }}>
           {activityList}
+          {fallacyList}
         </View>
       </View>
 
