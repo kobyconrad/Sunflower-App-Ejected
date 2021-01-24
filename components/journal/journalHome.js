@@ -160,7 +160,7 @@ function JournalHome(props) {
                   New Exercise
                 </Text>
                 <Text style={{ fontSize: 14, marginTop: 6, color: "#2E2E2E" }}>
-                  Start a new guided journal exercise to help you learn to
+                  Overcome your cravings and track activities to help you
                   associate sobriety with reward.
                 </Text>
               </View>
