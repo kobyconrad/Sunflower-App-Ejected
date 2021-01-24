@@ -43,6 +43,7 @@ function JournalHome(props) {
   const [mood, setMood] = useState("none");
   const [entries, setEntries] = useState({});
   const [currentKey, setCurrentKey] = useState("");
+  const [craving, setCraving] = useState(0);
 
   let NavActivityLog0 = props.NavActivityLog0;
 
@@ -559,7 +560,8 @@ function JournalHome(props) {
             backgroundColor: "#FBFCFE",
             height: "100%",
             zIndex: 100,
-            paddingTop: 50,
+            paddingTop: 30,
+            padding: 20,
           }}
         >
           <View style={styles.entryExerciseTitleContainer}>
@@ -567,6 +569,119 @@ function JournalHome(props) {
               How strong was this craving?
             </Text>
           </View>
+
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-around",
+              paddingTop: 10,
+              paddingBottom: 10,
+            }}
+          >
+            <TouchableHighlight
+              onPress={() => {
+                Haptics.selectionAsync();
+                setCraving(1);
+              }}
+              underlayColor=""
+              activeOpacity={0.5}
+              style={{}}
+            >
+              <Image
+                source={require(`./../../assets/fire-emoji.png`)}
+                style={{ width: 50, height: 50, marginRight: 6 }}
+              />
+            </TouchableHighlight>
+            <TouchableHighlight
+              onPress={() => {
+                Haptics.selectionAsync();
+                setCraving(2);
+              }}
+              underlayColor=""
+              activeOpacity={0.5}
+              style={{}}
+            >
+              <Image
+                source={require(`./../../assets/fire-emoji.png`)}
+                style={{ width: 50, height: 50, marginRight: 6 }}
+              />
+            </TouchableHighlight>
+            <TouchableHighlight
+              onPress={() => {
+                Haptics.selectionAsync();
+                setCraving(3);
+              }}
+              underlayColor=""
+              activeOpacity={0.5}
+              style={{}}
+            >
+              <Image
+                source={require(`./../../assets/fire-emoji.png`)}
+                style={{ width: 50, height: 50, marginRight: 6 }}
+              />
+            </TouchableHighlight>
+            <TouchableHighlight
+              onPress={() => {
+                Haptics.selectionAsync();
+                setCraving(4);
+              }}
+              underlayColor=""
+              activeOpacity={0.5}
+              style={{}}
+            >
+              <Image
+                source={require(`./../../assets/fire-emoji.png`)}
+                style={{ width: 50, height: 50, marginRight: 6 }}
+              />
+            </TouchableHighlight>
+            <TouchableHighlight
+              onPress={() => {
+                Haptics.selectionAsync();
+                setCraving(5);
+              }}
+              underlayColor=""
+              activeOpacity={0.5}
+              style={{}}
+            >
+              <Image
+                source={require(`./../../assets/fire-emoji.png`)}
+                style={{ width: 50, height: 50, marginRight: 6 }}
+              />
+            </TouchableHighlight>
+          </View>
+
+          <View style={styles.entryExerciseTitleContainer}>
+            <Text style={{ fontSize: 24, fontWeight: "800", color: "#000100" }}>
+              Write down why you shouldn't give in to your cravings.
+            </Text>
+          </View>
+          <TextInput
+            multiline={true}
+            numberOfLines={4}
+            placeholder={
+              "I cleaned my room, worked out at the gym, and had dinner with my family..."
+            }
+            style={{
+              height: 160,
+              borderColor: "gray",
+              borderWidth: 1,
+              borderBottomWidth: 3,
+              borderRightWidth: 2,
+              padding: 12,
+              paddingTop: 12,
+              marginTop: 0,
+              borderRadius: 4,
+              fontSize: 15,
+              borderColor: "#B8BFC8",
+              textAlignVertical: "top",
+              width: "100%",
+              marginTop: 20,
+              marginBottom: 10,
+            }}
+            onChangeText={(inputText) => setJournalText(inputText)}
+            value={text}
+          />
 
           <View
             style={{
