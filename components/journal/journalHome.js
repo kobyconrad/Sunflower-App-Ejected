@@ -81,7 +81,7 @@ function JournalHome(props) {
                 setJournalText(currentText);
                 setCurrentKey(key);
                 Haptics.selectionAsync();
-                setScreen("journal-entry");
+                setScreen("craving-edit");
               }}
               underlayColor=""
               style={{}}
@@ -544,6 +544,107 @@ function JournalHome(props) {
               <Trash2 stroke="#fff" width={28} height={28} />
             </View>
           </TouchableHighlight>
+        </View>
+      </TouchableWithoutFeedback>
+    );
+  } else if (screen === "craving-edit") {
+    return (
+      <TouchableWithoutFeedback
+        onPress={() => {
+          Keyboard.dismiss();
+        }}
+      >
+        <View
+          style={{
+            backgroundColor: "#FBFCFE",
+            height: "100%",
+            zIndex: 100,
+            paddingTop: 50,
+          }}
+        >
+          <View style={styles.entryExerciseTitleContainer}>
+            <Text style={{ fontSize: 24, fontWeight: "800", color: "#000100" }}>
+              How strong was this craving?
+            </Text>
+          </View>
+
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+            }}
+          >
+            <TouchableHighlight
+              onPress={() => {
+                // setJournalText("");
+                setScreen("home");
+                // setMood("none");
+                // setCurrentKey("");
+                Haptics.selectionAsync();
+              }}
+              underlayColor=""
+              style={{}}
+            >
+              <View style={styles.cancelButtonContainer}>
+                <Text
+                  style={{ fontSize: 18, fontWeight: "900", color: "white" }}
+                >
+                  cancel
+                </Text>
+              </View>
+            </TouchableHighlight>
+
+            <TouchableHighlight
+              onPress={() => {
+                setScreen("home");
+
+                // async function handleStorage() {
+                //   let currentDate = new Date();
+                //   if (currentKey.length > 1) {
+                //     currentDate = new Date(currentKey);
+                //   }
+
+                //   let storedData = await getData();
+                //   if (storedData !== null) {
+                //     let entryObj = {};
+                //     entryObj.text = text;
+                //     if (mood !== "none") {
+                //       entryObj.mood = mood;
+                //     }
+                //     storedData[currentDate] = entryObj;
+                //   } else {
+                //     storedData = {};
+                //     let entryObj = {};
+                //     entryObj.text = text;
+                //     if (mood !== "none") {
+                //       entryObj.mood = mood;
+                //     }
+                //     storedData[currentDate] = entryObj;
+                //   }
+                //   storeData(storedData);
+                //   setEntries(storedData);
+                // }
+
+                // handleStorage();
+                // setJournalText("");
+                // setMood("none");
+                // setCurrentKey("");
+                // Segment.track("completed-journal-entry");
+
+                Haptics.selectionAsync();
+              }}
+              underlayColor=""
+            >
+              <View style={styles.finishButtonContainer}>
+                <Text
+                  style={{ fontSize: 18, fontWeight: "900", color: "white" }}
+                >
+                  finish
+                </Text>
+              </View>
+            </TouchableHighlight>
+          </View>
         </View>
       </TouchableWithoutFeedback>
     );
