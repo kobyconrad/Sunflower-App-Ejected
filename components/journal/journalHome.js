@@ -714,38 +714,41 @@ function JournalHome(props) {
               onPress={() => {
                 setScreen("home");
 
-                // async function handleStorage() {
-                //   let currentDate = new Date();
-                //   if (currentKey.length > 1) {
-                //     currentDate = new Date(currentKey);
-                //   }
+                async function handleStorage() {
+                  let currentDate = new Date();
+                  if (currentKey.length > 1) {
+                    currentDate = new Date(currentKey);
+                  }
 
-                //   let storedData = await getData();
-                //   if (storedData !== null) {
-                //     let entryObj = {};
-                //     entryObj.text = text;
-                //     if (mood !== "none") {
-                //       entryObj.mood = mood;
-                //     }
-                //     storedData[currentDate] = entryObj;
-                //   } else {
-                //     storedData = {};
-                //     let entryObj = {};
-                //     entryObj.text = text;
-                //     if (mood !== "none") {
-                //       entryObj.mood = mood;
-                //     }
-                //     storedData[currentDate] = entryObj;
-                //   }
-                //   storeData(storedData);
-                //   setEntries(storedData);
-                // }
+                  let storedData = await getData();
+                  if (storedData !== null) {
+                    let entryObj = {};
+                    entryObj.text = text;
+                    if (craving !== 0) {
+                      entryObj.craving = craving;
+                    } else {
+                      entryObj.craving = 1;
+                    }
 
-                // handleStorage();
-                // setJournalText("");
-                // setMood("none");
-                // setCurrentKey("");
-                // Segment.track("completed-journal-entry");
+                    storedData[currentDate] = entryObj;
+                  } else {
+                    storedData = {};
+                    let entryObj = {};
+                    entryObj.text = text;
+                    if (craving !== 0) {
+                      entryObj.craving = craving;
+                    }
+                    storedData[currentDate] = entryObj;
+                  }
+                  storeData(storedData);
+                  setEntries(storedData);
+                }
+
+                handleStorage();
+                setJournalText("");
+                setCraving(0);
+                setCurrentKey("");
+                Segment.track("completed-journal-entry");
 
                 Haptics.selectionAsync();
               }}
@@ -760,6 +763,57 @@ function JournalHome(props) {
               </View>
             </TouchableHighlight>
           </View>
+          <TouchableHighlight
+            style={{
+              bottom: 0,
+              right: 0,
+              position: "absolute",
+              margin: 18,
+              backgroundColor: "#FA344C",
+              padding: 5,
+              borderRadius: 6,
+            }}
+            onPress={() => {
+              setScreen("home");
+
+              async function handleStorage() {
+                let currentDate = new Date();
+                let storedData = await getData();
+                if (storedData !== null) {
+                  let entryObj = {};
+                  entryObj.deleted = true;
+                  //   entryObj.text = text;
+                  //   if (mood !== "none") {
+                  //     entryObj.mood = mood;
+                  //   }
+                  storedData[currentKey] = entryObj;
+                } else {
+                  storedData = {};
+                  let entryObj = {};
+                  entryObj.deleted = true;
+                  //   entryObj.text = text;
+                  //   if (mood !== "none") {
+                  //     entryObj.mood = mood;
+                  //   }
+                  storedData[currentDate] = entryObj;
+                }
+                storeData(storedData);
+                setEntries(storedData);
+              }
+
+              handleStorage();
+              setJournalText("");
+              setCraving(0);
+              setCurrentKey("");
+
+              Haptics.selectionAsync();
+            }}
+            underlayColor=""
+          >
+            <View>
+              <Trash2 stroke="#fff" width={28} height={28} />
+            </View>
+          </TouchableHighlight>
         </View>
       </TouchableWithoutFeedback>
     );
