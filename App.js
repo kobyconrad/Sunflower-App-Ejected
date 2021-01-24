@@ -22,6 +22,7 @@ import JournalHome from "./components/journal/journalHome";
 import ActivityLogExercise from "./components/journal/activityLogExercise";
 import CravingExercise from "./components/journal/cravingExercise";
 import * as SplashScreen from "expo-splash-screen";
+import { ArrowRightCircle } from "react-native-feather";
 
 // This project uses YARN YARN YARN YARN YARN YARN YARN YARN YARN YARN YARN
 
@@ -142,6 +143,11 @@ export default function App() {
             component={CravingExerciseScreen}
             options={{ animationEnabled: false, headerShown: false }}
           />
+          <Stack.Screen
+            name="Exercise Nav Screen"
+            component={ExerciseNavScreen}
+            options={{ animationEnabled: false, headerShown: false }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     );
@@ -180,6 +186,11 @@ export default function App() {
           <Stack.Screen
             name="Craving Exercise"
             component={CravingExerciseScreen}
+            options={{ animationEnabled: false, headerShown: false }}
+          />
+          <Stack.Screen
+            name="Exercise Nav Screen"
+            component={ExerciseNavScreen}
             options={{ animationEnabled: false, headerShown: false }}
           />
         </Stack.Navigator>
@@ -466,12 +477,12 @@ function HomeScreen({ navigation }) {
         <TouchableHighlight
           onPress={() => {
             Haptics.selectionAsync();
-            navigation.navigate("Craving Exercise");
+            navigation.navigate("Exercise Nav Screen");
           }}
           underlayColor=""
         >
           <View style={styles.button}>
-            <Text style={styles.buttonText}>Add Craving</Text>
+            <Text style={styles.buttonText}>New Exercise</Text>
           </View>
         </TouchableHighlight>
       </View>
@@ -631,9 +642,16 @@ function JournalScreen({ navigation }) {
     navigation.navigate("Activity Log 0");
   };
 
+  const ExerciseNavFn = function () {
+    navigation.navigate("Exercise Nav Screen");
+  };
+
   return (
     <View>
-      <JournalHome NavActivityLog0={NavActivityLog0} />
+      <JournalHome
+        NavActivityLog0={NavActivityLog0}
+        ExerciseNavFn={ExerciseNavFn}
+      />
       {/* nav bar */}
 
       <View style={styles.menuContainer}>
@@ -683,6 +701,174 @@ function CravingExerciseScreen({ navigation }) {
   };
 
   return <CravingExercise NavJournalScreen={NavJournalScreen} />;
+}
+
+function ExerciseNavScreen({ navigation }) {
+  console.log("page trigger");
+  return (
+    <View
+      style={{
+        height: "100%",
+        width: "100%",
+        backgroundColor: "#fff",
+      }}
+    >
+      <View style={{ width: "100%", marginTop: 40, paddingLeft: 20 }}>
+        <Text style={styles.titleText}>Select A Guided Exercise</Text>
+      </View>
+      <View style={{ width: "100%", marginTop: 20, paddingLeft: 20 }}>
+        <Text style={{ fontSize: 18, fontWeight: "400", color: "#000100" }}>
+          Overcome your cravings and learn to associate sobriety with reward.
+        </Text>
+      </View>
+
+      <TouchableHighlight
+        onPress={() => {
+          Haptics.selectionAsync();
+          navigation.navigate("Craving Exercise");
+        }}
+        underlayColor=""
+        style={{}}
+        activeOpacity={0.8}
+      >
+        <View
+          style={{
+            width: "100%",
+            height: 110,
+            marginTop: 30,
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+          }}
+        >
+          <View
+            style={{
+              backgroundColor: "#000100",
+              width: "85%",
+              height: "100%",
+              display: "flex",
+              justifyContent: "center",
+              paddingLeft: 20,
+              paddingRight: 10,
+            }}
+          >
+            <Text style={{ color: "white", fontSize: 18, fontWeight: "600" }}>
+              New Craving Exercise
+            </Text>
+            <Text
+              style={{
+                color: "white",
+                fontSize: 14,
+                fontWeight: "400",
+                marginTop: 5,
+              }}
+            >
+              Track your cravings intensity, recognize illogical thoughts,
+              overcome the urge.
+            </Text>
+          </View>
+          <View
+            style={{
+              backgroundColor: "#2E2E2E",
+              width: "15%",
+              height: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <ArrowRightCircle stroke="#fff" width={22} height={22} />
+          </View>
+        </View>
+      </TouchableHighlight>
+
+      <TouchableHighlight
+        onPress={() => {
+          Haptics.selectionAsync();
+          navigation.navigate("Activity Log 0");
+        }}
+        underlayColor=""
+        style={{}}
+        activeOpacity={0.8}
+      >
+        <View
+          style={{
+            width: "100%",
+            height: 110,
+            marginTop: 20,
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+          }}
+        >
+          <View
+            style={{
+              backgroundColor: "#000100",
+              width: "85%",
+              height: "100%",
+              display: "flex",
+              justifyContent: "center",
+              paddingLeft: 20,
+              paddingRight: 10,
+            }}
+          >
+            <Text style={{ color: "white", fontSize: 18, fontWeight: "600" }}>
+              New Activity Log
+            </Text>
+            <Text
+              style={{
+                color: "white",
+                fontSize: 14,
+                fontWeight: "400",
+                marginTop: 5,
+              }}
+            >
+              Log your activities to help your brain learn how to get reward and
+              dopamine from healthy places.
+            </Text>
+          </View>
+          <View
+            style={{
+              backgroundColor: "#2E2E2E",
+              width: "15%",
+              height: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <ArrowRightCircle stroke="#fff" width={22} height={22} />
+          </View>
+        </View>
+      </TouchableHighlight>
+
+      <TouchableHighlight
+        onPress={() => {
+          Haptics.selectionAsync();
+          navigation.navigate("Journal Screen");
+        }}
+        underlayColor=""
+        style={{ position: "absolute", bottom: 40, left: 20 }}
+        activeOpacity={0.8}
+      >
+        <View
+          style={{
+            backgroundColor: "#B8BFC8",
+            width: 120,
+            height: 45,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            borderRadius: 8,
+          }}
+        >
+          <Text style={{ color: "white", fontSize: 18, fontWeight: "800" }}>
+            cancel
+          </Text>
+        </View>
+      </TouchableHighlight>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({

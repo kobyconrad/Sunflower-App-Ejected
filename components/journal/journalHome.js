@@ -46,6 +46,7 @@ function JournalHome(props) {
   const [craving, setCraving] = useState(0);
 
   let NavActivityLog0 = props.NavActivityLog0;
+  let ExerciseNavFn = props.ExerciseNavFn;
 
   const isFocused = useIsFocused();
 
@@ -146,7 +147,7 @@ function JournalHome(props) {
             onPress={() => {
               // setScreen("journal-entry");
               Haptics.selectionAsync();
-              NavActivityLog0();
+              ExerciseNavFn();
             }}
             underlayColor=""
             style={{}}
@@ -156,11 +157,11 @@ function JournalHome(props) {
                 <Text
                   style={{ fontSize: 18, fontWeight: "800", color: "#000100" }}
                 >
-                  New Activity Entry
+                  New Exercise
                 </Text>
                 <Text style={{ fontSize: 14, marginTop: 6, color: "#2E2E2E" }}>
-                  Log your activities to help your brain associate sobriety with
-                  reward.
+                  Start a new guided journal exercise to help you learn to
+                  associate sobriety with reward.
                 </Text>
               </View>
 
