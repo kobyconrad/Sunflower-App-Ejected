@@ -245,7 +245,7 @@ function CravingExercise(props) {
           <TouchableHighlight
             onPress={() => {
               Haptics.selectionAsync();
-              console.log(craving);
+
               setScreen(1);
             }}
             underlayColor=""
@@ -578,8 +578,6 @@ function CravingExercise(props) {
             onPress={() => {
               Haptics.selectionAsync();
 
-              console.log(journalText);
-
               // creates a new entry object
               let currentDate = new Date();
               let newEntry = {};
@@ -616,7 +614,6 @@ function CravingExercise(props) {
                 currentData[currentDate] = newEntry;
                 storeData(currentData);
                 NavJournalScreen();
-                console.log(currentData);
               }
               handleData();
             }}

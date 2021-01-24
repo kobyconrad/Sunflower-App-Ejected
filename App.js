@@ -226,7 +226,6 @@ function HomeScreen({ navigation }) {
     if (analytics) {
       Segment.screen("timer-screen");
       setAnalytics(false);
-      console.log("trigger");
     }
     setTimeout(() => {
       timeDifference();
@@ -704,7 +703,6 @@ function CravingExerciseScreen({ navigation }) {
 }
 
 function ExerciseNavScreen({ navigation }) {
-  console.log("page trigger");
   return (
     <View
       style={{
@@ -900,7 +898,7 @@ const styles = StyleSheet.create({
   },
   button: {
     width: 180,
-    height: 50,
+    height: 48,
     backgroundColor: "#000100",
     display: "flex",
     alignItems: "center",

@@ -923,7 +923,6 @@ function JournalEntry(props) {
     </View>
   );
 
-  console.log(fallacyObj);
   fallacyList = Object.keys(fallacyObj).map((key) => {
     if (fallacyObj[key]) {
       let fallacyEmoji;
