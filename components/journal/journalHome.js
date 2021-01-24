@@ -157,7 +157,7 @@ function JournalHome(props) {
                 <Text
                   style={{ fontSize: 18, fontWeight: "800", color: "#000100" }}
                 >
-                  New Exercise
+                  New Journal Exercise
                 </Text>
                 <Text style={{ fontSize: 14, marginTop: 6, color: "#2E2E2E" }}>
                   Overcome your cravings and track activities to help you
