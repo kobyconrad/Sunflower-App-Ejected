@@ -189,6 +189,7 @@ export default function App() {
 }
 
 function HomeScreen({ navigation }) {
+  const [analytics, setAnalytics] = useState(true);
   const [time, setTime] = useState(0);
   const [initialLoad, setInitialLoad] = useState(true);
 
@@ -211,6 +212,11 @@ function HomeScreen({ navigation }) {
   }
 
   useEffect(() => {
+    if (analytics) {
+      Segment.screen("timer-screen");
+      setAnalytics(false);
+      console.log("trigger");
+    }
     setTimeout(() => {
       timeDifference();
     }, 1000);

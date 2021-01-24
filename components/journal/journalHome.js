@@ -68,30 +68,57 @@ function JournalHome(props) {
       let currentText = entries[key].text;
       let currentMood = entries[key].mood;
       let currentActivities = entries[key].activities;
+      let craving = entries[key].craving;
+      let fallacy = entries[key.craving];
 
       if (entries[key].deleted !== true) {
-        return (
-          <TouchableHighlight
-            key={key}
-            onPress={() => {
-              setMood(currentMood);
-              setJournalText(currentText);
-              setCurrentKey(key);
-              Haptics.selectionAsync();
-              setScreen("journal-entry");
-            }}
-            underlayColor=""
-            style={{}}
-          >
-            <JournalEntry
+        if (craving) {
+          return (
+            <TouchableHighlight
               key={key}
-              text={currentText}
-              date={currentDate}
-              mood={currentMood}
-              activities={currentActivities}
-            />
-          </TouchableHighlight>
-        );
+              onPress={() => {
+                setMood(currentMood);
+                setJournalText(currentText);
+                setCurrentKey(key);
+                Haptics.selectionAsync();
+                setScreen("journal-entry");
+              }}
+              underlayColor=""
+              style={{}}
+            >
+              <JournalEntry
+                key={key}
+                text={currentText}
+                date={currentDate}
+                craving={craving}
+                activities={currentActivities}
+              />
+            </TouchableHighlight>
+          );
+        } else {
+          return (
+            <TouchableHighlight
+              key={key}
+              onPress={() => {
+                setMood(currentMood);
+                setJournalText(currentText);
+                setCurrentKey(key);
+                Haptics.selectionAsync();
+                setScreen("journal-entry");
+              }}
+              underlayColor=""
+              style={{}}
+            >
+              <JournalEntry
+                key={key}
+                text={currentText}
+                date={currentDate}
+                mood={currentMood}
+                activities={currentActivities}
+              />
+            </TouchableHighlight>
+          );
+        }
       }
     });
   }
@@ -539,6 +566,19 @@ function JournalEntry(props) {
     moodComponent = <Smile stroke="#02B268" width={22} height={22} />;
   }
 
+  let cravingComponent = <View></View>;
+
+  console.log(props.craving);
+  if (props.craving) {
+    console.log("hello");
+    cravingComponent = (
+      <Image
+        source={require(`./../../assets/fire-emoji.png`)}
+        style={{ width: 22, height: 22 }}
+      />
+    );
+  }
+
   let activitiesObj = props.activities || {};
 
   let activityList = (
@@ -619,7 +659,10 @@ function JournalEntry(props) {
         </View>
       </View>
 
-      <View style={styles.iconContainer}>{moodComponent}</View>
+      <View style={styles.iconContainer}>
+        {moodComponent}
+        {cravingComponent}
+      </View>
     </View>
   );
 }

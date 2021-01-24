@@ -18,7 +18,7 @@ import * as Segment from "expo-analytics-segment";
 const storeData = async (value) => {
   try {
     const jsonValue = JSON.stringify(value);
-    await AsyncStorage.setItem("craving-entries-test-1", jsonValue);
+    await AsyncStorage.setItem("journal-entries-test-2", jsonValue);
   } catch (e) {
     // saving error
   }
@@ -26,7 +26,7 @@ const storeData = async (value) => {
 
 const getData = async () => {
   try {
-    const jsonValue = await AsyncStorage.getItem("craving-entries-test-1");
+    const jsonValue = await AsyncStorage.getItem("journal-entries-test-2");
     return jsonValue != null ? JSON.parse(jsonValue) : null;
   } catch (e) {
     // error reading value
