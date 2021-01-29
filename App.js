@@ -25,6 +25,7 @@ import * as SplashScreen from "expo-splash-screen";
 import { ArrowRightCircle } from "react-native-feather";
 
 // This project uses YARN YARN YARN YARN YARN YARN YARN YARN YARN YARN YARN
+// I'm a bad developer
 
 const Stack = createStackNavigator();
 
