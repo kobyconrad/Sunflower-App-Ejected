@@ -7,6 +7,8 @@ import {
   SafeAreaView,
   ScrollView,
   Image,
+  TouchableWithoutFeedback,
+  Keyboard,
   TextInput,
 } from "react-native";
 import * as Haptics from "expo-haptics";
@@ -521,113 +523,119 @@ function CravingExercise(props) {
     );
   } else if (screen === 2) {
     return (
-      <View style={styles.screenContainer}>
-        <Text style={styles.titleText}>
-          Write down why you shouldn't give in to your cravings.
+      <TouchableWithoutFeedback
+        onPress={() => {
+          Keyboard.dismiss();
+        }}
+      >
+        <View style={styles.screenContainer}>
+          <Text style={styles.titleText}>
+            Write down why you shouldn't give in to your cravings.
         </Text>
-        <Text style={styles.subtitleText}>
-          List the negatives of addiction. List the rewards of sobriety. List
-          healthy ways to give your brain dopamine (exercise, friends, learning
-          new things, etc).
+          <Text style={styles.subtitleText}>
+            List the negatives of addiction. List the rewards of sobriety. List
+            healthy ways to give your brain dopamine (exercise, friends, learning
+            new things, etc).
         </Text>
-        <TextInput
-          multiline={true}
-          numberOfLines={4}
-          placeholder={
-            "I cleaned my room, worked out at the gym, and had dinner with my family..."
-          }
-          style={{
-            height: 160,
-            borderColor: "gray",
-            borderWidth: 1,
-            borderBottomWidth: 3,
-            borderRightWidth: 2,
-            padding: 12,
-            paddingTop: 12,
-            marginTop: 0,
-            borderRadius: 4,
-            fontSize: 15,
-            borderColor: "#B8BFC8",
-            textAlignVertical: "top",
-            width: "100%",
-            marginTop: 20,
-          }}
-          onChangeText={(inputText) => setJournalText(inputText)}
-          value={journalText}
-        />
-        <View style={styles.exerciseNavContainer}>
-          <TouchableHighlight
-            onPress={() => {
-              Haptics.selectionAsync();
-              setScreen(1);
-            }}
-            underlayColor=""
+          <TextInput
+            multiline={true}
+            numberOfLines={4}
+            placeholder={
+              "I cleaned my room, worked out at the gym, and had dinner with my family..."
+            }
             style={{
-              width: "33%",
-              height: "100%",
-              display: "flex",
+              height: 160,
+              borderColor: "gray",
+              borderWidth: 1,
+              borderBottomWidth: 3,
+              borderRightWidth: 2,
+              padding: 12,
+              paddingTop: 12,
+              marginTop: 0,
+              borderRadius: 4,
+              fontSize: 15,
+              borderColor: "#B8BFC8",
+              textAlignVertical: "top",
+              width: "100%",
+              marginTop: 20,
             }}
-          >
-            <View style={styles.cancelContainer}>
-              <Text style={{ fontSize: 18, color: "#fff", fontWeight: "800" }}>
-                back
+            onChangeText={(inputText) => setJournalText(inputText)}
+            value={journalText}
+          />
+          <View style={styles.exerciseNavContainer}>
+            <TouchableHighlight
+              onPress={() => {
+                Haptics.selectionAsync();
+                setScreen(1);
+              }}
+              underlayColor=""
+              style={{
+                width: "33%",
+                height: "100%",
+                display: "flex",
+              }}
+            >
+              <View style={styles.cancelContainer}>
+                <Text style={{ fontSize: 18, color: "#fff", fontWeight: "800" }}>
+                  back
               </Text>
-            </View>
-          </TouchableHighlight>
-          <TouchableHighlight
-            onPress={() => {
-              Haptics.selectionAsync();
+              </View>
+            </TouchableHighlight>
+            <TouchableHighlight
+              onPress={() => {
+                Haptics.selectionAsync();
 
-              // creates a new entry object
-              let currentDate = new Date();
-              let newEntry = {};
+                // creates a new entry object
+                let currentDate = new Date();
+                let newEntry = {};
 
-              newEntry["craving"] = craving;
-              newEntry["fallacy"] = {};
-              newEntry["text"] = journalText;
+                newEntry["craving"] = craving;
+                newEntry["fallacy"] = {};
+                newEntry["text"] = journalText;
 
-              if (coping) {
-                newEntry["fallacy"]["coping"] = true;
-              }
-              if (reward) {
-                newEntry["fallacy"]["reward"] = true;
-              }
-              if (notAddicted) {
-                newEntry["fallacy"]["notAddicted"] = true;
-              }
-              if (notBad) {
-                newEntry["fallacy"]["notBad"] = true;
-              }
-              if (job) {
-                newEntry["fallacy"]["job"] = true;
-              }
-              if (occasional) {
-                newEntry["fallacy"]["occasional"] = true;
-              }
-
-              let currentData = {};
-              async function handleData() {
-                currentData = await getData();
-                if (currentData === null) {
-                  currentData = {};
+                if (coping) {
+                  newEntry["fallacy"]["coping"] = true;
                 }
-                currentData[currentDate] = newEntry;
-                storeData(currentData);
-                NavJournalScreen();
-              }
-              handleData();
-            }}
-            underlayColor=""
-            style={{ width: "63%", height: "100%", display: "flex" }}
-          >
-            <View style={styles.nextContainer}>
-              <Text style={{ fontSize: 18, color: "#fff", fontWeight: "800" }}>
-                finish
+                if (reward) {
+                  newEntry["fallacy"]["reward"] = true;
+                }
+                if (notAddicted) {
+                  newEntry["fallacy"]["notAddicted"] = true;
+                }
+                if (notBad) {
+                  newEntry["fallacy"]["notBad"] = true;
+                }
+                if (job) {
+                  newEntry["fallacy"]["job"] = true;
+                }
+                if (occasional) {
+                  newEntry["fallacy"]["occasional"] = true;
+                }
+
+                let currentData = {};
+                async function handleData() {
+                  currentData = await getData();
+                  if (currentData === null) {
+                    currentData = {};
+                  }
+                  currentData[currentDate] = newEntry;
+                  storeData(currentData);
+                  NavJournalScreen();
+                }
+                handleData();
+              }}
+              underlayColor=""
+              style={{ width: "63%", height: "100%", display: "flex" }}
+            >
+              <View style={styles.nextContainer}>
+                <Text style={{ fontSize: 18, color: "#fff", fontWeight: "800" }}>
+                  finish
               </Text>
-            </View>
-          </TouchableHighlight>
+              </View>
+            </TouchableHighlight>
+          </View>
         </View>
-      </View>
+      </TouchableWithoutFeedback>
     );
   } else {
     return <View></View>;

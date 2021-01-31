@@ -15,6 +15,7 @@ import { Book, Frown, Meh, Smile, Trash2 } from "react-native-feather";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Segment from "expo-analytics-segment";
 
+
 const storeData = async (value) => {
   try {
     const jsonValue = JSON.stringify(value);
