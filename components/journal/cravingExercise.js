@@ -134,6 +134,96 @@ function CravingExercise(props) {
   let NavJournalScreen = props.NavJournalScreen;
 
   if (screen === 0) {
+    function flame5() {
+      if (craving === 5) {
+        return (
+          <Image
+            source={require(`./../../assets/flame5.png`)}
+            style={{ width: 60, height: 60, marginRight: 3 }}
+          />
+        );
+      } else {
+        return (
+          <Image
+            source={require(`./../../assets/flame5grey.png`)}
+            style={{ width: 60, height: 60, marginRight: 3 }}
+          />
+        );
+      }
+    }
+
+    function flame4() {
+      if (craving === 4) {
+        return (
+          <Image
+            source={require(`./../../assets/flame4.png`)}
+            style={{ width: 60, height: 60, marginRight: 3 }}
+          />
+        );
+      } else {
+        return (
+          <Image
+            source={require(`./../../assets/flame4grey.png`)}
+            style={{ width: 60, height: 60, marginRight: 3 }}
+          />
+        );
+      }
+    }
+
+    function flame3() {
+      if (craving === 3) {
+        return (
+          <Image
+            source={require(`./../../assets/flame3.png`)}
+            style={{ width: 60, height: 60, marginRight: 3 }}
+          />
+        );
+      } else {
+        return (
+          <Image
+            source={require(`./../../assets/flame3grey.png`)}
+            style={{ width: 60, height: 60, marginRight: 3 }}
+          />
+        );
+      }
+    }
+
+    function flame2() {
+      if (craving === 2) {
+        return (
+          <Image
+            source={require(`./../../assets/flame2.png`)}
+            style={{ width: 60, height: 60, marginRight: 3 }}
+          />
+        );
+      } else {
+        return (
+          <Image
+            source={require(`./../../assets/flame2grey.png`)}
+            style={{ width: 60, height: 60, marginRight: 3 }}
+          />
+        );
+      }
+    }
+
+    function flame1() {
+      if (craving === 1) {
+        return (
+          <Image
+            source={require(`./../../assets/flame1.png`)}
+            style={{ width: 60, height: 60, marginRight: 3 }}
+          />
+        );
+      } else {
+        return (
+          <Image
+            source={require(`./../../assets/flame1grey.png`)}
+            style={{ width: 60, height: 60, marginRight: 3 }}
+          />
+        );
+      }
+    }
+
     return (
       <View style={styles.screenContainer}>
         <Text style={styles.titleText}>Rate Your Craving</Text>
@@ -159,10 +249,7 @@ function CravingExercise(props) {
             activeOpacity={0.5}
             style={{}}
           >
-            <Image
-              source={require(`./../../assets/flame1.png`)}
-              style={{ width: 60, height: 60, marginRight: 3 }}
-            />
+            {flame1()}
           </TouchableHighlight>
 
           <TouchableHighlight
@@ -174,10 +261,7 @@ function CravingExercise(props) {
             activeOpacity={0.5}
             style={{}}
           >
-            <Image
-              source={require(`./../../assets/flame2.png`)}
-              style={{ width: 60, height: 60, marginRight: 3 }}
-            />
+            {flame2()}
           </TouchableHighlight>
           <TouchableHighlight
             onPress={() => {
@@ -188,10 +272,7 @@ function CravingExercise(props) {
             activeOpacity={0.5}
             style={{}}
           >
-            <Image
-              source={require(`./../../assets/flame3.png`)}
-              style={{ width: 60, height: 60, marginRight: 3 }}
-            />
+            {flame3()}
           </TouchableHighlight>
 
           <TouchableHighlight
@@ -203,10 +284,7 @@ function CravingExercise(props) {
             activeOpacity={0.5}
             style={{}}
           >
-            <Image
-              source={require(`./../../assets/flame4.png`)}
-              style={{ width: 60, height: 60, marginRight: 3 }}
-            />
+            {flame4()}
           </TouchableHighlight>
 
           <TouchableHighlight
@@ -218,10 +296,7 @@ function CravingExercise(props) {
             activeOpacity={0.5}
             style={{}}
           >
-            <Image
-              source={require(`./../../assets/flame5.png`)}
-              style={{ width: 60, height: 60, marginRight: 3 }}
-            />
+            {flame5()}
           </TouchableHighlight>
         </View>
 
