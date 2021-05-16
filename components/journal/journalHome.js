@@ -841,12 +841,49 @@ function JournalEntry(props) {
   let cravingComponent = <View></View>;
 
   if (props.craving) {
-    cravingComponent = (
-      <Image
-        source={require(`./../../assets/fire-emoji.png`)}
-        style={{ width: 22, height: 22 }}
-      />
-    );
+    if (props.craving === 5) {
+      cravingComponent = (
+        <Image
+          source={require(`./../../assets/flame5.png`)}
+          style={{ width: 35, height: 35 }}
+        />
+      );
+    } else if (props.craving === 4) {
+      cravingComponent = (
+        <Image
+          source={require(`./../../assets/flame4.png`)}
+          style={{ width: 35, height: 35 }}
+        />
+      );
+    } else if (props.craving === 3) {
+      cravingComponent = (
+        <Image
+          source={require(`./../../assets/flame3.png`)}
+          style={{ width: 35, height: 35 }}
+        />
+      );
+    } else if (props.craving === 2) {
+      cravingComponent = (
+        <Image
+          source={require(`./../../assets/flame2.png`)}
+          style={{ width: 35, height: 35 }}
+        />
+      );
+    } else if (props.craving === 1) {
+      cravingComponent = (
+        <Image
+          source={require(`./../../assets/flame1.png`)}
+          style={{ width: 35, height: 35 }}
+        />
+      );
+    } else {
+      cravingComponent = (
+        <Image
+          source={require(`./../../assets/fire-emoji.png`)}
+          style={{ width: 35, height: 35 }}
+        />
+      );
+    }
   }
 
   let activitiesObj = props.activities || {};
