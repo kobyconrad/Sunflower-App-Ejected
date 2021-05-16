@@ -160,8 +160,8 @@ function CravingExercise(props) {
             style={{}}
           >
             <Image
-              source={require(`./../../assets/fire-emoji.png`)}
-              style={{ width: 50, height: 50, marginRight: 6 }}
+              source={require(`./../../assets/flame1.png`)}
+              style={{ width: 60, height: 60, marginRight: 3 }}
             />
           </TouchableHighlight>
 
@@ -175,8 +175,8 @@ function CravingExercise(props) {
             style={{}}
           >
             <Image
-              source={require(`./../../assets/fire-emoji.png`)}
-              style={{ width: 50, height: 50, marginRight: 6 }}
+              source={require(`./../../assets/flame2.png`)}
+              style={{ width: 60, height: 60, marginRight: 3 }}
             />
           </TouchableHighlight>
           <TouchableHighlight
@@ -189,8 +189,8 @@ function CravingExercise(props) {
             style={{}}
           >
             <Image
-              source={require(`./../../assets/fire-emoji.png`)}
-              style={{ width: 50, height: 50, marginRight: 6 }}
+              source={require(`./../../assets/flame3.png`)}
+              style={{ width: 60, height: 60, marginRight: 3 }}
             />
           </TouchableHighlight>
 
@@ -204,8 +204,8 @@ function CravingExercise(props) {
             style={{}}
           >
             <Image
-              source={require(`./../../assets/fire-emoji.png`)}
-              style={{ width: 50, height: 50, marginRight: 6 }}
+              source={require(`./../../assets/flame4.png`)}
+              style={{ width: 60, height: 60, marginRight: 3 }}
             />
           </TouchableHighlight>
 
@@ -219,8 +219,8 @@ function CravingExercise(props) {
             style={{}}
           >
             <Image
-              source={require(`./../../assets/fire-emoji.png`)}
-              style={{ width: 50, height: 50, marginRight: 6 }}
+              source={require(`./../../assets/flame5.png`)}
+              style={{ width: 60, height: 60, marginRight: 3 }}
             />
           </TouchableHighlight>
         </View>
@@ -531,12 +531,12 @@ function CravingExercise(props) {
         <View style={styles.screenContainer}>
           <Text style={styles.titleText}>
             Write down why you shouldn't give in to your cravings.
-        </Text>
+          </Text>
           <Text style={styles.subtitleText}>
             List the negatives of addiction. List the rewards of sobriety. List
-            healthy ways to give your brain dopamine (exercise, friends, learning
-            new things, etc).
-        </Text>
+            healthy ways to give your brain dopamine (exercise, friends,
+            learning new things, etc).
+          </Text>
           <TextInput
             multiline={true}
             numberOfLines={4}
@@ -576,9 +576,11 @@ function CravingExercise(props) {
               }}
             >
               <View style={styles.cancelContainer}>
-                <Text style={{ fontSize: 18, color: "#fff", fontWeight: "800" }}>
+                <Text
+                  style={{ fontSize: 18, color: "#fff", fontWeight: "800" }}
+                >
                   back
-              </Text>
+                </Text>
               </View>
             </TouchableHighlight>
             <TouchableHighlight
@@ -628,9 +630,11 @@ function CravingExercise(props) {
               style={{ width: "63%", height: "100%", display: "flex" }}
             >
               <View style={styles.nextContainer}>
-                <Text style={{ fontSize: 18, color: "#fff", fontWeight: "800" }}>
+                <Text
+                  style={{ fontSize: 18, color: "#fff", fontWeight: "800" }}
+                >
                   finish
-              </Text>
+                </Text>
               </View>
             </TouchableHighlight>
           </View>
