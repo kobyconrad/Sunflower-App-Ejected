@@ -26,6 +26,8 @@ import { ArrowRightCircle } from "react-native-feather";
 
 // This project uses YARN YARN YARN YARN YARN YARN YARN YARN YARN YARN YARN
 
+// I'm still a developer :(
+
 const Stack = createStackNavigator();
 
 const storeData = async (value) => {
