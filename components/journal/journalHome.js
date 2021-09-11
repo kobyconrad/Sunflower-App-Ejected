@@ -583,14 +583,16 @@ function JournalHome(props) {
             <TouchableHighlight
               onPress={() => {
                 Haptics.selectionAsync();
+                console.log(craving)
                 setCraving(1);
+                
               }}
               underlayColor=""
               activeOpacity={0.5}
               style={{}}
             >
               <Image
-                source={require(`./../../assets/fire-emoji.png`)}
+                source={require(`./../../assets/flame1grey.png`)}
                 style={{ width: 50, height: 50, marginRight: 6 }}
               />
             </TouchableHighlight>
@@ -604,7 +606,7 @@ function JournalHome(props) {
               style={{}}
             >
               <Image
-                source={require(`./../../assets/fire-emoji.png`)}
+                source={require(`./../../assets/flame2grey.png`)}
                 style={{ width: 50, height: 50, marginRight: 6 }}
               />
             </TouchableHighlight>
@@ -618,7 +620,7 @@ function JournalHome(props) {
               style={{}}
             >
               <Image
-                source={require(`./../../assets/fire-emoji.png`)}
+                source={require(`./../../assets/flame3grey.png`)}
                 style={{ width: 50, height: 50, marginRight: 6 }}
               />
             </TouchableHighlight>
@@ -632,7 +634,7 @@ function JournalHome(props) {
               style={{}}
             >
               <Image
-                source={require(`./../../assets/fire-emoji.png`)}
+                source={require(`./../../assets/flame4grey.png`)}
                 style={{ width: 50, height: 50, marginRight: 6 }}
               />
             </TouchableHighlight>
@@ -646,7 +648,7 @@ function JournalHome(props) {
               style={{}}
             >
               <Image
-                source={require(`./../../assets/fire-emoji.png`)}
+                source={require(`./../../assets/flame5grey.png`)}
                 style={{ width: 50, height: 50, marginRight: 6 }}
               />
             </TouchableHighlight>
