@@ -19,6 +19,7 @@ import { useEffect } from "react";
 import * as Segment from "expo-analytics-segment";
 import { useIsFocused } from "@react-navigation/native";
 
+
 const storeData = async (value) => {
   try {
     const jsonValue = JSON.stringify(value);
@@ -54,6 +55,7 @@ function JournalHome(props) {
     Segment.screen("journal-home-screen");
     async function grabData() {
       let currentData = await getData();
+      console.log(currentData)
       setEntries(currentData);
     }
     grabData();
@@ -72,6 +74,8 @@ function JournalHome(props) {
       let currentActivities = entries[key].activities;
       let craving = entries[key].craving;
       let fallacy = entries[key].fallacy;
+
+      
 
       if (entries[key].deleted !== true) {
         if (craving) {
@@ -550,6 +554,78 @@ function JournalHome(props) {
       </TouchableWithoutFeedback>
     );
   } else if (screen === "craving-edit") {
+
+    function flameOne(){
+      if (craving === 1) {
+        return (<Image
+                source={require(`./../../assets/flame1.png`)}
+                style={{ width: 50, height: 50, marginRight: 6 }}
+              />)
+      } else {
+        return (<Image
+                source={require(`./../../assets/flame1grey.png`)}
+                style={{ width: 50, height: 50, marginRight: 6 }}
+              />)
+      }
+    }
+
+    function flameTwo(){
+      if (craving === 2) {
+        return (<Image
+                source={require(`./../../assets/flame2.png`)}
+                style={{ width: 50, height: 50, marginRight: 6 }}
+              />)
+      } else {
+        return (<Image
+                source={require(`./../../assets/flame2grey.png`)}
+                style={{ width: 50, height: 50, marginRight: 6 }}
+              />)
+      }
+    }
+
+    function flameThree(){
+      if (craving === 3) {
+        return (<Image
+                source={require(`./../../assets/flame3.png`)}
+                style={{ width: 50, height: 50, marginRight: 6 }}
+              />)
+      } else {
+        return (<Image
+                source={require(`./../../assets/flame3grey.png`)}
+                style={{ width: 50, height: 50, marginRight: 6 }}
+              />)
+      }
+    }
+
+    function flameFour(){
+      if (craving === 4) {
+        return (<Image
+                source={require(`./../../assets/flame4.png`)}
+                style={{ width: 50, height: 50, marginRight: 6 }}
+              />)
+      } else {
+        return (<Image
+                source={require(`./../../assets/flame4grey.png`)}
+                style={{ width: 50, height: 50, marginRight: 6 }}
+              />)
+      }
+    }
+
+    function flameFive(){
+      if (craving === 5) {
+        return (<Image
+                source={require(`./../../assets/flame5.png`)}
+                style={{ width: 50, height: 50, marginRight: 6 }}
+              />)
+      } else {
+        return (<Image
+                source={require(`./../../assets/flame5grey.png`)}
+                style={{ width: 50, height: 50, marginRight: 6 }}
+              />)
+      }
+    }
+
+
     return (
       <TouchableWithoutFeedback
         onPress={() => {
@@ -591,10 +667,7 @@ function JournalHome(props) {
               activeOpacity={0.5}
               style={{}}
             >
-              <Image
-                source={require(`./../../assets/flame1grey.png`)}
-                style={{ width: 50, height: 50, marginRight: 6 }}
-              />
+              {flameOne()}
             </TouchableHighlight>
             <TouchableHighlight
               onPress={() => {
@@ -605,10 +678,8 @@ function JournalHome(props) {
               activeOpacity={0.5}
               style={{}}
             >
-              <Image
-                source={require(`./../../assets/flame2grey.png`)}
-                style={{ width: 50, height: 50, marginRight: 6 }}
-              />
+              
+              {flameTwo()}
             </TouchableHighlight>
             <TouchableHighlight
               onPress={() => {
@@ -619,10 +690,8 @@ function JournalHome(props) {
               activeOpacity={0.5}
               style={{}}
             >
-              <Image
-                source={require(`./../../assets/flame3grey.png`)}
-                style={{ width: 50, height: 50, marginRight: 6 }}
-              />
+            
+              {flameThree()}
             </TouchableHighlight>
             <TouchableHighlight
               onPress={() => {
@@ -633,10 +702,8 @@ function JournalHome(props) {
               activeOpacity={0.5}
               style={{}}
             >
-              <Image
-                source={require(`./../../assets/flame4grey.png`)}
-                style={{ width: 50, height: 50, marginRight: 6 }}
-              />
+     
+              {flameFour()}
             </TouchableHighlight>
             <TouchableHighlight
               onPress={() => {
@@ -647,10 +714,8 @@ function JournalHome(props) {
               activeOpacity={0.5}
               style={{}}
             >
-              <Image
-                source={require(`./../../assets/flame5grey.png`)}
-                style={{ width: 50, height: 50, marginRight: 6 }}
-              />
+           
+              {flameFive()}
             </TouchableHighlight>
           </View>
 
