@@ -63,7 +63,6 @@ const getUserData = async () => {
     const jsonValue = await AsyncStorage.getItem("user-data-test-23");
     let parsedJson = JSON.parse(jsonValue);
     if (parsedJson.sessonCount > 10) {
-      console.log("greater than 10 sessions: ", parsedJson.sessonCount);
       if (await StoreReview.hasAction()) {
         // you can call StoreReview.requestReview()
         StoreReview.requestReview();
