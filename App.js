@@ -23,8 +23,7 @@ import ActivityLogExercise from "./components/journal/activityLogExercise";
 import CravingExercise from "./components/journal/cravingExercise";
 import * as SplashScreen from "expo-splash-screen";
 import { ArrowRightCircle } from "react-native-feather";
-import * as StoreReview from 'expo-store-review';
-
+import * as StoreReview from "expo-store-review";
 
 // This project uses YARN YARN YARN YARN YARN YARN YARN YARN YARN YARN YARN
 
@@ -62,15 +61,15 @@ const storeUserData = async (value) => {
 const getUserData = async () => {
   try {
     const jsonValue = await AsyncStorage.getItem("user-data-test-23");
-    let parsedJson = JSON.parse(jsonValue)
+    let parsedJson = JSON.parse(jsonValue);
     if (parsedJson.sessonCount > 10) {
-      console.log('greater than 10 sessions: ', parsedJson.sessonCount)
+      console.log("greater than 10 sessions: ", parsedJson.sessonCount);
       if (await StoreReview.hasAction()) {
         // you can call StoreReview.requestReview()
         StoreReview.requestReview();
       }
     }
-    
+
     return jsonValue != null ? JSON.parse(jsonValue) : null;
   } catch (e) {
     // error reading value
@@ -97,7 +96,7 @@ export default function App() {
     async function handleNewSession() {
       let currentUserData = await getUserData();
 
-      if (currentUserData === null) {
+      if (currentUserData === undefined) {
         setLoad("new");
         let userData = {
           firstSeen: new Date(),
