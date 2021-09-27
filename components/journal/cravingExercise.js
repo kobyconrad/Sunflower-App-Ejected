@@ -661,6 +661,7 @@ function CravingExercise(props) {
             <TouchableHighlight
               onPress={() => {
                 Haptics.selectionAsync();
+                Segment.screen("submit-craving-exercise");
 
                 // creates a new entry object
                 let currentDate = new Date();
