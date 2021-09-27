@@ -62,12 +62,9 @@ const getUserData = async () => {
   try {
     const jsonValue = await AsyncStorage.getItem("user-data-test-23");
     let parsedJson = JSON.parse(jsonValue);
-    console.log(parsedJson);
     if (parsedJson.sessonCount > 2) {
       if (await StoreReview.hasAction()) {
         // you can call StoreReview.requestReview()
-        console.log("ask for review");
-        Segment.screen("ask-for-review");
         StoreReview.requestReview();
       }
     }
