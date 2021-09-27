@@ -62,9 +62,12 @@ const getUserData = async () => {
   try {
     const jsonValue = await AsyncStorage.getItem("user-data-test-23");
     let parsedJson = JSON.parse(jsonValue);
-    if (parsedJson.sessonCount > 10) {
+    console.log(parsedJson);
+    if (parsedJson.sessonCount > 2) {
       if (await StoreReview.hasAction()) {
         // you can call StoreReview.requestReview()
+        console.log("ask for review");
+        Segment.screen("ask-for-review");
         StoreReview.requestReview();
       }
     }
@@ -525,6 +528,17 @@ function HomeScreen({ navigation }) {
             <Text style={styles.menuText}>edit</Text>
           </View>
         </TouchableHighlight>
+        {/* <TouchableHighlight
+          onPress={() => {
+            Haptics.selectionAsync();
+            navigation.navigate("Edit Date");
+          }}
+          underlayColor=""
+        >
+          <View style={styles.menuItemContainer}>
+            <Text style={styles.menuText}>learn</Text>
+          </View>
+        </TouchableHighlight> */}
       </View>
     </View>
   );
