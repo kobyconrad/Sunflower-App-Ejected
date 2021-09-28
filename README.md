@@ -13,3 +13,5 @@ One Sunflower at a time.
 The app comes with built in guided journaling exercises. If you follow them, they are designed to help you associate activities like exercise, being social, and learning, with reward. 
 
 Learn to associate something like exercise with reward or pleasure, and watch as your cravings change from destructive to empowering. 
+
+[Download on the iOS store.](https://apps.apple.com/us/app/sunflower-sober-tracker/id1547099435) :)
