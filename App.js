@@ -27,8 +27,6 @@ import * as StoreReview from "expo-store-review";
 
 // This project uses YARN YARN YARN YARN YARN YARN YARN YARN YARN YARN YARN
 
-// I'm still a developer :(
-
 const Stack = createStackNavigator();
 
 const storeData = async (value) => {
@@ -62,7 +60,7 @@ const getUserData = async () => {
   try {
     const jsonValue = await AsyncStorage.getItem("user-data-test-23");
     let parsedJson = JSON.parse(jsonValue);
-    if (parsedJson.sessonCount > 2) {
+    if (parsedJson.sessonCount > 20) {
       if (await StoreReview.hasAction()) {
         // you can call StoreReview.requestReview()
         StoreReview.requestReview();
