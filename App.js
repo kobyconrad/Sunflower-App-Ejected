@@ -731,7 +731,7 @@ function ExerciseNavScreen({ navigation }) {
         backgroundColor: "#fff",
       }}
     >
-      <View style={{ width: "100%", marginTop: 40, paddingLeft: 20 }}>
+      <View style={{ width: "100%", marginTop: 60, paddingLeft: 20 }}>
         <Text style={styles.titleText}>Select A Guided Exercise</Text>
       </View>
       <View style={{ width: "100%", marginTop: 20, paddingLeft: 20 }}>
