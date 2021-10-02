@@ -22,7 +22,7 @@ import JournalHome from "./components/journal/journalHome";
 import ActivityLogExercise from "./components/journal/activityLogExercise";
 import CravingExercise from "./components/journal/cravingExercise";
 import * as SplashScreen from "expo-splash-screen";
-import { ArrowRightCircle } from "react-native-feather";
+import { ArrowRightCircle, Settings } from "react-native-feather";
 import * as StoreReview from "expo-store-review";
 
 // This project uses YARN YARN YARN YARN YARN YARN YARN YARN YARN YARN YARN
@@ -472,7 +472,6 @@ function HomeScreen({ navigation }) {
             {ReturnSeconds()}
           </View>
         </View>
-
         <Image
           source={require("./assets/clock-simon-final.gif")}
           resizeMode={"contain"}
@@ -482,6 +481,7 @@ function HomeScreen({ navigation }) {
             marginTop: 0,
           }}
         />
+
         <TouchableHighlight
           onPress={() => {
             Haptics.selectionAsync();
