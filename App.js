@@ -16,16 +16,14 @@ import { createStackNavigator } from "@react-navigation/stack";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import * as Haptics from "expo-haptics";
-import LessonOneScreen from "./components/lessons/lessonOneScreen";
-import LessonTwoScreen from "./components/lessons/lessonTwoScreen";
-import LessonThreeScreen from "./components/lessons/lessonThreeScreen";
-import LessonFourScreen from "./components/lessons/lessonFourScreen";
-import LessonFiveScreen from "./components/lessons/lessonFiveScreen";
-import LessonSixScreen from "./components/lessons/lessonSixScreen";
-import LessonSevenScreen from "./components/lessons/lessonSevenScreen";
 import Onboarding from "./components/onboarding/onboarding";
 import * as Segment from "expo-analytics-segment";
 import JournalHome from "./components/journal/journalHome";
+import ActivityLogExercise from "./components/journal/activityLogExercise";
+import CravingExercise from "./components/journal/cravingExercise";
+import * as SplashScreen from "expo-splash-screen";
+import { ArrowRightCircle, Settings } from "react-native-feather";
+import * as StoreReview from "expo-store-review";
 
 // This project uses YARN YARN YARN YARN YARN YARN YARN YARN YARN YARN YARN
 
@@ -61,29 +59,41 @@ const storeUserData = async (value) => {
 const getUserData = async () => {
   try {
     const jsonValue = await AsyncStorage.getItem("user-data-test-23");
+    let parsedJson = JSON.parse(jsonValue);
+    if (parsedJson.sessonCount > 15) {
+      if (await StoreReview.hasAction()) {
+        // you can call StoreReview.requestReview()
+        StoreReview.requestReview();
+      }
+    }
+
     return jsonValue != null ? JSON.parse(jsonValue) : null;
   } catch (e) {
     // error reading value
   }
 };
 
-const userId = "universal123";
+const iosWriteKey = "dYDrjLXzJdCwztz5hDlfqYsfZNoWi0iM";
+const androidWriteKey = "kcGZd5M0tCqjlGyhKBAFuhyNyDCXA6l9";
+Segment.initialize({ androidWriteKey, iosWriteKey });
+Segment.track("session-tracker");
+
+SplashScreen.preventAutoHideAsync();
+async function renderPage() {
+  await SplashScreen.hideAsync();
+}
+setTimeout(() => {
+  renderPage();
+}, 800);
 
 export default function App() {
   const [load, setLoad] = useState("loading");
-
-  const iosWriteKey = "dYDrjLXzJdCwztz5hDlfqYsfZNoWi0iM";
-  const androidWriteKey = "kcGZd5M0tCqjlGyhKBAFuhyNyDCXA6l9";
-
-  Segment.initialize({ androidWriteKey, iosWriteKey });
-  Segment.identify(userId);
-  Segment.track("session-tracker");
 
   useEffect(() => {
     async function handleNewSession() {
       let currentUserData = await getUserData();
 
-      if (currentUserData === null) {
+      if (currentUserData === undefined) {
         setLoad("new");
         let userData = {
           firstSeen: new Date(),
@@ -133,44 +143,19 @@ export default function App() {
             options={{ animationEnabled: false, headerShown: false }}
           />
           <Stack.Screen
-            name="Learn Screen"
-            component={LearnScreen}
+            name="Activity Log 0"
+            component={ActivityLog0}
             options={{ animationEnabled: false, headerShown: false }}
           />
           <Stack.Screen
-            name="Lesson One"
-            component={LessonOne}
-            options={{ headerShown: false }}
+            name="Craving Exercise"
+            component={CravingExerciseScreen}
+            options={{ animationEnabled: false, headerShown: false }}
           />
           <Stack.Screen
-            name="Lesson Two"
-            component={LessonTwo}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="Lesson Three"
-            component={LessonThree}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="Lesson Four"
-            component={LessonFour}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="Lesson Five"
-            component={LessonFive}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="Lesson Six"
-            component={LessonSix}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="Lesson Seven"
-            component={LessonSeven}
-            options={{ headerShown: false }}
+            name="Exercise Nav Screen"
+            component={ExerciseNavScreen}
+            options={{ animationEnabled: false, headerShown: false }}
           />
         </Stack.Navigator>
       </NavigationContainer>
@@ -196,50 +181,26 @@ export default function App() {
             component={EditDateScreen}
             options={{ animationEnabled: false, headerShown: false }}
           />
-          <Stack.Screen
-            name="Learn Screen"
-            component={LearnScreen}
-            options={{ animationEnabled: false, headerShown: false }}
-          />
+
           <Stack.Screen
             name="Journal Screen"
             component={JournalScreen}
             options={{ animationEnabled: false, headerShown: false }}
           />
           <Stack.Screen
-            name="Lesson One"
-            component={LessonOne}
-            options={{ headerShown: false }}
+            name="Activity Log 0"
+            component={ActivityLog0}
+            options={{ animationEnabled: false, headerShown: false }}
           />
           <Stack.Screen
-            name="Lesson Two"
-            component={LessonTwo}
-            options={{ headerShown: false }}
+            name="Craving Exercise"
+            component={CravingExerciseScreen}
+            options={{ animationEnabled: false, headerShown: false }}
           />
           <Stack.Screen
-            name="Lesson Three"
-            component={LessonThree}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="Lesson Four"
-            component={LessonFour}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="Lesson Five"
-            component={LessonFive}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="Lesson Six"
-            component={LessonSix}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="Lesson Seven"
-            component={LessonSeven}
-            options={{ headerShown: false }}
+            name="Exercise Nav Screen"
+            component={ExerciseNavScreen}
+            options={{ animationEnabled: false, headerShown: false }}
           />
         </Stack.Navigator>
       </NavigationContainer>
@@ -248,22 +209,34 @@ export default function App() {
 }
 
 function HomeScreen({ navigation }) {
+  const [analytics, setAnalytics] = useState(true);
   const [time, setTime] = useState(0);
+  const [initialLoad, setInitialLoad] = useState(true);
+
+  async function timeDifference() {
+    let currentDate = new Date();
+    let savedData = await getData();
+    let quitDate = new Date(savedData);
+
+    let currentTotalTime = currentDate.getTime();
+    let quitTotalTime = quitDate.getTime();
+    let difference = currentTotalTime - quitTotalTime;
+    let differenceInSeconds = difference / 1000;
+
+    setTime(timeObject(differenceInSeconds));
+  }
+
+  if (initialLoad) {
+    setInitialLoad(false);
+    timeDifference();
+  }
 
   useEffect(() => {
+    if (analytics) {
+      Segment.screen("timer-screen");
+      setAnalytics(false);
+    }
     setTimeout(() => {
-      async function timeDifference() {
-        let currentDate = new Date();
-        let savedData = await getData();
-        let quitDate = new Date(savedData);
-
-        let currentTotalTime = currentDate.getTime();
-        let quitTotalTime = quitDate.getTime();
-        let difference = currentTotalTime - quitTotalTime;
-        let differenceInSeconds = difference / 1000;
-
-        setTime(timeObject(differenceInSeconds));
-      }
       timeDifference();
     }, 1000);
   });
@@ -477,25 +450,50 @@ function HomeScreen({ navigation }) {
           position: "absolute",
           height: "100%",
           width: "100%",
-          opacity: 0.2,
+          opacity: 0.05,
         }}
       ></View>
 
-      <View>
-        <Text style={styles.counterTitleText}>You've Stayed Sober For</Text>
-        <View style={styles.counterContainer}>
-          {ReturnDays()}
-          {ReturnHours()}
-          {ReturnMinutes()}
-          {ReturnSeconds()}
+      <View
+        style={{
+          width: "100%",
+          height: "88%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <View style={styles.timeContainer}>
+          <Text style={styles.counterTitleText}>You've Stayed Sober For</Text>
+          <View style={styles.counterContainer}>
+            {ReturnDays()}
+            {ReturnHours()}
+            {ReturnMinutes()}
+            {ReturnSeconds()}
+          </View>
         </View>
-      </View>
+        <Image
+          source={require("./assets/clock-simon-final.gif")}
+          resizeMode={"contain"}
+          style={{
+            width: "60%",
+            height: 300,
+            marginTop: 0,
+          }}
+        />
 
-      <Image
-        source={require("./assets/clock-fixed.gif")}
-        resizeMode={"contain"}
-        style={{ width: "60%", marginTop: 40, marginBottom: 100 }}
-      />
+        <TouchableHighlight
+          onPress={() => {
+            Haptics.selectionAsync();
+            navigation.navigate("Exercise Nav Screen");
+          }}
+          underlayColor=""
+        >
+          <View style={styles.button}>
+            <Text style={styles.buttonText}>New Exercise</Text>
+          </View>
+        </TouchableHighlight>
+      </View>
 
       <View style={styles.navContainer}></View>
 
@@ -525,6 +523,17 @@ function HomeScreen({ navigation }) {
             <Text style={styles.menuText}>edit</Text>
           </View>
         </TouchableHighlight>
+        {/* <TouchableHighlight
+          onPress={() => {
+            Haptics.selectionAsync();
+            navigation.navigate("Edit Date");
+          }}
+          underlayColor=""
+        >
+          <View style={styles.menuItemContainer}>
+            <Text style={styles.menuText}>learn</Text>
+          </View>
+        </TouchableHighlight> */}
       </View>
     </View>
   );
@@ -533,7 +542,9 @@ function HomeScreen({ navigation }) {
 function EditDateScreen({ navigation }) {
   const [date, setDate] = useState(new Date());
 
-  Segment.track("edit-date-screen-view");
+  useEffect(() => {
+    Segment.screen("edit-date-screen-view");
+  }, []);
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
@@ -620,289 +631,11 @@ function EditDateScreen({ navigation }) {
   );
 }
 
-function LearnScreen({ navigation }) {
-  Segment.track("learn-screen-view");
-
-  return (
-    <View
-      style={{
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "space-between",
-        height: "100%",
-        backgroundColor: "#f2f2f2",
-      }}
-    >
-      <View style={styles.learnScreenTitleContainer}>
-        <Text style={styles.learnScreenTitleText}>
-          Click To Learn About Marijuana Addiction
-        </Text>
-      </View>
-
-      <SafeAreaView style={styles.learnSafeContainer}>
-        <ScrollView style={styles.learnScrollContainer}>
-          <TouchableHighlight
-            onPress={() => {
-              Haptics.selectionAsync();
-              navigation.navigate("Lesson One");
-            }}
-            underlayColor=""
-          >
-            <View style={styles.learnItemContainer} onPress={() => {}}>
-              <Text style={styles.learnItemTitleText}>
-                Lesson 1: Marijuana Is Addictive 🙁
-              </Text>
-              <Text style={styles.learnItemSubtitleText}>
-                Do you want to learn the truth? Not 1960's scare tactics, not
-                stoner culture myths, but the actual truth about marijuana
-                addiction.
-              </Text>
-            </View>
-          </TouchableHighlight>
-
-          <TouchableHighlight
-            onPress={() => {
-              Haptics.selectionAsync();
-              navigation.navigate("Lesson Two");
-            }}
-            underlayColor=""
-          >
-            <View style={styles.learnItemContainer} onPress={() => {}}>
-              <Text style={styles.learnItemTitleText}>
-                Lesson 2: There Are Significant Withdrawal Symptoms 🛌
-              </Text>
-              <Text style={styles.learnItemSubtitleText}>
-                These effect people differently, but can include a severe
-                inability to sleep or eat, as well as depression and anger.
-              </Text>
-            </View>
-          </TouchableHighlight>
-
-          <TouchableHighlight
-            onPress={() => {
-              Haptics.selectionAsync();
-              navigation.navigate("Lesson Three");
-            }}
-            underlayColor=""
-          >
-            <View style={styles.learnItemContainer} onPress={() => {}}>
-              <Text style={styles.learnItemTitleText}>
-                Lesson 3: "Moderation" Often Leads To Daily Use 🪨
-              </Text>
-              <Text style={styles.learnItemSubtitleText}>
-                "One joint won't hurt..." is the most common lie we tell
-                ourselves before relapse. Addiction creates habits that are
-                easily reactivated.
-              </Text>
-            </View>
-          </TouchableHighlight>
-
-          <TouchableHighlight
-            onPress={() => {
-              Haptics.selectionAsync();
-              navigation.navigate("Lesson Four");
-            }}
-            underlayColor=""
-          >
-            <View style={styles.learnItemContainer} onPress={() => {}}>
-              <Text style={styles.learnItemTitleText}>
-                Lesson 4: Reprogram Your Mind 🧠
-              </Text>
-              <Text style={styles.learnItemSubtitleText}>
-                You've spent months or years training your brain to associate
-                marijuana with pleasure. Now it's time to learn new
-                associations.
-              </Text>
-            </View>
-          </TouchableHighlight>
-
-          <TouchableHighlight
-            onPress={() => {
-              Haptics.selectionAsync();
-              navigation.navigate("Lesson Five");
-            }}
-            underlayColor=""
-          >
-            <View style={styles.learnItemContainer} onPress={() => {}}>
-              <Text style={styles.learnItemTitleText}>
-                Lesson 5: Addiction Hides Your Real Problems 👩‍⚕️
-              </Text>
-              <Text style={styles.learnItemSubtitleText}>
-                People frequently use marijuana as a crutch to avoid their real
-                problems. Becoming sober means facing your real issues.
-              </Text>
-            </View>
-          </TouchableHighlight>
-
-          <TouchableHighlight
-            onPress={() => {
-              Haptics.selectionAsync();
-              navigation.navigate("Lesson Six");
-            }}
-            underlayColor=""
-          >
-            <View style={styles.learnItemContainer} onPress={() => {}}>
-              <Text style={styles.learnItemTitleText}>
-                Lesson 6: It's Okay To Fail ❤️
-              </Text>
-              <View>
-                <Text style={styles.learnItemSubtitleText}>
-                  While moderation rarely works, it's also okay to fail. You
-                  should fight for your sobriety, but don't quit fighting if you
-                  relapse.
-                </Text>
-              </View>
-            </View>
-          </TouchableHighlight>
-
-          <TouchableHighlight
-            onPress={() => {
-              Haptics.selectionAsync();
-              navigation.navigate("Lesson Seven");
-            }}
-            underlayColor=""
-          >
-            <View style={styles.learnItemContainer} onPress={() => {}}>
-              <Text style={styles.learnItemTitleText}>
-                Lesson 7: You're A Better Version Of Yourself, Sober 🦾
-              </Text>
-              <Text style={styles.learnItemSubtitleText}>
-                The ultimate secret to becoming sober? Internalizing the fact
-                you are your best self when sober.
-              </Text>
-            </View>
-          </TouchableHighlight>
-
-          <View style={{ width: "100%", height: 240 }}></View>
-        </ScrollView>
-      </SafeAreaView>
-
-      <View style={styles.menuContainer}>
-        <TouchableHighlight
-          onPress={() => {
-            Haptics.selectionAsync();
-            navigation.navigate("Time");
-          }}
-          underlayColor=""
-        >
-          <View style={styles.menuItemContainer}>
-            <Text style={styles.menuText}>time</Text>
-          </View>
-        </TouchableHighlight>
-
-        <View style={styles.menuItemSelectContainer}>
-          <Text style={styles.menuTextSelect}>learn</Text>
-        </View>
-
-        <TouchableHighlight
-          onPress={() => {
-            Haptics.selectionAsync();
-            navigation.navigate("Edit Date");
-          }}
-          underlayColor=""
-        >
-          <View style={styles.menuItemContainer}>
-            <Text style={styles.menuText}>edit</Text>
-          </View>
-        </TouchableHighlight>
-      </View>
-    </View>
-  );
-}
-
-function LessonOne({ navigation }) {
-  return (
-    <View>
-      <LessonOneScreen
-        back={() => {
-          Haptics.selectionAsync();
-          navigation.navigate("Learn Screen");
-        }}
-      />
-    </View>
-  );
-}
-
-function LessonTwo({ navigation }) {
-  return (
-    <View>
-      <LessonTwoScreen
-        back={() => {
-          Haptics.selectionAsync();
-          navigation.navigate("Learn Screen");
-        }}
-      />
-    </View>
-  );
-}
-
-function LessonThree({ navigation }) {
-  return (
-    <View>
-      <LessonThreeScreen
-        back={() => {
-          Haptics.selectionAsync();
-          navigation.navigate("Learn Screen");
-        }}
-      />
-    </View>
-  );
-}
-
-function LessonFour({ navigation }) {
-  return (
-    <View>
-      <LessonFourScreen
-        back={() => {
-          Haptics.selectionAsync();
-          navigation.navigate("Learn Screen");
-        }}
-      />
-    </View>
-  );
-}
-
-function LessonFive({ navigation }) {
-  return (
-    <View>
-      <LessonFiveScreen
-        back={() => {
-          Haptics.selectionAsync();
-          navigation.navigate("Learn Screen");
-        }}
-      />
-    </View>
-  );
-}
-
-function LessonSix({ navigation }) {
-  return (
-    <View>
-      <LessonSixScreen
-        back={() => {
-          Haptics.selectionAsync();
-          navigation.navigate("Learn Screen");
-        }}
-      />
-    </View>
-  );
-}
-
-function LessonSeven({ navigation }) {
-  return (
-    <View>
-      <LessonSevenScreen
-        back={() => {
-          Haptics.selectionAsync();
-          navigation.navigate("Learn Screen");
-        }}
-      />
-    </View>
-  );
-}
-
 function OnboardingScreen({ navigation }) {
-  Segment.track("onboarding-screen-view");
+  useEffect(() => {
+    Segment.screen("onboarding-screen-view");
+  }, []);
+
   return (
     <View>
       <Onboarding
@@ -924,9 +657,20 @@ function OnboardingScreen({ navigation }) {
 }
 
 function JournalScreen({ navigation }) {
+  const NavActivityLog0 = function () {
+    navigation.navigate("Activity Log 0");
+  };
+
+  const ExerciseNavFn = function () {
+    navigation.navigate("Exercise Nav Screen");
+  };
+
   return (
     <View>
-      <JournalHome />
+      <JournalHome
+        NavActivityLog0={NavActivityLog0}
+        ExerciseNavFn={ExerciseNavFn}
+      />
       {/* nav bar */}
 
       <View style={styles.menuContainer}>
@@ -962,12 +706,196 @@ function JournalScreen({ navigation }) {
   );
 }
 
+function ActivityLog0({ navigation }) {
+  const NavJournalScreen = function () {
+    navigation.navigate("Journal Screen");
+  };
+
+  return <ActivityLogExercise NavJournalScreen={NavJournalScreen} />;
+}
+
+function CravingExerciseScreen({ navigation }) {
+  const NavJournalScreen = function () {
+    navigation.navigate("Journal Screen");
+  };
+
+  return <CravingExercise NavJournalScreen={NavJournalScreen} />;
+}
+
+function ExerciseNavScreen({ navigation }) {
+  return (
+    <View
+      style={{
+        height: "100%",
+        width: "100%",
+        backgroundColor: "#fff",
+      }}
+    >
+      <View style={{ width: "100%", marginTop: 60, paddingLeft: 20 }}>
+        <Text style={styles.titleText}>Select A Guided Exercise</Text>
+      </View>
+      <View style={{ width: "100%", marginTop: 20, paddingLeft: 20 }}>
+        <Text style={{ fontSize: 18, fontWeight: "400", color: "#000100" }}>
+          Overcome your cravings and learn to associate sobriety with reward.
+        </Text>
+      </View>
+
+      <TouchableHighlight
+        onPress={() => {
+          Haptics.selectionAsync();
+          navigation.navigate("Craving Exercise");
+        }}
+        underlayColor=""
+        style={{}}
+        activeOpacity={0.8}
+      >
+        <View
+          style={{
+            width: "100%",
+            height: 110,
+            marginTop: 30,
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+          }}
+        >
+          <View
+            style={{
+              backgroundColor: "#000100",
+              width: "85%",
+              height: "100%",
+              display: "flex",
+              justifyContent: "center",
+              paddingLeft: 20,
+              paddingRight: 10,
+            }}
+          >
+            <Text style={{ color: "white", fontSize: 18, fontWeight: "600" }}>
+              New Craving Exercise
+            </Text>
+            <Text
+              style={{
+                color: "white",
+                fontSize: 14,
+                fontWeight: "400",
+                marginTop: 5,
+              }}
+            >
+              Track your cravings intensity, recognize illogical thoughts,
+              overcome the urge.
+            </Text>
+          </View>
+          <View
+            style={{
+              backgroundColor: "#2E2E2E",
+              width: "15%",
+              height: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <ArrowRightCircle stroke="#fff" width={22} height={22} />
+          </View>
+        </View>
+      </TouchableHighlight>
+
+      <TouchableHighlight
+        onPress={() => {
+          Haptics.selectionAsync();
+          navigation.navigate("Activity Log 0");
+        }}
+        underlayColor=""
+        style={{}}
+        activeOpacity={0.8}
+      >
+        <View
+          style={{
+            width: "100%",
+            height: 110,
+            marginTop: 20,
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+          }}
+        >
+          <View
+            style={{
+              backgroundColor: "#000100",
+              width: "85%",
+              height: "100%",
+              display: "flex",
+              justifyContent: "center",
+              paddingLeft: 20,
+              paddingRight: 10,
+            }}
+          >
+            <Text style={{ color: "white", fontSize: 18, fontWeight: "600" }}>
+              New Activity Log
+            </Text>
+            <Text
+              style={{
+                color: "white",
+                fontSize: 14,
+                fontWeight: "400",
+                marginTop: 5,
+              }}
+            >
+              Log your activities to help your brain learn how to get reward and
+              dopamine from healthy places.
+            </Text>
+          </View>
+          <View
+            style={{
+              backgroundColor: "#2E2E2E",
+              width: "15%",
+              height: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <ArrowRightCircle stroke="#fff" width={22} height={22} />
+          </View>
+        </View>
+      </TouchableHighlight>
+
+      <TouchableHighlight
+        onPress={() => {
+          Haptics.selectionAsync();
+          navigation.navigate("Journal Screen");
+        }}
+        underlayColor=""
+        style={{ position: "absolute", bottom: 40, left: 20 }}
+        activeOpacity={0.8}
+      >
+        <View
+          style={{
+            backgroundColor: "#B8BFC8",
+            width: 120,
+            height: 45,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            borderRadius: 8,
+          }}
+        >
+          <Text style={{ color: "white", fontSize: 18, fontWeight: "800" }}>
+            cancel
+          </Text>
+        </View>
+      </TouchableHighlight>
+    </View>
+  );
+}
+
 const styles = StyleSheet.create({
   displayContainer: {
     width: "100%",
     height: "100%",
     display: "flex",
     justifyContent: "center",
+    backgroundColor: "#fff",
   },
   titleContainer: {
     width: "100%",
@@ -977,8 +905,8 @@ const styles = StyleSheet.create({
   },
   titleText: {
     fontSize: 24,
-    fontWeight: "900",
-    color: "#6A49E8",
+    fontWeight: "800",
+    color: "#000100",
   },
   buttonContainer: {
     width: "100%",
@@ -990,7 +918,7 @@ const styles = StyleSheet.create({
   },
   button: {
     width: 180,
-    height: 50,
+    height: 48,
     backgroundColor: "#000100",
     display: "flex",
     alignItems: "center",
@@ -1004,8 +932,8 @@ const styles = StyleSheet.create({
   },
   counterText: {
     margin: 5,
-    fontSize: 32,
-    fontWeight: "700",
+    fontSize: 24,
+    fontWeight: "800",
   },
   counterContainer: {
     display: "flex",
@@ -1014,9 +942,16 @@ const styles = StyleSheet.create({
   },
   counterTitleText: {
     fontSize: 24,
-    fontWeight: "600",
-    marginBottom: 20,
-    marginTop: 120,
+    fontWeight: "400",
+    marginBottom: 5,
+  },
+  timeContainer: {
+    backgroundColor: "rgba(255, 255, 255,  .7)",
+    width: "100%",
+    display: "flex",
+    alignItems: "center",
+    paddingTop: 20,
+    paddingBottom: 20,
   },
   navContainer: {
     display: "flex",

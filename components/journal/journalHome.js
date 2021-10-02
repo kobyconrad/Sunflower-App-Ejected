@@ -10,11 +10,14 @@ import {
   ScrollView,
   TouchableWithoutFeedback,
   Keyboard,
+  Image,
 } from "react-native";
 import { Book, Frown, Meh, Smile, Trash2 } from "react-native-feather";
 import * as Haptics from "expo-haptics";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect } from "react";
+import * as Segment from "expo-analytics-segment";
+import { useIsFocused } from "@react-navigation/native";
 
 const storeData = async (value) => {
   try {
@@ -34,20 +37,27 @@ const getData = async () => {
   }
 };
 
-function JournalHome() {
+function JournalHome(props) {
   const [screen, setScreen] = useState("home");
   const [text, setJournalText] = useState("");
   const [mood, setMood] = useState("none");
   const [entries, setEntries] = useState({});
   const [currentKey, setCurrentKey] = useState("");
+  const [craving, setCraving] = useState(0);
+
+  let NavActivityLog0 = props.NavActivityLog0;
+  let ExerciseNavFn = props.ExerciseNavFn;
+
+  const isFocused = useIsFocused();
 
   useEffect(() => {
+    Segment.screen("journal-home-screen");
     async function grabData() {
       let currentData = await getData();
       setEntries(currentData);
     }
     grabData();
-  }, []);
+  }, [isFocused]);
 
   let myComponentList = (
     <View key={`${Math.random() * 100}`}>
@@ -59,29 +69,59 @@ function JournalHome() {
       let currentDate = key;
       let currentText = entries[key].text;
       let currentMood = entries[key].mood;
+      let currentActivities = entries[key].activities;
+      let craving = entries[key].craving;
+      let fallacy = entries[key].fallacy;
 
       if (entries[key].deleted !== true) {
-        return (
-          <TouchableHighlight
-            key={key}
-            onPress={() => {
-              setMood(currentMood);
-              setJournalText(currentText);
-              setCurrentKey(key);
-              Haptics.selectionAsync();
-              setScreen("journal-entry");
-            }}
-            underlayColor=""
-            style={{}}
-          >
-            <JournalEntry
+        if (craving) {
+          return (
+            <TouchableHighlight
               key={key}
-              text={currentText}
-              date={currentDate}
-              mood={currentMood}
-            />
-          </TouchableHighlight>
-        );
+              onPress={() => {
+                setMood(currentMood);
+                setJournalText(currentText);
+                setCurrentKey(key);
+                Haptics.selectionAsync();
+                setScreen("craving-edit");
+              }}
+              underlayColor=""
+              style={{}}
+            >
+              <JournalEntry
+                key={key}
+                text={currentText}
+                date={currentDate}
+                craving={craving}
+                activities={currentActivities}
+                fallacy={fallacy}
+              />
+            </TouchableHighlight>
+          );
+        } else {
+          return (
+            <TouchableHighlight
+              key={key}
+              onPress={() => {
+                setMood(currentMood);
+                setJournalText(currentText);
+                setCurrentKey(key);
+                Haptics.selectionAsync();
+                setScreen("journal-entry");
+              }}
+              underlayColor=""
+              style={{}}
+            >
+              <JournalEntry
+                key={key}
+                text={currentText}
+                date={currentDate}
+                mood={currentMood}
+                activities={currentActivities}
+              />
+            </TouchableHighlight>
+          );
+        }
       }
     });
   }
@@ -105,8 +145,9 @@ function JournalHome() {
         >
           <TouchableHighlight
             onPress={() => {
-              setScreen("journal-entry");
+              // setScreen("journal-entry");
               Haptics.selectionAsync();
+              ExerciseNavFn();
             }}
             underlayColor=""
             style={{}}
@@ -114,12 +155,13 @@ function JournalHome() {
             <View style={styles.exerciseContainer}>
               <View style={styles.exerciseTitleContainer}>
                 <Text
-                  style={{ fontSize: 16, fontWeight: "900", color: "#313853" }}
+                  style={{ fontSize: 18, fontWeight: "800", color: "#000100" }}
                 >
-                  Add Sober Journal Entry
+                  New Journal Exercise
                 </Text>
-                <Text style={{ fontSize: 14, marginTop: 6, color: "#8892AB" }}>
-                  Rewire your brain to associate sobriety with reward.
+                <Text style={{ fontSize: 14, marginTop: 6, color: "#2E2E2E" }}>
+                  Overcome your cravings and track activities to help you
+                  associate sobriety with reward.
                 </Text>
               </View>
 
@@ -336,16 +378,16 @@ function JournalHome() {
           }}
         >
           <View style={styles.entryExerciseTitleContainer}>
-            <Text style={{ fontSize: 20, fontWeight: "900", color: "#313853" }}>
-              How did you feel today?
+            <Text style={{ fontSize: 24, fontWeight: "800", color: "#000100" }}>
+              How rewarding was this activity?
             </Text>
           </View>
 
           <MoodSelector moodSetting={mood} />
 
           <View style={styles.entryExerciseTitleContainer}>
-            <Text style={{ fontSize: 20, fontWeight: "900", color: "#313853" }}>
-              What did you accomplish today, because you were sober?
+            <Text style={{ fontSize: 24, fontWeight: "800", color: "#000100" }}>
+              Briefly write down what you did.
             </Text>
           </View>
 
@@ -436,6 +478,7 @@ function JournalHome() {
                 setJournalText("");
                 setMood("none");
                 setCurrentKey("");
+                Segment.track("completed-journal-entry");
 
                 Haptics.selectionAsync();
               }}
@@ -506,6 +549,350 @@ function JournalHome() {
         </View>
       </TouchableWithoutFeedback>
     );
+  } else if (screen === "craving-edit") {
+    function flameOne() {
+      if (craving === 1) {
+        return (
+          <Image
+            source={require(`./../../assets/flame1.png`)}
+            style={{ width: 50, height: 50, marginRight: 6 }}
+          />
+        );
+      } else {
+        return (
+          <Image
+            source={require(`./../../assets/flame1grey.png`)}
+            style={{ width: 50, height: 50, marginRight: 6 }}
+          />
+        );
+      }
+    }
+
+    function flameTwo() {
+      if (craving === 2) {
+        return (
+          <Image
+            source={require(`./../../assets/flame2.png`)}
+            style={{ width: 50, height: 50, marginRight: 6 }}
+          />
+        );
+      } else {
+        return (
+          <Image
+            source={require(`./../../assets/flame2grey.png`)}
+            style={{ width: 50, height: 50, marginRight: 6 }}
+          />
+        );
+      }
+    }
+
+    function flameThree() {
+      if (craving === 3) {
+        return (
+          <Image
+            source={require(`./../../assets/flame3.png`)}
+            style={{ width: 50, height: 50, marginRight: 6 }}
+          />
+        );
+      } else {
+        return (
+          <Image
+            source={require(`./../../assets/flame3grey.png`)}
+            style={{ width: 50, height: 50, marginRight: 6 }}
+          />
+        );
+      }
+    }
+
+    function flameFour() {
+      if (craving === 4) {
+        return (
+          <Image
+            source={require(`./../../assets/flame4.png`)}
+            style={{ width: 50, height: 50, marginRight: 6 }}
+          />
+        );
+      } else {
+        return (
+          <Image
+            source={require(`./../../assets/flame4grey.png`)}
+            style={{ width: 50, height: 50, marginRight: 6 }}
+          />
+        );
+      }
+    }
+
+    function flameFive() {
+      if (craving === 5) {
+        return (
+          <Image
+            source={require(`./../../assets/flame5.png`)}
+            style={{ width: 50, height: 50, marginRight: 6 }}
+          />
+        );
+      } else {
+        return (
+          <Image
+            source={require(`./../../assets/flame5grey.png`)}
+            style={{ width: 50, height: 50, marginRight: 6 }}
+          />
+        );
+      }
+    }
+
+    return (
+      <TouchableWithoutFeedback
+        onPress={() => {
+          Keyboard.dismiss();
+        }}
+      >
+        <View
+          style={{
+            backgroundColor: "#FBFCFE",
+            height: "100%",
+            zIndex: 100,
+            paddingTop: 30,
+            padding: 20,
+          }}
+        >
+          <View style={styles.entryExerciseTitleContainer}>
+            <Text style={{ fontSize: 24, fontWeight: "800", color: "#000100" }}>
+              How strong was this craving?
+            </Text>
+          </View>
+
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-around",
+              paddingTop: 10,
+              paddingBottom: 10,
+            }}
+          >
+            <TouchableHighlight
+              onPress={() => {
+                Haptics.selectionAsync();
+                setCraving(1);
+              }}
+              underlayColor=""
+              activeOpacity={0.5}
+              style={{}}
+            >
+              {flameOne()}
+            </TouchableHighlight>
+            <TouchableHighlight
+              onPress={() => {
+                Haptics.selectionAsync();
+                setCraving(2);
+              }}
+              underlayColor=""
+              activeOpacity={0.5}
+              style={{}}
+            >
+              {flameTwo()}
+            </TouchableHighlight>
+            <TouchableHighlight
+              onPress={() => {
+                Haptics.selectionAsync();
+                setCraving(3);
+              }}
+              underlayColor=""
+              activeOpacity={0.5}
+              style={{}}
+            >
+              {flameThree()}
+            </TouchableHighlight>
+            <TouchableHighlight
+              onPress={() => {
+                Haptics.selectionAsync();
+                setCraving(4);
+              }}
+              underlayColor=""
+              activeOpacity={0.5}
+              style={{}}
+            >
+              {flameFour()}
+            </TouchableHighlight>
+            <TouchableHighlight
+              onPress={() => {
+                Haptics.selectionAsync();
+                setCraving(5);
+              }}
+              underlayColor=""
+              activeOpacity={0.5}
+              style={{}}
+            >
+              {flameFive()}
+            </TouchableHighlight>
+          </View>
+
+          <View style={styles.entryExerciseTitleContainer}>
+            <Text style={{ fontSize: 24, fontWeight: "800", color: "#000100" }}>
+              Write down why you shouldn't give in to your cravings.
+            </Text>
+          </View>
+          <TextInput
+            multiline={true}
+            numberOfLines={4}
+            placeholder={
+              "I cleaned my room, worked out at the gym, and had dinner with my family..."
+            }
+            style={{
+              height: 160,
+              borderColor: "gray",
+              borderWidth: 1,
+              borderBottomWidth: 3,
+              borderRightWidth: 2,
+              padding: 12,
+              paddingTop: 12,
+              marginTop: 0,
+              borderRadius: 4,
+              fontSize: 15,
+              borderColor: "#B8BFC8",
+              textAlignVertical: "top",
+              width: "100%",
+              marginTop: 20,
+              marginBottom: 10,
+            }}
+            onChangeText={(inputText) => setJournalText(inputText)}
+            value={text}
+          />
+
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+            }}
+          >
+            <TouchableHighlight
+              onPress={() => {
+                // setJournalText("");
+                setScreen("home");
+                // setMood("none");
+                // setCurrentKey("");
+                Haptics.selectionAsync();
+              }}
+              underlayColor=""
+              style={{}}
+            >
+              <View style={styles.cancelButtonContainer}>
+                <Text
+                  style={{ fontSize: 18, fontWeight: "900", color: "white" }}
+                >
+                  cancel
+                </Text>
+              </View>
+            </TouchableHighlight>
+
+            <TouchableHighlight
+              onPress={() => {
+                setScreen("home");
+
+                async function handleStorage() {
+                  let currentDate = new Date();
+                  if (currentKey.length > 1) {
+                    currentDate = new Date(currentKey);
+                  }
+
+                  let storedData = await getData();
+                  if (storedData !== null) {
+                    let entryObj = {};
+                    entryObj.text = text;
+                    if (craving !== 0) {
+                      entryObj.craving = craving;
+                    } else {
+                      entryObj.craving = 1;
+                    }
+
+                    storedData[currentDate] = entryObj;
+                  } else {
+                    storedData = {};
+                    let entryObj = {};
+                    entryObj.text = text;
+                    if (craving !== 0) {
+                      entryObj.craving = craving;
+                    }
+                    storedData[currentDate] = entryObj;
+                  }
+                  storeData(storedData);
+                  setEntries(storedData);
+                }
+
+                handleStorage();
+                setJournalText("");
+                setCraving(0);
+                setCurrentKey("");
+                Segment.track("completed-journal-entry");
+
+                Haptics.selectionAsync();
+              }}
+              underlayColor=""
+            >
+              <View style={styles.finishButtonContainer}>
+                <Text
+                  style={{ fontSize: 18, fontWeight: "900", color: "white" }}
+                >
+                  finish
+                </Text>
+              </View>
+            </TouchableHighlight>
+          </View>
+          <TouchableHighlight
+            style={{
+              bottom: 0,
+              right: 0,
+              position: "absolute",
+              margin: 18,
+              backgroundColor: "#FA344C",
+              padding: 5,
+              borderRadius: 6,
+            }}
+            onPress={() => {
+              setScreen("home");
+
+              async function handleStorage() {
+                let currentDate = new Date();
+                let storedData = await getData();
+                if (storedData !== null) {
+                  let entryObj = {};
+                  entryObj.deleted = true;
+                  //   entryObj.text = text;
+                  //   if (mood !== "none") {
+                  //     entryObj.mood = mood;
+                  //   }
+                  storedData[currentKey] = entryObj;
+                } else {
+                  storedData = {};
+                  let entryObj = {};
+                  entryObj.deleted = true;
+                  //   entryObj.text = text;
+                  //   if (mood !== "none") {
+                  //     entryObj.mood = mood;
+                  //   }
+                  storedData[currentDate] = entryObj;
+                }
+                storeData(storedData);
+                setEntries(storedData);
+              }
+
+              handleStorage();
+              setJournalText("");
+              setCraving(0);
+              setCurrentKey("");
+
+              Haptics.selectionAsync();
+            }}
+            underlayColor=""
+          >
+            <View>
+              <Trash2 stroke="#fff" width={28} height={28} />
+            </View>
+          </TouchableHighlight>
+        </View>
+      </TouchableWithoutFeedback>
+    );
   } else {
     return <View></View>;
   }
@@ -526,18 +913,198 @@ function JournalEntry(props) {
     moodComponent = <Smile stroke="#02B268" width={22} height={22} />;
   }
 
+  let cravingComponent = <View></View>;
+
+  if (props.craving) {
+    if (props.craving === 5) {
+      cravingComponent = (
+        <Image
+          source={require(`./../../assets/flame5.png`)}
+          style={{ width: 35, height: 35 }}
+        />
+      );
+    } else if (props.craving === 4) {
+      cravingComponent = (
+        <Image
+          source={require(`./../../assets/flame4.png`)}
+          style={{ width: 35, height: 35 }}
+        />
+      );
+    } else if (props.craving === 3) {
+      cravingComponent = (
+        <Image
+          source={require(`./../../assets/flame3.png`)}
+          style={{ width: 35, height: 35 }}
+        />
+      );
+    } else if (props.craving === 2) {
+      cravingComponent = (
+        <Image
+          source={require(`./../../assets/flame2.png`)}
+          style={{ width: 35, height: 35 }}
+        />
+      );
+    } else if (props.craving === 1) {
+      cravingComponent = (
+        <Image
+          source={require(`./../../assets/flame1.png`)}
+          style={{ width: 35, height: 35 }}
+        />
+      );
+    } else {
+      cravingComponent = (
+        <Image
+          source={require(`./../../assets/fire-emoji.png`)}
+          style={{ width: 35, height: 35 }}
+        />
+      );
+    }
+  }
+
+  let activitiesObj = props.activities || {};
+
+  let activityList = (
+    <View>
+      <Text></Text>
+    </View>
+  );
+
+  activityList = Object.keys(activitiesObj).map((key) => {
+    if (activitiesObj[key]) {
+      let emoji;
+      if (key === "exercise") {
+        emoji = (
+          <Image
+            source={require(`./../../assets/arm-emoji.png`)}
+            style={{ width: 16, height: 16, marginRight: 6 }}
+          />
+        );
+      } else if (key === "learn") {
+        emoji = (
+          <Image
+            source={require(`./../../assets/books-emoji.png`)}
+            style={{ width: 16, height: 16, marginRight: 6 }}
+          />
+        );
+      } else if (key === "social") {
+        emoji = (
+          <Image
+            source={require(`./../../assets/family-emoji.png`)}
+            style={{ width: 16, height: 16, marginRight: 6 }}
+          />
+        );
+      } else if (key === "work") {
+        emoji = (
+          <Image
+            source={require(`./../../assets/work-emoji.png`)}
+            style={{ width: 16, height: 16, marginRight: 6 }}
+          />
+        );
+      } else if (key === "care") {
+        emoji = (
+          <Image
+            source={require(`./../../assets/care-emoji.png`)}
+            style={{ width: 16, height: 16, marginRight: 6 }}
+          />
+        );
+      } else if (key === "skill") {
+        emoji = (
+          <Image
+            source={require(`./../../assets/skill-emoji.png`)}
+            style={{ width: 16, height: 16, marginRight: 6 }}
+          />
+        );
+      } else if (key === "misc") {
+        emoji = (
+          <Image
+            source={require(`./../../assets/misc-emoji.png`)}
+            style={{ width: 16, height: 16, marginRight: 6 }}
+          />
+        );
+      }
+
+      return <View key={key}>{emoji}</View>;
+    }
+  });
+
+  let fallacyObj = props.fallacy || {};
+
+  let fallacyList = (
+    <View>
+      <Text></Text>
+    </View>
+  );
+
+  fallacyList = Object.keys(fallacyObj).map((key) => {
+    if (fallacyObj[key]) {
+      let fallacyEmoji;
+      if (key === "coping") {
+        fallacyEmoji = (
+          <Image
+            source={require(`./../../assets/coping-emoji.png`)}
+            style={{ width: 16, height: 16, marginRight: 6 }}
+          />
+        );
+      } else if (key === "reward") {
+        fallacyEmoji = (
+          <Image
+            source={require(`./../../assets/reward-emoji.png`)}
+            style={{ width: 16, height: 16, marginRight: 6 }}
+          />
+        );
+      } else if (key === "notAddicted") {
+        fallacyEmoji = (
+          <Image
+            source={require(`./../../assets/not-addicted-emoji.png`)}
+            style={{ width: 16, height: 16, marginRight: 6 }}
+          />
+        );
+      } else if (key === "notBad") {
+        fallacyEmoji = (
+          <Image
+            source={require(`./../../assets/not-bad.png`)}
+            style={{ width: 16, height: 16, marginRight: 6 }}
+          />
+        );
+      } else if (key === "job") {
+        fallacyEmoji = (
+          <Image
+            source={require(`./../../assets/work-emoji.png`)}
+            style={{ width: 16, height: 16, marginRight: 6 }}
+          />
+        );
+      } else if (key === "occasional") {
+        fallacyEmoji = (
+          <Image
+            source={require(`./../../assets/occasional-emoji.png`)}
+            style={{ width: 16, height: 16, marginRight: 6 }}
+          />
+        );
+      }
+
+      return <View key={key}>{fallacyEmoji}</View>;
+    }
+  });
+
   return (
     <View style={styles.exerciseContainer} key={props.key}>
       <View style={styles.exerciseTitleContainer}>
-        <Text style={{ fontSize: 16, fontWeight: "900", color: "#313853" }}>
+        <Text style={{ fontSize: 18, fontWeight: "800", color: "#000100" }}>
           {stringDate}
         </Text>
-        <Text style={{ fontSize: 14, marginTop: 6, color: "#8892AB" }}>
+        <Text style={{ fontSize: 14, marginTop: 6, color: "#2E2E2E" }}>
           {props.text}
         </Text>
+        <View style={{ display: "flex", flexDirection: "row", marginTop: 10 }}>
+          {activityList}
+          {fallacyList}
+        </View>
       </View>
 
-      <View style={styles.iconContainer}>{moodComponent}</View>
+      <View style={styles.iconContainer}>
+        {moodComponent}
+        {cravingComponent}
+      </View>
     </View>
   );
 }

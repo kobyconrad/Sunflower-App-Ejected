@@ -1,6 +1,12 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-import { View, Text, StyleSheet, TouchableHighlight } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableHighlight,
+  Button,
+} from "react-native";
 import * as Haptics from "expo-haptics";
 import { XCircle, ArrowLeftCircle } from "react-native-feather";
 import DateTimePicker from "@react-native-community/datetimepicker";
@@ -81,50 +87,75 @@ function Pages({ screen, finish }) {
 
   if (screen === 0) {
     return (
-      <View style={styles.pageContainer}>
-        <View style={styles.titleContainer}>
-          <Text style={styles.titleText}>Set Your Quit Date</Text>
-        </View>
-
-        <DateTimePicker
-          testID="dateTimePicker"
-          value={date}
-          mode={"date"}
-          is24Hour={true}
-          display="spinner"
-          onChange={onChange}
-        />
-        <View style={styles.titleContainer}>
-          <Text style={styles.titleText}>Set Your Quit Time</Text>
-        </View>
-
-        <DateTimePicker
-          testID="dateTimePicker"
-          value={date}
-          mode={"time"}
-          is24Hour={true}
-          display="spinner"
-          onChange={onChange}
-          style={{ backgroundColor: "white" }}
-        />
-
-        <View style={{ width: "100%", height: 45, marginBottom: 20 }}>
-          <TouchableHighlight
-            onPress={() => {
-              storeData(date);
-              getData();
-              finish();
+      <View>
+        <Text>Pay me money plz</Text>
+        <TouchableHighlight
+          onPress={() => {
+            console.log("tap");
+          }}
+          underlayColor=""
+        >
+          <View
+            style={{
+              width: 90,
+              height: 45,
+              borderRadius: 8,
+              backgroundColor: "#6A49E8",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              marginTop: 10,
             }}
-            underlayColor=""
-            style={styles.buttonPositioning}
           >
-            <View style={styles.nextButtonContainer}>
-              <Text style={styles.nextButtonText}>finish</Text>
-            </View>
-          </TouchableHighlight>
-        </View>
+            <Text style={{ color: "white" }}>okay</Text>
+          </View>
+        </TouchableHighlight>
       </View>
     );
+  } else if (screen === 1) {
+    <View style={styles.pageContainer}>
+      <View style={styles.titleContainer}>
+        <Text style={styles.titleText}>Set Your Quit Date</Text>
+      </View>
+
+      <DateTimePicker
+        testID="dateTimePicker"
+        value={date}
+        mode={"date"}
+        is24Hour={true}
+        display="spinner"
+        onChange={onChange}
+      />
+      <View style={styles.titleContainer}>
+        <Text style={styles.titleText}>Set Your Quit Time</Text>
+      </View>
+
+      <DateTimePicker
+        testID="dateTimePicker"
+        value={date}
+        mode={"time"}
+        is24Hour={true}
+        display="spinner"
+        onChange={onChange}
+        style={{ backgroundColor: "white" }}
+      />
+
+      <View style={{ width: "100%", height: 45, marginBottom: 20 }}>
+        <TouchableHighlight
+          onPress={() => {
+            storeData(date);
+            getData();
+            finish();
+          }}
+          underlayColor=""
+          style={styles.buttonPositioning}
+        >
+          <View style={styles.nextButtonContainer}>
+            <Text style={styles.nextButtonText}>finish</Text>
+          </View>
+        </TouchableHighlight>
+      </View>
+    </View>;
   } else {
     return (
       <View style={styles.pageContainer}>
@@ -291,8 +322,8 @@ const styles = StyleSheet.create({
   },
   titleText: {
     fontSize: 24,
-    fontWeight: "900",
-    color: "#6A49E8",
+    fontWeight: "800",
+    color: "#000100",
   },
   bodyText: {
     color: "#6A49E8",
