@@ -87,29 +87,73 @@ function Pages({ screen, finish }) {
 
   if (screen === 0) {
     return (
-      <View>
-        <Text>Pay me money plz</Text>
-        <TouchableHighlight
-          onPress={() => {
-            console.log("tap");
-          }}
-          underlayColor=""
-        >
-          <View
-            style={{
-              width: 90,
-              height: 45,
-              borderRadius: 8,
-              backgroundColor: "#6A49E8",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              marginTop: 10,
+      // <View>
+      //   <Text>Pay me money plz</Text>
+      //   <TouchableHighlight
+      //     onPress={() => {
+      //       console.log("tap");
+      //     }}
+      //     underlayColor=""
+      //   >
+      //     <View
+      //       style={{
+      //         width: 90,
+      //         height: 45,
+      //         borderRadius: 8,
+      //         backgroundColor: "#6A49E8",
+      //         display: "flex",
+      //         alignItems: "center",
+      //         justifyContent: "center",
+      //         marginTop: 10,
+      //       }}
+      //     >
+      //       <Text style={{ color: "white" }}>okay</Text>
+      //     </View>
+      //   </TouchableHighlight>
+      // </View>
+
+      <View style={styles.pageContainer}>
+        <View style={styles.titleContainer}>
+          <Text style={styles.titleText}>Set Your Quit Date</Text>
+        </View>
+
+        <DateTimePicker
+          testID="dateTimePicker"
+          value={date}
+          mode={"date"}
+          is24Hour={true}
+          display="spinner"
+          onChange={onChange}
+        />
+        <View style={styles.titleContainer}>
+          <Text style={styles.titleText}>Set Your Quit Time</Text>
+        </View>
+
+        <DateTimePicker
+          testID="dateTimePicker"
+          value={date}
+          mode={"time"}
+          is24Hour={true}
+          display="spinner"
+          onChange={onChange}
+          style={{ backgroundColor: "white" }}
+        />
+
+        <View style={{ width: "100%", height: 45, marginBottom: 20 }}>
+          <TouchableHighlight
+            onPress={() => {
+              storeData(date);
+              getData();
+              finish();
             }}
+            underlayColor=""
+            style={styles.buttonPositioning}
           >
-            <Text style={{ color: "white" }}>okay</Text>
-          </View>
-        </TouchableHighlight>
+            <View style={styles.nextButtonContainer}>
+              <Text style={styles.nextButtonText}>finish</Text>
+            </View>
+          </TouchableHighlight>
+        </View>
       </View>
     );
   } else if (screen === 1) {
